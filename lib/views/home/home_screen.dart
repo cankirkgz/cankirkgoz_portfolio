@@ -11,7 +11,7 @@ import 'package:my_portfolio/design/atoms/subtitle_text.dart';
 import 'package:my_portfolio/design/molecules/floating_bubbles.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -70,13 +70,14 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const FloatingBubbles(),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: Stack(
+        children: [
+          const FloatingBubbles(),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return ConstrainedBox(
                 constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: Row(
                   children: [
@@ -139,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                   const SizedBox(width: 16),
                                   RoundedButton(
-                                    firstText: 'CV’mi İndir',
+                                    firstText: "CV'mi İndir",
                                     icon: 'assets/icons/download.png',
                                     type: ButtonType.outline,
                                     onPressed: () {},
@@ -173,7 +174,8 @@ class _HomeScreenState extends State<HomeScreen>
                           child: _buildAnimated(
                             index: 6,
                             child: const ProfileAvatar(
-                              image: AssetImage('assets/images/profile.jpg'),
+                              image: AssetImage(
+                                  'assets/images/my_photo_first.JPG'),
                               showBorder: true,
                             ),
                           ),
@@ -182,22 +184,22 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ],
                 ),
+              );
+            },
+          ),
+          Positioned(
+            bottom: 16,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: _buildAnimated(
+                index: 7,
+                child: const ScrollIndicator(),
               ),
-            );
-          },
-        ),
-        Positioned(
-          bottom: 16,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: _buildAnimated(
-              index: 7,
-              child: const ScrollIndicator(),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -19,6 +19,10 @@ class _SkillsScreenState extends State<SkillsScreen>
   final List<Animation<double>> _fadeAnims = [];
   final int _itemCount = 12;
 
+  String _currentFilter = 'all';
+  final Duration _filterAnimationDuration = const Duration(milliseconds: 500);
+  final Curve _filterAnimationCurve = Curves.easeInOut;
+
   @override
   void initState() {
     super.initState();
@@ -60,319 +64,425 @@ class _SkillsScreenState extends State<SkillsScreen>
     );
   }
 
+  List<Widget> _getFilteredSkillCards() {
+    if (_currentFilter == 'all') {
+      return [
+        Row(
+          children: [
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Flutter',
+                skillLevel: 'Orta+',
+                percentage: 65,
+                color: AppColors.primaryblue,
+                iconPath: 'assets/icons/flutter_icon.png',
+                gradientColors: [AppColors.blueText, AppColors.purpleText],
+              ),
+            ),
+            SizedBox(width: AppSizes.p16.left),
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Dart',
+                skillLevel: 'Orta+',
+                percentage: 65,
+                color: AppColors.primaryblue,
+                iconPath: 'assets/icons/dart_icon.png',
+                gradientColors: [AppColors.blueText, AppColors.purpleText],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: AppSizes.p16.top),
+        Row(
+          children: [
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Firebase',
+                skillLevel: 'Orta',
+                percentage: 55,
+                color: Colors.orange,
+                iconPath: 'assets/icons/firebase_icon.png',
+                gradientColors: [Colors.deepOrange, Colors.orangeAccent],
+              ),
+            ),
+            SizedBox(width: AppSizes.p16.left),
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Kotlin',
+                skillLevel: 'Başlangıç',
+                percentage: 30,
+                color: Colors.purple,
+                iconPath: 'assets/icons/kotlin_icon.png',
+              ),
+            ),
+          ],
+        ),
+      ];
+    } else if (_currentFilter == 'beginner') {
+      return [
+        Row(
+          children: [
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Kotlin',
+                skillLevel: 'Başlangıç',
+                percentage: 30,
+                color: Colors.purple,
+                iconPath: 'assets/icons/kotlin_icon.png',
+              ),
+            ),
+            SizedBox(width: AppSizes.p16.left),
+            Expanded(child: Container()),
+          ],
+        ),
+      ];
+    } else if (_currentFilter == 'intermediate') {
+      return [
+        Row(
+          children: [
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Flutter',
+                skillLevel: 'Orta+',
+                percentage: 65,
+                color: AppColors.primaryblue,
+                iconPath: 'assets/icons/flutter_icon.png',
+                gradientColors: [AppColors.blueText, AppColors.purpleText],
+              ),
+            ),
+            SizedBox(width: AppSizes.p16.left),
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Dart',
+                skillLevel: 'Orta+',
+                percentage: 65,
+                color: AppColors.primaryblue,
+                iconPath: 'assets/icons/dart_icon.png',
+                gradientColors: [AppColors.blueText, AppColors.purpleText],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: AppSizes.p16.top),
+        Row(
+          children: [
+            Expanded(
+              child: SkillLevelCard(
+                skillName: 'Firebase',
+                skillLevel: 'Orta',
+                percentage: 55,
+                color: Colors.orange,
+                iconPath: 'assets/icons/firebase_icon.png',
+                gradientColors: [Colors.deepOrange, Colors.orangeAccent],
+              ),
+            ),
+            SizedBox(width: AppSizes.p16.left),
+            Expanded(child: Container()),
+          ],
+        ),
+      ];
+    } else if (_currentFilter == 'expert') {
+      return [
+        Center(
+          child: Text(
+            'Uzman seviye yetenekler henüz eklenmedi',
+            style: TextStyle(
+              fontSize: AppSizes.fontL,
+              color: AppColors.darkText,
+            ),
+          ),
+        ),
+      ];
+    }
+    return [];
+  }
+
   @override
   Widget build(BuildContext context) {
-    const double horizontalPadding = 24.0;
     const double itemGap = 16.0;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1400),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: horizontalPadding,
-                vertical: 80.0,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Başlık
-                  _animItem(
-                    0,
-                    Center(
-                      child: Text(
-                        "Kullandığım Teknolojiler",
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1400),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Başlık
+                _animItem(
+                  0,
+                  Center(
+                    child: Text(
+                      "Kullandığım Teknolojiler",
+                      style: TextStyle(
+                        fontSize: AppSizes.fontXXXXL,
+                        fontWeight: AppSizes.fontWeightBold,
+                        color: const Color(0xFF111827),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // Alt başlık
+                _animItem(
+                  1,
+                  Center(
+                    child: Text(
+                      "Mobil uygulamalar geliştirmek için kullandığım teknolojiler, araçlar ve framework'ler.",
+                      style: TextStyle(
+                        fontSize: AppSizes.fontL,
+                        fontWeight: AppSizes.fontWeightRegular,
+                        color: const Color(0xFF6B7280),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 48),
+
+                // Filtre butonları
+                _animItem(
+                  2,
+                  Center(
+                    child: Wrap(
+                      spacing: 30,
+                      runSpacing: 16,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        RoundedButton(
+                          firstText: "Tüm Yetenekler",
+                          onPressed: () {
+                            setState(() {
+                              _currentFilter = 'all';
+                            });
+                          },
+                          type: _currentFilter == 'all'
+                              ? ButtonType.gradient
+                              : ButtonType.outline,
+                          borderRadius: 9999,
+                        ),
+                        RoundedButton(
+                          firstText: "Başlangıç",
+                          onPressed: () {
+                            setState(() {
+                              _currentFilter = 'beginner';
+                            });
+                          },
+                          type: _currentFilter == 'beginner'
+                              ? ButtonType.gradient
+                              : ButtonType.outline,
+                          borderRadius: 9999,
+                        ),
+                        RoundedButton(
+                          firstText: "Orta Seviye",
+                          onPressed: () {
+                            setState(() {
+                              _currentFilter = 'intermediate';
+                            });
+                          },
+                          type: _currentFilter == 'intermediate'
+                              ? ButtonType.gradient
+                              : ButtonType.outline,
+                          borderRadius: 9999,
+                        ),
+                        RoundedButton(
+                          firstText: "Uzman",
+                          onPressed: () {
+                            setState(() {
+                              _currentFilter = 'expert';
+                            });
+                          },
+                          type: _currentFilter == 'expert'
+                              ? ButtonType.gradient
+                              : ButtonType.outline,
+                          borderRadius: 9999,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 48),
+
+                // Featured Projects başlığı
+                _animItem(
+                  3,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/icons/code_icon.png',
+                        height: 32,
+                        width: 32,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Öne Çıkan Yetenekler',
                         style: TextStyle(
-                          fontSize: AppSizes.fontXXXXL,
-                          fontWeight: AppSizes.fontWeightBold,
+                          fontSize: AppSizes.fontXL,
+                          fontWeight: AppSizes.fontWeightSemiBold,
                           color: const Color(0xFF111827),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Filtrelenmiş yetenek kartları (Animasyonlu)
+                _animItem(
+                  4,
+                  AnimatedSwitcher(
+                    duration: _filterAnimationDuration,
+                    switchInCurve: _filterAnimationCurve,
+                    switchOutCurve: _filterAnimationCurve,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SizeTransition(
+                          sizeFactor: animation,
+                          axis: Axis.vertical,
+                          axisAlignment: -1,
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: Column(
+                      key: ValueKey<String>(_currentFilter),
+                      children: _getFilteredSkillCards(),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  // Alt başlık
-                  _animItem(
-                    1,
-                    Center(
-                      child: Text(
-                        "Mobil uygulamalar geliştirmek için kullandığım teknolojiler, araçlar ve framework'ler.",
+                ),
+
+                const SizedBox(height: 48),
+
+                // Diğer bölümler aynı şekilde devam eder...
+                _animItem(
+                  5,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/icons/framework_icon.png',
+                        height: 32,
+                        width: 32,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        "Framework'ler ve Kütüphaneler",
+                        style: const TextStyle(
+                          fontSize: AppSizes.fontXL,
+                          fontWeight: AppSizes.fontWeightSemiBold,
+                          color: AppColors.darkText,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                _animItem(
+                  6,
+                  Row(
+                    children: List.generate(
+                      frameworkCards.length * 2 - 1,
+                      (i) {
+                        if (i.isOdd) return SizedBox(width: itemGap);
+                        return Expanded(child: frameworkCards[i ~/ 2]);
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 48),
+                _animItem(
+                  7,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/icons/tools.png',
+                        height: 32,
+                        width: 32,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Araçlar ve Platformlar',
                         style: TextStyle(
-                          fontSize: AppSizes.fontL,
-                          fontWeight: AppSizes.fontWeightRegular,
-                          color: const Color(0xFF6B7280),
+                          fontSize: AppSizes.fontXL,
+                          fontWeight: AppSizes.fontWeightSemiBold,
+                          color: const Color(0xFF111827),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                _animItem(
+                  8,
+                  Row(
+                    children: List.generate(
+                      toolCards.length * 2 - 1,
+                      (i) {
+                        if (i.isOdd) return SizedBox(width: itemGap);
+                        return Expanded(child: toolCards[i ~/ 2]);
+                      },
                     ),
                   ),
-                  const SizedBox(height: 48),
-
-                  // Filtre butonları
-                  _animItem(
-                    2,
-                    Center(
-                      child: Wrap(
-                        spacing: 30,
-                        runSpacing: 16,
-                        alignment: WrapAlignment.center,
-                        children: [
-                          RoundedButton(
-                            firstText: "Tüm Yetenekler",
-                            onPressed: () {},
-                            type: ButtonType.gradient,
-                            borderRadius: 9999,
-                          ),
-                          RoundedButton(
-                            firstText: "Başlangıç",
-                            onPressed: () {},
-                            type: ButtonType.outline,
-                            borderRadius: 9999,
-                          ),
-                          RoundedButton(
-                            firstText: "Orta Seviye",
-                            onPressed: () {},
-                            type: ButtonType.outline,
-                            borderRadius: 9999,
-                          ),
-                          RoundedButton(
-                            firstText: "Uzman",
-                            onPressed: () {},
-                            type: ButtonType.outline,
-                            borderRadius: 9999,
-                          ),
-                        ],
-                      ),
+                ),
+                const SizedBox(height: 48),
+                _animItem(
+                  9,
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryblue.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                  ),
-                  const SizedBox(height: 48),
-
-                  // Featured Projects başlığı
-                  _animItem(
-                    3,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
                       children: [
-                        Image.asset(
-                          'assets/icons/code_icon.png',
-                          height: 32,
-                          width: 32,
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          'Öne Çıkan Yetenekler',
-                          style: TextStyle(
-                            fontSize: AppSizes.fontXL,
-                            fontWeight: AppSizes.fontWeightSemiBold,
-                            color: const Color(0xFF111827),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // GridView yerine Row ve Expanded kullanıyoruz
-                  _animItem(
-                    4,
-                    Column(
-                      children: [
-                        // İlk satır
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: SkillLevelCard(
-                                skillName: 'Flutter',
-                                skillLevel: 'Orta+',
-                                percentage: 65,
-                                color: AppColors.primaryblue,
-                                iconPath: 'assets/icons/flutter_icon.png',
-                                gradientColors: [
-                                  AppColors.blueText,
-                                  AppColors.purpleText
-                                ],
-                              ),
+                            Image.asset(
+                              'assets/icons/education_icon.png',
+                              height: 32,
+                              width: 32,
                             ),
-                            SizedBox(width: AppSizes.p16.left),
-                            Expanded(
-                              child: SkillLevelCard(
-                                skillName: 'Dart',
-                                skillLevel: 'Orta+',
-                                percentage: 65,
-                                color: AppColors.primaryblue,
-                                iconPath: 'assets/icons/dart_icon.png',
-                                gradientColors: [
-                                  AppColors.blueText,
-                                  AppColors.purpleText
-                                ],
+                            const SizedBox(width: 12),
+                            Text(
+                              'Şu Anda Öğreniyorum',
+                              style: TextStyle(
+                                fontSize: AppSizes.fontL,
+                                fontWeight: AppSizes.fontWeightSemiBold,
+                                color: const Color(0xFF111827),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: AppSizes.p16.top),
-                        // İkinci satır
+                        const SizedBox(height: 30),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: SkillLevelCard(
-                                skillName: 'Firebase',
-                                skillLevel: 'Orta',
-                                percentage: 55,
-                                color: Colors.orange,
-                                iconPath: 'assets/icons/firebase_icon.png',
-                                gradientColors: [
-                                  Colors.deepOrange,
-                                  Colors.orangeAccent
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: AppSizes.p16.left),
-                            Expanded(
-                              child: SkillLevelCard(
-                                skillName: 'Kotlin',
-                                skillLevel: 'Başlangıç',
-                                percentage: 30,
-                                color: Colors.purple,
-                                iconPath: 'assets/icons/kotlin_icon.png',
-                              ),
+                            RoundedButton(
+                              firstText: "Kotlin",
+                              onPressed: () {},
+                              type: ButtonType.outline,
+                              icon: "assets/icons/kotlin_icon.png",
+                              iconColor: const Color(0xFFF97316),
+                              borderRadius: 999,
                             ),
                           ],
-                        ),
+                        )
                       ],
                     ),
                   ),
-
-                  const SizedBox(height: 48),
-
-                  // Frameworks & Libraries başlığı
-                  _animItem(
-                    5,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/icons/framework_icon.png',
-                          height: 32,
-                          width: 32,
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          "Framework'ler ve Kütüphaneler",
-                          style: const TextStyle(
-                            fontSize: AppSizes.fontXL,
-                            fontWeight: AppSizes.fontWeightSemiBold,
-                            color: AppColors.darkText,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  // FrameworkCard'lar: eşit genişlik
-                  _animItem(
-                    6,
-                    Row(
-                      children: List.generate(
-                        frameworkCards.length * 2 - 1,
-                        (i) {
-                          if (i.isOdd) return SizedBox(width: itemGap);
-                          return Expanded(child: frameworkCards[i ~/ 2]);
-                        },
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 48),
-
-                  // Tools & Platforms başlığı
-                  _animItem(
-                    7,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/icons/tools.png',
-                          height: 32,
-                          width: 32,
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          'Araçlar ve Platformlar',
-                          style: TextStyle(
-                            fontSize: AppSizes.fontXL,
-                            fontWeight: AppSizes.fontWeightSemiBold,
-                            color: const Color(0xFF111827),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  // ToolCard'lar: eşit genişlik
-                  _animItem(
-                    8,
-                    Row(
-                      children: List.generate(
-                        toolCards.length * 2 - 1,
-                        (i) {
-                          if (i.isOdd) return SizedBox(width: itemGap);
-                          return Expanded(child: toolCards[i ~/ 2]);
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 48),
-                  _animItem(
-                    9,
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryblue.withOpacity(0.05),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                'assets/icons/education_icon.png',
-                                height: 32,
-                                width: 32,
-                              ),
-                              const SizedBox(width: 12),
-                              Text(
-                                'Şu Anda Öğreniyorum',
-                                style: TextStyle(
-                                  fontSize: AppSizes.fontL,
-                                  fontWeight: AppSizes.fontWeightSemiBold,
-                                  color: const Color(0xFF111827),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              RoundedButton(
-                                firstText: "Kotlin",
-                                onPressed: () {},
-                                type: ButtonType.outline,
-                                icon: "assets/icons/kotlin_icon.png",
-                                iconColor: const Color(0xFFF97316),
-                                borderRadius: 999,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),
@@ -380,7 +490,6 @@ class _SkillsScreenState extends State<SkillsScreen>
     );
   }
 
-  // frameworkCards ve toolCards listelerini sınıf içerisinde tanımlıyoruz:
   List<FrameworkCard> get frameworkCards => [
         FrameworkCard(
           title: "Flutter",

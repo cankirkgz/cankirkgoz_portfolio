@@ -18,6 +18,7 @@ class ProjectShowcaseCard extends StatefulWidget {
   final String button2Text;
   final VoidCallback onButton2Pressed;
   final double? buttonHeight;
+  final String projectLanguage;
 
   const ProjectShowcaseCard({
     super.key,
@@ -34,6 +35,7 @@ class ProjectShowcaseCard extends StatefulWidget {
     required this.button2Text,
     required this.onButton2Pressed,
     this.buttonHeight,
+    required this.projectLanguage,
   });
 
   @override

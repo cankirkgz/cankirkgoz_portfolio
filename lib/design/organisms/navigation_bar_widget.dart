@@ -81,9 +81,11 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                       style: TextStyle(
                         fontSize: AppSizes.fontS,
                         color: widget.selectedIndex == index
-                            ? AppColors.textPrimary
+                            ? Colors.black
                             : AppColors.blackText,
-                        fontWeight: AppSizes.fontWeightMedium,
+                        fontWeight: widget.selectedIndex == index
+                            ? AppSizes.fontWeightBold
+                            : AppSizes.fontWeightMedium,
                       ),
                     ),
                   ),

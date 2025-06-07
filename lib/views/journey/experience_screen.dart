@@ -175,10 +175,12 @@ class _ExperienceScreenState extends State<ExperienceScreen>
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white, // Tek renk arka plan
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
         child: Column(
           children: [
             // Header section
@@ -200,7 +202,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
     return Column(
       children: [
         Text(
-          'My Journey',
+          'Yolculuğum',
           style: TextStyle(
             fontSize: AppSizes.fontXXXXL,
             fontWeight: AppSizes.fontWeightBold,
@@ -209,7 +211,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         ),
         const SizedBox(height: 8),
         Text(
-          "Where I've worked and what I've learned along the way",
+          "Çalıştığım yerler ve bu yolda öğrendiklerim",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppSizes.fontL,
