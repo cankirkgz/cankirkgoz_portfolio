@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
@@ -155,7 +156,11 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 RoundedButton(
                   firstText: "Tüm Projelerime Göz At",
                   icon: "assets/icons/github_icon.png",
-                  onPressed: () {},
+                  onPressed: () {
+                    html.window.open(
+                        'https://github.com/cankirkgz?tab=repositories',
+                        '_blank');
+                  },
                   type: ButtonType.gradient,
                 ),
               ],
@@ -207,7 +212,10 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           button1SecondText: 'Et',
           onButton1Pressed: () {},
           button2Text: 'Github',
-          onButton2Pressed: () {},
+          onButton2Pressed: () {
+            html.window
+                .open('https://github.com/cankirkgz/ternai-app', '_blank');
+          },
           buttonHeight: AppSizes.buttonHeightXL,
         ),
         ProjectShowcaseCard(
@@ -228,9 +236,15 @@ class _ProjectsScreenState extends State<ProjectsScreen>
             Colors.teal,
           ],
           button1Text: 'Yükle',
-          onButton1Pressed: () {},
+          onButton1Pressed: () {
+            html.window.open(
+                'https://play.google.com/store/apps/details?id=com.wedly.app&hl=tr',
+                '_blank');
+          },
           button2Text: 'GitHub',
-          onButton2Pressed: () {},
+          onButton2Pressed: () {
+            html.window.open('https://github.com/cankirkgz/wedlist', '_blank');
+          },
           buttonHeight: AppSizes.buttonHeightXL,
         ),
       ];

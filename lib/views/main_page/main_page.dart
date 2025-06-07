@@ -66,7 +66,10 @@ class _MainPageState extends State<MainPage> {
             controller: _scrollController,
             child: Column(
               children: [
-                HomeScreen(key: _sectionKeys[0]),
+                HomeScreen(
+                  key: _sectionKeys[0],
+                  onProjectsTap: () => _scrollToSection(2),
+                ),
                 AboutScreen(key: _sectionKeys[1]),
                 ProjectsScreen(key: _sectionKeys[2]),
                 SkillsScreen(key: _sectionKeys[3]),
@@ -74,6 +77,7 @@ class _MainPageState extends State<MainPage> {
                 ContactScreen(key: _sectionKeys[5]),
                 Footer(
                   key: _sectionKeys[6],
+                  onItemTap: _scrollToSection,
                 )
               ],
             ),

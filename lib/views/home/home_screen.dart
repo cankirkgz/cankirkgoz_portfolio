@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/animated_title.dart';
@@ -11,7 +12,8 @@ import 'package:my_portfolio/design/atoms/subtitle_text.dart';
 import 'package:my_portfolio/design/molecules/floating_bubbles.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final VoidCallback? onProjectsTap;
+  const HomeScreen({Key? key, this.onProjectsTap}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -136,14 +138,24 @@ class _HomeScreenState extends State<HomeScreen>
                                     firstText: 'Projelerime Göz At',
                                     icon: 'assets/icons/rocket.png',
                                     type: ButtonType.gradient,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      widget.onProjectsTap?.call();
+                                    },
                                   ),
                                   const SizedBox(width: 16),
                                   RoundedButton(
                                     firstText: "CV'mi İndir",
                                     icon: 'assets/icons/download.png',
                                     type: ButtonType.outline,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      final anchor = html.AnchorElement(
+                                        href:
+                                            'mcankirkgoz-mobiledeveloper-resume.pdf',
+                                      )
+                                        ..setAttribute('download',
+                                            'mcankirkgoz-mobiledeveloper-resume.pdf')
+                                        ..click();
+                                    },
                                   ),
                                 ],
                               ),

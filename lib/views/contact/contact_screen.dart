@@ -1,10 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
 import 'package:my_portfolio/design/molecules/custom_text_field.dart';
 import 'package:my_portfolio/design/molecules/social_card.dart';
 import 'package:my_portfolio/design/molecules/schedule_card.dart';
+
+class ContactForm extends StatefulWidget {
+  const ContactForm({super.key});
+
+  @override
+  State<ContactForm> createState() => _ContactFormState();
+}
+
+class _ContactFormState extends State<ContactForm> {
+  final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final messageController = TextEditingController();
+
+  bool _isSubmitting = false;
+
+  Future<void> submitForm() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    try {
+      final uri = Uri.parse('https://getform.io/f/bejlenya');
+      final response = await http.post(uri, body: {
+        'name': nameController.text,
+        'email': emailController.text,
+        'message': messageController.text,
+      });
+
+      if (response.statusCode == 200 || response.statusCode == 302) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Mesaj başarıyla gönderildi ✅')),
+          );
+        }
+        nameController.clear();
+        emailController.clear();
+        messageController.clear();
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Bir hata oluştu ❌')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Bir hata oluştu ❌')),
+        );
+      }
+    } finally {
+      setState(() {
+        _isSubmitting = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    messageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomTextField(
+            controller: nameController,
+            label: 'İsim Soyisim',
+            validator: (v) => v!.isEmpty ? 'Gerekli' : null,
+          ),
+          const SizedBox(height: 20),
+          CustomTextField(
+            controller: emailController,
+            label: 'Email',
+            keyboardType: TextInputType.emailAddress,
+            validator: (v) {
+              if (v!.isEmpty) return 'Gerekli';
+              final regex = RegExp(r"^[^\s@]+@[^\s@]+\.[^\s@]+$");
+              return regex.hasMatch(v) ? null : 'Geçersiz email';
+            },
+          ),
+          const SizedBox(height: 20),
+          CustomTextField(
+            controller: messageController,
+            label: 'Mesajın',
+            maxLines: 5,
+            validator: (v) => v!.isEmpty ? 'Gerekli' : null,
+          ),
+          const SizedBox(height: 24),
+          RoundedButton(
+            firstText: 'Mesaj Gönder',
+            icon: 'assets/icons/postman_icon.png',
+            type: ButtonType.gradient,
+            onPressed: _isSubmitting ? () {} : submitForm,
+            width: double.infinity,
+            height: AppSizes.buttonHeightL,
+            hasShadow: true,
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 /// ContactScreen with staggered entrance animations for each section.
 class ContactScreen extends StatefulWidget {
@@ -16,19 +130,11 @@ class ContactScreen extends StatefulWidget {
 
 class _ContactScreenState extends State<ContactScreen>
     with SingleTickerProviderStateMixin {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _messageController = TextEditingController();
-
   late final AnimationController _controller;
   final List<Animation<double>> _fadeAnims = [];
   final List<Animation<Offset>> _slideAnims = [];
   final int _sectionCount =
-      7; // header text, subtitle, form container, success, social, schedule, padding
-
-  bool _isSubmitting = false;
-  bool _showSuccess = false;
+      5; // header text, subtitle, form container, social, schedule
 
   @override
   void initState() {
@@ -64,30 +170,7 @@ class _ContactScreenState extends State<ContactScreen>
   @override
   void dispose() {
     _controller.dispose();
-    _nameController.dispose();
-    _emailController.dispose();
-    _messageController.dispose();
     super.dispose();
-  }
-
-  void _submitForm() async {
-    if (!_formKey.currentState!.validate()) return;
-    setState(() {
-      _isSubmitting = true;
-      _showSuccess = false;
-    });
-    await Future.delayed(const Duration(seconds: 2));
-    setState(() {
-      _isSubmitting = false;
-      _showSuccess = true;
-    });
-    _formKey.currentState!.reset();
-    _nameController.clear();
-    _emailController.clear();
-    _messageController.clear();
-    Future.delayed(const Duration(seconds: 5), () {
-      if (mounted) setState(() => _showSuccess = false);
-    });
   }
 
   Widget _buildAnimated(int index, Widget child) {
@@ -210,111 +293,7 @@ class _ContactScreenState extends State<ContactScreen>
                                   ),
                                 ),
                                 const SizedBox(height: 24),
-                                Form(
-                                  key: _formKey,
-                                  child: Column(
-                                    children: [
-                                      CustomTextField(
-                                        controller: _nameController,
-                                        label: 'İsim Soyisim',
-                                        validator: (v) =>
-                                            v!.isEmpty ? 'Gerekli' : null,
-                                      ),
-                                      const SizedBox(height: 20),
-                                      CustomTextField(
-                                        controller: _emailController,
-                                        label: 'Email',
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                        validator: (v) {
-                                          if (v!.isEmpty) return 'Gerekli';
-                                          final regex = RegExp(
-                                              r"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-                                          return regex.hasMatch(v)
-                                              ? null
-                                              : 'Invalid email';
-                                        },
-                                      ),
-                                      const SizedBox(height: 20),
-                                      CustomTextField(
-                                        controller: _messageController,
-                                        label: 'Mesajın',
-                                        maxLines: 5,
-                                        validator: (v) =>
-                                            v!.isEmpty ? 'Gerekli' : null,
-                                      ),
-                                      const SizedBox(height: 24),
-                                      RoundedButton(
-                                        firstText: 'Mesaj Gönder',
-                                        icon: 'assets/icons/postman_icon.png',
-                                        type: ButtonType.gradient,
-                                        onPressed:
-                                            _isSubmitting ? () {} : _submitForm,
-                                        width: double.infinity,
-                                        height: AppSizes.buttonHeightL,
-                                        hasShadow: true,
-                                      ),
-                                      const SizedBox(height: 16),
-                                      // 3: Success banner
-                                      AnimatedOpacity(
-                                        opacity: _showSuccess ? 1 : 0,
-                                        duration:
-                                            const Duration(milliseconds: 300),
-                                        child: Container(
-                                          padding: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                            color: Colors.green.shade50,
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            border: Border.all(
-                                                color: Colors.green.shade200),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                width: 32,
-                                                height: 32,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.green,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: const Icon(
-                                                  Icons.check,
-                                                  color: Colors.white,
-                                                  size: 18,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 12),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Mesajın başarıyla gönderildi!',
-                                                    style: TextStyle(
-                                                      color:
-                                                          Colors.green.shade800,
-                                                      fontWeight: AppSizes
-                                                          .fontWeightMedium,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "En yakın zamanda sana döneceğim.",
-                                                    style: TextStyle(
-                                                      color:
-                                                          Colors.green.shade600,
-                                                      fontSize: AppSizes.fontS,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                const ContactForm(), // Using the new ContactForm widget
                               ],
                             ),
                           ),
@@ -324,19 +303,18 @@ class _ContactScreenState extends State<ContactScreen>
                         const SizedBox(width: 40)
                       else
                         const SizedBox(height: 40),
-                      // 4: Social card
+                      // 3: Social card
                       Expanded(
                         flex: isWide ? 1 : 0,
                         child: Column(
                           children: [
-                            _buildAnimated(4, const SocialCard()),
+                            _buildAnimated(3, const SocialCard()),
                             const SizedBox(height: 24),
-                            // 5: Schedule card
-                            _buildAnimated(5, const ScheduleCard()),
+                            // 4: Schedule card
+                            _buildAnimated(4, const ScheduleCard()),
                           ],
                         ),
                       ),
-                      // 6: bottom padding
                       const SizedBox(height: 80),
                     ],
                   );

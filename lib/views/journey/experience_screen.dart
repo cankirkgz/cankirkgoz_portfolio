@@ -74,7 +74,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
     // Define experience entries data
     final entries = [
       _ExperienceEntry(
-        icon: FontAwesomeIcons.flutter,
+        icon: FontAwesomeIcons.code,
         iconBg: AppColors.primary,
         title: 'Takım Lideri - Flutter Developer',
         subtitle: 'Ternai',
@@ -101,7 +101,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         ],
       ),
       _ExperienceEntry(
-        icon: FontAwesomeIcons.flutter,
+        icon: FontAwesomeIcons.mobileScreen,
         iconBg: AppColors.primary,
         title: 'Flutter Developer',
         subtitle: 'Moneypay',
@@ -126,7 +126,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         ],
       ),
       _ExperienceEntry(
-        icon: FontAwesomeIcons.code,
+        icon: FontAwesomeIcons.computer,
         iconBg: AppColors.primaryPurple,
         title: 'BT Takım Asistani',
         subtitle: 'VitrA Karo (Eczacıbaşı)',
@@ -142,7 +142,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         tags: ['SAP', 'Proje Takibi', 'Kurumsal Deneyim', 'Takım İletişimi'],
       ),
       _ExperienceEntry(
-        icon: FontAwesomeIcons.graduationCap,
+        icon: FontAwesomeIcons.building,
         iconBg: AppColors.primary,
         title: 'BT. Takım Asistanı',
         subtitle: 'Akbank',
@@ -158,7 +158,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         tags: ['Agile', 'Scrum', 'Takım Çalışması', 'Kurumsal Deneyim'],
       ),
       _ExperienceEntry(
-        icon: FontAwesomeIcons.laptopCode,
+        icon: FontAwesomeIcons.codeBranch,
         iconBg: Colors.green,
         title: 'React Native Intern',
         subtitle: 'Fazla',
@@ -333,7 +333,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
 }
 
 /// Defines each timeline entry UI block
-class _ExperienceEntry extends StatelessWidget {
+class _ExperienceEntry extends StatefulWidget {
   final IconData icon;
   final Color iconBg;
   final String title;
@@ -359,121 +359,142 @@ class _ExperienceEntry extends StatelessWidget {
   });
 
   @override
+  State<_ExperienceEntry> createState() => _ExperienceEntryState();
+}
+
+class _ExperienceEntryState extends State<_ExperienceEntry> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    // Card container with shadow and rounded corners
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        transform: Matrix4.translationValues(0, _isHovered ? -8 : 0, 0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+                spreadRadius: 2,
+              ),
+            ],
           ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Top row: icon + title/subtitle + status badge
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Top row: icon + title/subtitle + status badge
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Icon box with gradient
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [iconBg, iconBg.withOpacity(0.7)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(child: FaIcon(icon, color: Colors.white)),
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      // Entry title
-                      Text(title,
-                          style: TextStyle(
-                              fontSize: AppSizes.fontXL,
-                              fontWeight: AppSizes.fontWeightSemiBold)),
-                      // Entry subtitle/company
-                      Text(subtitle,
-                          style: TextStyle(
-                              color: iconBg, fontWeight: FontWeight.w500)),
+                      // Icon box with gradient
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              widget.iconBg,
+                              widget.iconBg.withOpacity(0.7)
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                            child: FaIcon(widget.icon, color: Colors.white)),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Entry title
+                          Text(widget.title,
+                              style: TextStyle(
+                                  fontSize: AppSizes.fontXL,
+                                  fontWeight: AppSizes.fontWeightSemiBold)),
+                          // Entry subtitle/company
+                          Text(widget.subtitle,
+                              style: TextStyle(
+                                  color: widget.iconBg,
+                                  fontWeight: FontWeight.w500)),
+                        ],
+                      ),
                     ],
+                  ),
+                  // Status badge
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                        color: widget.bulletColor.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Text(widget.statusBadge,
+                        style: TextStyle(
+                            color: widget.bulletColor,
+                            fontSize: AppSizes.fontXs)),
                   ),
                 ],
               ),
-              // Status badge
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                    color: bulletColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text(statusBadge,
-                    style: TextStyle(
-                        color: bulletColor, fontSize: AppSizes.fontXs)),
+              const SizedBox(height: 8),
+              // Date text
+              Text(widget.date, style: TextStyle(color: Colors.grey[600])),
+              const SizedBox(height: 4),
+              // Location row with icon
+              Row(
+                children: [
+                  const Icon(FontAwesomeIcons.mapMarkerAlt,
+                      size: 14, color: Colors.grey),
+                  const SizedBox(width: 6),
+                  Expanded(
+                      child: Text(widget.location,
+                          style: TextStyle(color: Colors.grey[600]))),
+                ],
               ),
+              const SizedBox(height: 12),
+              // Bullet points
+              ...widget.points.map((p) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Row(
+                      children: [
+                        Icon(FontAwesomeIcons.checkCircle,
+                            size: 14, color: widget.bulletColor),
+                        const SizedBox(width: 6),
+                        Expanded(
+                            child: Text(p,
+                                style: TextStyle(color: Colors.grey[800]))),
+                      ],
+                    ),
+                  )),
+              const SizedBox(height: 12),
+              // Tags wrap
+              Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  children: widget.tags
+                      .map((t) => Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(6)),
+                            child: Text(t,
+                                style: TextStyle(fontSize: AppSizes.fontXs)),
+                          ))
+                      .toList()),
             ],
           ),
-          const SizedBox(height: 8),
-          // Date text
-          Text(date, style: TextStyle(color: Colors.grey[600])),
-          const SizedBox(height: 4),
-          // Location row with icon
-          Row(
-            children: [
-              const Icon(FontAwesomeIcons.mapMarkerAlt,
-                  size: 14, color: Colors.grey),
-              const SizedBox(width: 6),
-              Expanded(
-                  child: Text(location,
-                      style: TextStyle(color: Colors.grey[600]))),
-            ],
-          ),
-          const SizedBox(height: 12),
-          // Bullet points
-          ...points.map((p) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Row(
-                  children: [
-                    Icon(FontAwesomeIcons.checkCircle,
-                        size: 14, color: bulletColor),
-                    const SizedBox(width: 6),
-                    Expanded(
-                        child:
-                            Text(p, style: TextStyle(color: Colors.grey[800]))),
-                  ],
-                ),
-              )),
-          const SizedBox(height: 12),
-          // Tags wrap
-          Wrap(
-              spacing: 8,
-              runSpacing: 6,
-              children: tags
-                  .map((t) => Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            borderRadius: BorderRadius.circular(6)),
-                        child: Text(t,
-                            style: TextStyle(fontSize: AppSizes.fontXs)),
-                      ))
-                  .toList()),
-        ],
+        ),
       ),
     );
   }

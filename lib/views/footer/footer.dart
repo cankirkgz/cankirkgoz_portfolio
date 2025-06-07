@@ -4,7 +4,8 @@ import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({Key? key}) : super(key: key);
+  final Function(int)? onItemTap;
+  const Footer({Key? key, this.onItemTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +66,12 @@ class Footer extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      _footerLink('Home'),
-                      _footerLink('About'),
-                      _footerLink('Projects'),
-                      _footerLink('Skills'),
-                      _footerLink('Contact'),
+                      _footerLink(0, 'Ana Sayfa', onItemTap),
+                      _footerLink(1, 'Hakkımda', onItemTap),
+                      _footerLink(2, 'Projeler', onItemTap),
+                      _footerLink(3, 'Yetenekler', onItemTap),
+                      _footerLink(4, 'Deneyimler', onItemTap),
+                      _footerLink(5, 'İletişim', onItemTap),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -107,17 +109,20 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _footerLink(String label) {
+  Widget _footerLink(int index, String label, Function(int)? onTap) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: AppSizes.fontS,
-            color: Colors.grey.shade300,
-            fontWeight: FontWeight.w500,
+      child: GestureDetector(
+        onTap: () => onTap?.call(index),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: AppSizes.fontS,
+              color: Colors.grey.shade300,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),

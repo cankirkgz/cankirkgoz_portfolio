@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
@@ -43,6 +44,7 @@ class SocialCard extends StatelessWidget {
                 label: 'GitHub',
                 sublabel: '@cankirkgz',
                 color: Colors.white,
+                url: 'https://github.com/cankirkgz',
               ),
               _SocialItem(
                 icon: FontAwesomeIcons.linkedinIn,
@@ -50,6 +52,7 @@ class SocialCard extends StatelessWidget {
                 label: 'LinkedIn',
                 sublabel: '@cankirkgoz99',
                 color: Colors.white,
+                url: 'https://www.linkedin.com/in/cankirkgoz99/',
               ),
               _SocialItem(
                 icon: FontAwesomeIcons.envelope,
@@ -57,6 +60,7 @@ class SocialCard extends StatelessWidget {
                 label: 'Email',
                 sublabel: 'Doğrudan',
                 color: Colors.white,
+                url: 'mailto:mcankirkgoz@gmail.com',
               ),
               _SocialItem(
                 icon: FontAwesomeIcons.medium,
@@ -64,6 +68,7 @@ class SocialCard extends StatelessWidget {
                 label: 'Medium',
                 sublabel: '@mcankirkgoz',
                 color: Colors.white,
+                url: 'https://medium.com/@mcankirkgoz',
               ),
             ],
           ),
@@ -73,12 +78,13 @@ class SocialCard extends StatelessWidget {
   }
 }
 
-class _SocialItem extends StatelessWidget {
+class _SocialItem extends StatefulWidget {
   final IconData icon;
   final Color background;
   final String label;
   final String sublabel;
   final Color color;
+  final String url;
 
   const _SocialItem({
     required this.icon,
@@ -86,57 +92,88 @@ class _SocialItem extends StatelessWidget {
     required this.label,
     required this.sublabel,
     required this.color,
+    required this.url,
   });
 
   @override
+  State<_SocialItem> createState() => _SocialItemState();
+}
+
+class _SocialItemState extends State<_SocialItem> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 160,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.grey,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.grey),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: () => html.window.open(widget.url, '_blank'),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          transform: Matrix4.translationValues(0, _isHovered ? -4 : 0, 0),
+          child: Container(
+            width: 160,
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: background,
-              borderRadius: BorderRadius.circular(16),
+              color: AppColors.grey,
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: _isHovered ? widget.background : AppColors.grey,
+                width: _isHovered ? 2 : 1,
+              ),
+              boxShadow: _isHovered
+                  ? [
+                      BoxShadow(
+                        color: widget.background.withOpacity(0.2),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ]
+                  : null,
             ),
-            child: Center(
-              child: FaIcon(icon, color: color),
-            ),
-          ),
-          const SizedBox(width: 12),
-          // Wrap text in Flexible to prevent overflow
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  label,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  sublabel,
-                  style: TextStyle(
-                    fontSize: AppSizes.fontXs,
-                    color: AppColors.textPrimary.withOpacity(0.6),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: widget.background,
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  child: Center(
+                    child: FaIcon(widget.icon, color: widget.color),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.label,
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.sublabel,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontXs,
+                          color: AppColors.textPrimary.withOpacity(0.6),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
