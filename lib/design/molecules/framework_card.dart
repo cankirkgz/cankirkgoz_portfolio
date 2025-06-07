@@ -37,14 +37,14 @@ class _FrameworkCardState extends State<FrameworkCard> {
         duration: const Duration(milliseconds: 200),
         transform: Matrix4.translationValues(0, _isHovered ? -8 : 0, 0),
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(AppSizes.p16),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            color: AppColors.scaffoldBackground,
+            borderRadius: AppSizes.r12,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 8,
+                color: AppColors.shadowLight,
+                blurRadius: AppSizes.shadowBlur,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -53,43 +53,43 @@ class _FrameworkCardState extends State<FrameworkCard> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(AppSizes.p12),
                 decoration: BoxDecoration(
                   color: widget.iconBackgroundColor.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: AppSizes.r16,
                 ),
                 child: SizedBox(
-                  width: 28,
-                  height: 28,
+                  width: AppSizes.iconXL,
+                  height: AppSizes.iconXL,
                   child: Image.asset(
                     widget.iconPath,
                     color: widget.iconBackgroundColor,
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSizes.p12),
               Text(
                 widget.title,
                 style: const TextStyle(
                   fontWeight: AppSizes.fontWeightSemiBold,
-                  fontSize: 16,
+                  fontSize: AppSizes.fontM,
                 ),
               ),
               if (widget.level != null) ...[
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSizes.p8),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSizes.p12, vertical: AppSizes.p4),
                   decoration: BoxDecoration(
                     color: effectiveBadgeColor.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(999),
+                    borderRadius: AppSizes.r999,
                   ),
                   child: Text(
                     widget.level!,
                     style: TextStyle(
                       color: effectiveBadgeColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: AppSizes.fontXs,
+                      fontWeight: AppSizes.fontWeightMedium,
                     ),
                   ),
                 ),

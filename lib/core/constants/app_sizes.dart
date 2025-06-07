@@ -6,29 +6,46 @@ import 'package:flutter/material.dart';
 
 class AppSizes {
   // PADDING & MARGIN
-  static const EdgeInsets p2 = EdgeInsets.all(2);
-  static const EdgeInsets p4 = EdgeInsets.all(4);
-  static const EdgeInsets p8 = EdgeInsets.all(8);
-  static const EdgeInsets p12 = EdgeInsets.all(12);
-  static const EdgeInsets p16 = EdgeInsets.all(16);
-  static const EdgeInsets p20 = EdgeInsets.all(20);
-  static const EdgeInsets p24 = EdgeInsets.all(24);
-  static const EdgeInsets p32 = EdgeInsets.all(32);
-  static const EdgeInsets p40 = EdgeInsets.all(40);
+  static const double p4 = 4.0;
+  static const double p6 = 6.0;
+  static const double p8 = 8.0;
+  static const double p10 = 10.0;
+  static const double p12 = 12.0;
+  static const double p14 = 14.0;
+  static const double p16 = 16.0;
+  static const double p20 = 20.0;
+  static const double p24 = 24.0;
+  static const double p30 = 30.0;
+  static const double p32 = 32.0;
+  static const double p40 = 40.0;
+  static const double p48 = 48.0;
+  static const double p50 = 50.0;
+  static const double p64 = 64.0;
+  static const double p80 = 80.0;
+  static const double p120 = 120.0;
+  static const double p128 = 128.0;
+  static const double p200 = 200.0;
+  static const double p256 = 256.0;
+  static const double p1 = 1.0;
+  static const double p2 = 2.0;
 
   // BORDER RADIUS
   static const BorderRadius r4 = BorderRadius.all(Radius.circular(4));
+  static const BorderRadius r6 = BorderRadius.all(Radius.circular(6));
   static const BorderRadius r8 = BorderRadius.all(Radius.circular(8));
   static const BorderRadius r12 = BorderRadius.all(Radius.circular(12));
   static const BorderRadius r16 = BorderRadius.all(Radius.circular(16));
   static const BorderRadius r20 = BorderRadius.all(Radius.circular(20));
+  static const BorderRadius r24 = BorderRadius.all(Radius.circular(24));
   static const BorderRadius r30 = BorderRadius.all(Radius.circular(30));
+  static const BorderRadius r999 = BorderRadius.all(Radius.circular(999));
 
   // ICON SIZES
   static const double iconS = 16.0;
   static const double iconM = 24.0;
   static const double iconL = 32.0;
   static const double iconXL = 40.0;
+  static const double iconXXL = 28.0;
 
   // FONT SIZES
   static const double fontXxs = 10.0;

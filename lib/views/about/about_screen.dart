@@ -72,11 +72,12 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
 ''';
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 120.0, vertical: 80.0),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.p120, vertical: AppSizes.p80),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 48),
+          const SizedBox(height: AppSizes.p48),
           _animItem(
             1,
             Row(
@@ -93,7 +94,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               ],
             ),
           ),
-          const SizedBox(height: 64),
+          const SizedBox(height: AppSizes.p64),
           _animItem(
             2,
             Text(
@@ -101,17 +102,17 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               style: TextStyle(
                 fontSize: AppSizes.fontXL,
                 fontWeight: AppSizes.fontWeightSemiBold,
-                color: const Color(0xFF111827),
+                color: AppColors.textPrimary,
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSizes.p24),
           _animItem(
             3,
             Wrap(
               alignment: WrapAlignment.center,
-              spacing: 40,
-              runSpacing: 20,
+              spacing: AppSizes.p40,
+              runSpacing: AppSizes.p20,
               children: const [
                 TechIconCard(
                     iconPath: 'assets/icons/flutter_icon.png',
@@ -135,7 +136,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               ],
             ),
           ),
-          const SizedBox(height: 64),
+          const SizedBox(height: AppSizes.p64),
           _animItem(
             4,
             Text(
@@ -143,13 +144,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               style: TextStyle(
                 fontSize: AppSizes.fontXL,
                 fontWeight: AppSizes.fontWeightSemiBold,
-                color: const Color(0xFF111827),
+                color: AppColors.textPrimary,
               ),
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: AppSizes.p40),
           _animItem(5, JourneyTimeline()),
-          const SizedBox(height: 64),
+          const SizedBox(height: AppSizes.p64),
           _animItem(
             6,
             Text(
@@ -157,18 +158,18 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               style: TextStyle(
                 fontSize: AppSizes.fontXL,
                 fontWeight: AppSizes.fontWeightSemiBold,
-                color: const Color(0xFF111827),
+                color: AppColors.textPrimary,
               ),
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: AppSizes.p40),
           _animItem(
             7,
             LayoutBuilder(
               builder: (context, constraints) {
                 final screenWidth = constraints.maxWidth;
                 final cardCount = 3; // Kart sayısı
-                final spacing = 24.0; // Kartlar arası boşluk
+                final spacing = AppSizes.p24; // Kartlar arası boşluk
                 final totalSpacing = spacing * (cardCount - 1);
                 final availableWidth = screenWidth - totalSpacing;
                 final cardWidth = availableWidth / cardCount;
@@ -180,13 +181,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       width: cardWidth,
                       child: CertificateCard(
                         icon: FontAwesomeIcons.lightbulb,
-                        iconColor: Color(0xFF2563EB),
+                        iconColor: AppColors.primaryblue,
                         title: "Ideathon",
                         subtitle: "Google Oyun ve Uygulama Akademisi",
                         description:
                             "Fikir üretme, takım çalışması ve sunum teknikleri alanında yoğun bir fikir maratonuna katıldım.",
                         year: "2024",
-                        yearColor: Color(0xFF2563EB),
+                        yearColor: AppColors.primaryblue,
                       ),
                     ),
                     SizedBox(width: spacing),
@@ -194,13 +195,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       width: cardWidth,
                       child: CertificateCard(
                         icon: FontAwesomeIcons.rocket,
-                        iconColor: Color(0xFFEA580C),
+                        iconColor: AppColors.certOrange,
                         title: "App-Jam",
                         subtitle: "Google Oyun ve Uygulama Akademisi",
                         description:
                             "3 gün içinde takım çalışmasıyla prototip bir mobil uygulama geliştirip sunduğumuz hızlı geliştirme maratonu.",
                         year: "2024",
-                        yearColor: Color(0xFFEA580C),
+                        yearColor: AppColors.certOrange,
                       ),
                     ),
                     SizedBox(width: spacing),
@@ -208,13 +209,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       width: cardWidth,
                       child: CertificateCard(
                         icon: FontAwesomeIcons.robot,
-                        iconColor: Color(0xFF16A34A),
+                        iconColor: AppColors.certGreen,
                         title: "AI Destekli App-Jam",
                         subtitle: "Google Oyun ve Uygulama Akademisi",
                         description:
                             "Yapay zekayı entegre ettiğimiz, 4 günlük bir uygulama geliştirme sürecinde ekip olarak yenilikçi bir prototip oluşturduk.",
                         year: "2024",
-                        yearColor: Color(0xFF16A34A),
+                        yearColor: AppColors.certGreen,
                       ),
                     ),
                   ],
@@ -222,14 +223,14 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               },
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSizes.p24),
           _animItem(
             8,
             LayoutBuilder(
               builder: (context, constraints) {
                 final screenWidth = constraints.maxWidth;
                 final cardCount = 3; // Bu satırdaki kart sayısı
-                final spacing = 24.0; // Kartlar arası boşluk
+                final spacing = AppSizes.p24; // Kartlar arası boşluk
                 final totalSpacing = spacing * (cardCount - 1);
                 final availableWidth = screenWidth - totalSpacing;
                 final cardWidth = availableWidth / cardCount;
@@ -241,13 +242,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       width: cardWidth,
                       child: CertificateCard(
                         icon: FontAwesomeIcons.clipboardCheck,
-                        iconColor: Color(0xFF61DAFB),
+                        iconColor: AppColors.certLightBlue,
                         title: "Proje Yöneticisi",
                         subtitle: "Google",
                         description:
                             "Google Proje Yönetimi eğitimi kapsamında; planlama, zaman yönetimi, ekip koordinasyonu ve Agile metodolojileri üzerine kapsamlı bilgi edindim.",
                         year: "2024",
-                        yearColor: Color(0xFF61DAFB),
+                        yearColor: AppColors.certLightBlue,
                       ),
                     ),
                     SizedBox(width: spacing),
@@ -255,13 +256,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       width: cardWidth,
                       child: CertificateCard(
                         icon: FontAwesomeIcons.code,
-                        iconColor: Color(0xFF3776AB),
+                        iconColor: AppColors.certDarkBlue,
                         title: "Dart Programlama Dili",
                         subtitle: "BTK Akademi",
                         description:
                             "Dart programlama dilinin temellerini öğrendim. Flutter geliştirme sürecinde ihtiyaç duyduğum tüm temel konulara hakimiyet kazandım.",
                         year: "2024",
-                        yearColor: Color(0xFF3776AB),
+                        yearColor: AppColors.certDarkBlue,
                       ),
                     ),
                     SizedBox(width: spacing),
@@ -269,13 +270,13 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       width: cardWidth,
                       child: CertificateCard(
                         icon: FontAwesomeIcons.graduationCap,
-                        iconColor: Color(0xFFFF9900),
+                        iconColor: AppColors.certYellow,
                         title: "Bootcamp",
                         subtitle: "Google Oyun ve Uygulama Akademisi",
                         description:
                             "Flutter, girişimcilik ve proje yönetimi alanlarında kapsamlı eğitim aldığım, uygulamalı proje geliştirme temelli yoğun eğitim programı.",
                         year: "2021",
-                        yearColor: Color(0xFFFF9900),
+                        yearColor: AppColors.certYellow,
                       ),
                     ),
                   ],
@@ -283,7 +284,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
               },
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: AppSizes.p40),
           _animItem(
             9,
             QuoteCard(

@@ -30,6 +30,23 @@ class AppColors {
   static const Color warning = Color(0xFFF59E0B);
   static const Color error = Color(0xFFEF4444);
 
+  // CERTIFICATE COLORS
+  static const Color certOrange = Color(0xFFEA580C);
+  static const Color certGreen = Colors.green;
+  static const Color certLightBlue = Color(0xFF61DAFB);
+  static const Color certDarkBlue = Color(0xFF3776AB);
+  static const Color certYellow = Color(0xFFFF9900);
+
+  // SKILL CARD COLORS
+  static const Color skillOrange = Colors.orange;
+  static const Color skillDeepOrange = Colors.deepOrange;
+  static const Color skillOrangeAccent = Colors.orangeAccent;
+  static const Color skillPurple = Colors.purple;
+
+  // BADGE COLORS
+  static const Color successLight = Color(0xFFD1FAE5);
+  static const Color successDark = Color(0xFF065F46);
+
   // BORDERS & DIVIDERS
   static const Color border = Color(0xFFE5E7EB);
   static const Color divider = Color(0xFFCBD5E1);
@@ -43,4 +60,5 @@ class AppColors {
 
   // SHADOWS
   static const Color shadow = Color(0x1A000000); // %10 opak siyah
+  static const Color shadowLight = Color(0x0D000000); // %5 opak siyah
 }

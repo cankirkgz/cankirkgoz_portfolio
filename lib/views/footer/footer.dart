@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
@@ -77,10 +78,14 @@ class Footer extends StatelessWidget {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      _socialIcon(FontAwesomeIcons.github),
-                      _socialIcon(FontAwesomeIcons.linkedinIn),
-                      _socialIcon(FontAwesomeIcons.envelope),
-                      _socialIcon(FontAwesomeIcons.twitter),
+                      _SocialIcon(FontAwesomeIcons.github,
+                          'https://github.com/cankirkgz'),
+                      _SocialIcon(FontAwesomeIcons.linkedinIn,
+                          'https://www.linkedin.com/in/cankirkgoz99/'),
+                      _SocialIcon(FontAwesomeIcons.envelope,
+                          'mailto:mcankirkgoz@gmail.com'),
+                      _SocialIcon(FontAwesomeIcons.medium,
+                          'https://medium.com/@mcankirkgoz'),
                     ],
                   )
                 ],
@@ -94,12 +99,18 @@ class Footer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CircleAvatar(
-                backgroundColor: Color(0xFF6366F1),
-                child: Icon(
-                  FontAwesomeIcons.arrowUp,
-                  size: 14,
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () => onItemTap?.call(0),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: CircleAvatar(
+                    backgroundColor: Color(0xFF6366F1),
+                    child: Icon(
+                      FontAwesomeIcons.arrowUp,
+                      size: 14,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               )
             ],
@@ -128,14 +139,42 @@ class Footer extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _socialIcon(IconData icon) {
+class _SocialIcon extends StatefulWidget {
+  final IconData icon;
+  final String url;
+
+  const _SocialIcon(this.icon, this.url);
+
+  @override
+  State<_SocialIcon> createState() => _SocialIconState();
+}
+
+class _SocialIconState extends State<_SocialIcon> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: CircleAvatar(
-        radius: 18,
-        backgroundColor: Colors.grey.shade800,
-        child: Icon(icon, size: 16, color: Colors.white),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: GestureDetector(
+          onTap: () => html.window.open(widget.url, '_blank'),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            transform: Matrix4.translationValues(0, _isHovered ? -4 : 0, 0),
+            child: CircleAvatar(
+              radius: 18,
+              backgroundColor:
+                  _isHovered ? AppColors.primaryPurple : Colors.grey.shade800,
+              child: Icon(widget.icon, size: 16, color: Colors.white),
+            ),
+          ),
+        ),
       ),
     );
   }

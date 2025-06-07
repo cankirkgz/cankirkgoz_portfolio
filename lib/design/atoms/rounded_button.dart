@@ -75,19 +75,22 @@ class _RoundedButtonState extends State<RoundedButton> {
                       ? AppSizes.iconL
                       : AppSizes.iconS,
                   color: widget.type == ButtonType.gradient
-                      ? Colors.white
+                      ? AppColors.scaffoldBackground
                       : widget.iconColor ??
                           (widget.type == ButtonType.card
                               ? null
                               : AppColors.blackText),
                 ),
-                SizedBox(width: widget.type == ButtonType.card ? 10 : 8),
+                SizedBox(
+                    width: widget.type == ButtonType.card
+                        ? AppSizes.p10
+                        : AppSizes.p8),
               ],
               Text(
                 widget.firstText,
                 style: TextStyle(
                   color: widget.type == ButtonType.gradient
-                      ? Colors.white
+                      ? AppColors.scaffoldBackground
                       : widget.textColor ??
                           (widget.type == ButtonType.card
                               ? AppColors.textPrimary
@@ -97,7 +100,10 @@ class _RoundedButtonState extends State<RoundedButton> {
                 ),
               ),
               if (widget.rightIcon != null) ...[
-                SizedBox(width: widget.type == ButtonType.card ? 12 : 8),
+                SizedBox(
+                    width: widget.type == ButtonType.card
+                        ? AppSizes.p12
+                        : AppSizes.p8),
                 Image.asset(
                   widget.rightIcon!,
                   height: widget.type == ButtonType.card
@@ -107,7 +113,7 @@ class _RoundedButtonState extends State<RoundedButton> {
                       ? AppSizes.iconL
                       : AppSizes.iconS,
                   color: widget.type == ButtonType.gradient
-                      ? Colors.white
+                      ? AppColors.scaffoldBackground
                       : widget.iconColor ??
                           (widget.type == ButtonType.card
                               ? null
@@ -117,12 +123,12 @@ class _RoundedButtonState extends State<RoundedButton> {
             ],
           ),
           if (widget.secondText != null) ...[
-            const SizedBox(height: 2),
+            const SizedBox(height: AppSizes.p2),
             Text(
               widget.secondText!,
               style: TextStyle(
                 color: widget.type == ButtonType.gradient
-                    ? Colors.white
+                    ? AppColors.scaffoldBackground
                     : (widget.textColor ??
                         (widget.type == ButtonType.card
                             ? AppColors.textSecondary
@@ -147,18 +153,20 @@ class _RoundedButtonState extends State<RoundedButton> {
             gradient: LinearGradient(
               colors: gradientColors,
             ),
-            borderRadius: BorderRadius.circular(widget.borderRadius ?? 12.0),
+            borderRadius: widget.borderRadius != null
+                ? BorderRadius.circular(widget.borderRadius!)
+                : AppSizes.r12,
             border: widget.borderColor != null
                 ? Border.all(
                     color: widget.borderColor!,
-                    width: widget.borderWidth ?? 1.0,
+                    width: widget.borderWidth ?? AppSizes.p1,
                   )
                 : null,
             boxShadow: widget.hasShadow
                 ? [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
+                      color: AppColors.shadow.withOpacity(0.1),
+                      blurRadius: AppSizes.shadowBlur,
                       offset: const Offset(0, 4),
                     ),
                   ]
@@ -166,17 +174,19 @@ class _RoundedButtonState extends State<RoundedButton> {
           );
         case ButtonType.outline:
           return BoxDecoration(
-            color: Colors.white,
+            color: AppColors.scaffoldBackground,
             border: Border.all(
-              color: widget.borderColor ?? Colors.grey.shade300,
-              width: widget.borderWidth ?? 1.0,
+              color: widget.borderColor ?? AppColors.border,
+              width: widget.borderWidth ?? AppSizes.p1,
             ),
-            borderRadius: BorderRadius.circular(widget.borderRadius ?? 12.0),
+            borderRadius: widget.borderRadius != null
+                ? BorderRadius.circular(widget.borderRadius!)
+                : AppSizes.r12,
             boxShadow: widget.hasShadow
                 ? [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
+                      color: AppColors.shadow.withOpacity(0.1),
+                      blurRadius: AppSizes.shadowBlur,
                       offset: const Offset(0, 4),
                     ),
                   ]
@@ -184,19 +194,21 @@ class _RoundedButtonState extends State<RoundedButton> {
           );
         case ButtonType.card:
           return BoxDecoration(
-            color: widget.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(widget.borderRadius ?? 12.0),
+            color: widget.backgroundColor ?? AppColors.scaffoldBackground,
+            borderRadius: widget.borderRadius != null
+                ? BorderRadius.circular(widget.borderRadius!)
+                : AppSizes.r12,
             border: widget.borderColor != null
                 ? Border.all(
                     color: widget.borderColor!,
-                    width: widget.borderWidth ?? 1.0,
+                    width: widget.borderWidth ?? AppSizes.p1,
                   )
                 : null,
             boxShadow: widget.hasShadow
                 ? [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
+                      color: AppColors.shadow.withOpacity(0.1),
+                      blurRadius: AppSizes.shadowBlur,
                       offset: const Offset(0, 4),
                     ),
                   ]
@@ -209,9 +221,10 @@ class _RoundedButtonState extends State<RoundedButton> {
       switch (widget.type) {
         case ButtonType.gradient:
         case ButtonType.outline:
-          return const EdgeInsets.symmetric(horizontal: 24, vertical: 14);
+          return const EdgeInsets.symmetric(
+              horizontal: AppSizes.p24, vertical: AppSizes.p14);
         case ButtonType.card:
-          return AppSizes.p12;
+          return EdgeInsets.all(AppSizes.p12);
       }
     }
 
@@ -230,7 +243,7 @@ class _RoundedButtonState extends State<RoundedButton> {
             minHeight: widget.height ??
                 (widget.type == ButtonType.gradient
                     ? AppSizes.buttonHeightS
-                    : 32),
+                    : AppSizes.p32),
             minWidth: widget.width ?? 0,
           ),
           decoration: getDecoration(),

@@ -74,13 +74,14 @@ class _ProjectsScreenState extends State<ProjectsScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: AppColors.scaffoldBackground,
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1400),
+          constraints:
+              const BoxConstraints(maxWidth: AppSizes.breakpointDesktop),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.p24, vertical: AppSizes.p80),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -90,24 +91,24 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                   style: TextStyle(
                     fontSize: AppSizes.fontXXXXL,
                     fontWeight: AppSizes.fontWeightBold,
-                    color: const Color(0xFF111827),
+                    color: AppColors.textPrimary,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSizes.p8),
                 // Alt Başlık
                 Text(
                   'Flutter, Firebase ve ileri düzey mobil teknolojilerle geliştirdiğim son projelerimden bazıları.',
                   style: TextStyle(
                     fontSize: AppSizes.fontL,
                     fontWeight: AppSizes.fontWeightRegular,
-                    color: const Color(0xFF6B7280),
+                    color: AppColors.textSecondary,
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
                 // Filtre Butonları
                 Wrap(
-                  spacing: 30,
-                  runSpacing: 16,
+                  spacing: AppSizes.p30,
+                  runSpacing: AppSizes.p16,
                   alignment: WrapAlignment.center,
                   children: [
                     _buildFilterButton("Tüm Projeler"),
@@ -116,11 +117,12 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                     _buildFilterButton("Diğer"),
                   ],
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
                 // Proje Kartları
                 _displayedProjects.isEmpty
                     ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 50.0),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: AppSizes.p50),
                         child: Text(
                           "Çok yakında...",
                           style: TextStyle(
@@ -132,8 +134,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                       )
                     : Wrap(
                         key: ValueKey<String>(_selectedFilter),
-                        spacing: 24,
-                        runSpacing: 24,
+                        spacing: AppSizes.p24,
+                        runSpacing: AppSizes.p24,
                         alignment: WrapAlignment.center,
                         children: _displayedProjects.map((project) {
                           return SlideTransition(
@@ -151,7 +153,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           );
                         }).toList(),
                       ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
                 // GitHub Butonu
                 RoundedButton(
                   firstText: "Tüm Projelerime Göz At",
@@ -176,7 +178,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
       firstText: label,
       onPressed: () => _filterProjects(label),
       type: _selectedFilter == label ? ButtonType.gradient : ButtonType.outline,
-      borderRadius: 9999,
+      borderRadius: AppSizes.r999.bottomLeft.x,
     );
   }
 
@@ -188,7 +190,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           description:
               "Ternai, yurt dışı seyahat planlayan kullanıcılar için geliştirilen, maliyetleri karşılaştırarak tatil bütçesi oluşturmalarını sağlayan bir mobil uygulamadır.",
           badgeText: "Geliştiriliyor",
-          badgeColor: Colors.green,
+          badgeColor: AppColors.success,
           imagePath: "assets/images/ternai_mockup.png",
           techTags: [
             'Flutter',
@@ -200,13 +202,13 @@ class _ProjectsScreenState extends State<ProjectsScreen>
             'EmpowerMe Finalisti'
           ],
           techTagColors: [
-            Colors.blue,
-            Colors.orange,
-            Colors.purple,
-            Colors.deepPurple,
-            Colors.teal,
-            Colors.orange,
-            Colors.blue,
+            AppColors.primary,
+            AppColors.skillOrange,
+            AppColors.skillPurple,
+            AppColors.primaryPurple,
+            AppColors.textSecondary,
+            AppColors.skillOrange,
+            AppColors.primary,
           ],
           button1Text: 'Ziyaret',
           button1SecondText: 'Et',
@@ -225,15 +227,15 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           description:
               "Evlenmeye hazırlanan çiftler için oda bazlı eşya planlama ve listeleme uygulamasıdır. Offline desteklidir.",
           badgeText: "Yayında",
-          badgeColor: Colors.orange,
+          badgeColor: AppColors.skillOrange,
           imagePath: "assets/images/wedly_mockup.png",
           techTags: ['Dart', 'Firebase', 'Hive', 'Riverpod', 'MVVM'],
           techTagColors: [
-            Colors.cyan,
-            Colors.red,
-            Colors.amber,
-            Colors.deepPurple,
-            Colors.teal,
+            AppColors.primaryblue,
+            AppColors.error,
+            AppColors.skillOrangeAccent,
+            AppColors.primaryPurple,
+            AppColors.textSecondary,
           ],
           button1Text: 'Yükle',
           onButton1Pressed: () {

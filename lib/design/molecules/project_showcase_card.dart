@@ -62,22 +62,23 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                 minHeight: 450,
               ),
               child: Container(
-                margin: AppSizes.p12,
+                margin: EdgeInsets.all(AppSizes.p12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.scaffoldBackground,
                   borderRadius: AppSizes.r16,
                   boxShadow: [
                     BoxShadow(
                       color: _isHovered
                           ? AppColors.blueText.withOpacity(0.2)
-                          : Colors.black.withOpacity(0.05),
-                      blurRadius: _isHovered ? 20 : AppSizes.shadowBlur,
-                      offset: const Offset(0, 6),
+                          : AppColors.shadow.withOpacity(0.05),
+                      blurRadius:
+                          _isHovered ? AppSizes.p20 : AppSizes.shadowBlur,
+                      offset: Offset(0, AppSizes.p6),
                     ),
                   ],
                 ),
                 child: Padding(
-                  padding: AppSizes.p16,
+                  padding: EdgeInsets.all(AppSizes.p16),
                   child: IntrinsicHeight(
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,15 +87,15 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                         ClipRRect(
                           borderRadius: AppSizes.r12,
                           child: SizedBox(
-                            width: 256,
-                            height: 256,
+                            width: AppSizes.p256,
+                            height: AppSizes.p256,
                             child: Image.asset(
                               widget.imagePath,
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        SizedBox(width: AppSizes.p16.left),
+                        SizedBox(width: AppSizes.p16),
 
                         // İçerik kısmı
                         Expanded(
@@ -116,22 +117,24 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
-                                  SizedBox(width: AppSizes.p8.left),
+                                  SizedBox(width: AppSizes.p8),
                                   CustomBadge(
                                     text: widget.badgeText,
                                     showDot: false,
+                                    backgroundColor: widget.badgeColor,
+                                    textColor: Colors.white,
                                   ),
                                 ],
                               ),
-                              SizedBox(height: AppSizes.p12.top),
+                              SizedBox(height: AppSizes.p12),
 
                               // Açıklama (maksimum 6 satır)
                               Tooltip(
                                 message: null,
                                 preferBelow: true,
-                                padding: AppSizes.p8,
+                                padding: EdgeInsets.all(AppSizes.p8),
                                 decoration: BoxDecoration(
-                                  color: Colors.black87,
+                                  color: AppColors.darkText.withOpacity(0.9),
                                   borderRadius: AppSizes.r8,
                                 ),
                                 waitDuration: const Duration(milliseconds: 300),
@@ -140,13 +143,13 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                                   children: [
                                     WidgetSpan(
                                       child: Container(
-                                        width: 200,
-                                        padding: AppSizes.p8,
+                                        width: AppSizes.p200,
+                                        padding: EdgeInsets.all(AppSizes.p8),
                                         child: Text(
                                           widget.description,
                                           style: TextStyle(
                                             fontSize: AppSizes.fontS,
-                                            color: Colors.white,
+                                            color: AppColors.scaffoldBackground,
                                           ),
                                         ),
                                       ),
@@ -166,12 +169,12 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                               ),
 
                               // Açıklama ile etiketler arasındaki boşluk
-                              SizedBox(height: AppSizes.p4.top),
+                              SizedBox(height: AppSizes.p4),
 
                               // Teknoloji Etiketleri
                               Wrap(
-                                spacing: AppSizes.p8.left,
-                                runSpacing: AppSizes.p8.top,
+                                spacing: AppSizes.p8,
+                                runSpacing: AppSizes.p8,
                                 children: List.generate(
                                   widget.techTags.length,
                                   (index) => CustomBadge(
@@ -181,10 +184,10 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                                     textColor: widget.techTagColors[index],
                                     showDot: false,
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: AppSizes.p8.left,
-                                      vertical: AppSizes.p4.top,
+                                      horizontal: AppSizes.p8,
+                                      vertical: AppSizes.p4,
                                     ),
-                                    borderRadius: 8,
+                                    borderRadius: AppSizes.r8.bottomLeft.x,
                                   ),
                                 ),
                               ),
@@ -198,7 +201,7 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                                     child: RoundedButton(
                                       firstText: widget.button1Text,
                                       secondText: widget.button1SecondText,
-                                      icon: "assets/icons/share_icon.png",
+                                      icon: 'assets/icons/share_icon.png',
                                       onPressed: widget.onButton1Pressed,
                                       type: ButtonType.gradient,
                                       gradientColors: [
@@ -208,11 +211,11 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                                       height: widget.buttonHeight,
                                     ),
                                   ),
-                                  SizedBox(width: AppSizes.p12.left),
+                                  SizedBox(width: AppSizes.p12),
                                   Expanded(
                                     child: RoundedButton(
                                       firstText: widget.button2Text,
-                                      icon: "assets/icons/github_icon.png",
+                                      icon: 'assets/icons/github_icon.png',
                                       onPressed: widget.onButton2Pressed,
                                       type: ButtonType.outline,
                                       gradientColors: [

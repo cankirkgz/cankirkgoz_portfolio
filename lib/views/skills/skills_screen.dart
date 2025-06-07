@@ -79,7 +79,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                 gradientColors: [AppColors.blueText, AppColors.purpleText],
               ),
             ),
-            SizedBox(width: AppSizes.p16.left),
+            SizedBox(width: AppSizes.p16),
             Expanded(
               child: SkillLevelCard(
                 skillName: 'Dart',
@@ -92,7 +92,7 @@ class _SkillsScreenState extends State<SkillsScreen>
             ),
           ],
         ),
-        SizedBox(height: AppSizes.p16.top),
+        SizedBox(height: AppSizes.p16),
         Row(
           children: [
             Expanded(
@@ -100,18 +100,21 @@ class _SkillsScreenState extends State<SkillsScreen>
                 skillName: 'Firebase',
                 skillLevel: 'Orta',
                 percentage: 55,
-                color: Colors.orange,
+                color: AppColors.skillOrange,
                 iconPath: 'assets/icons/firebase_icon.png',
-                gradientColors: [Colors.deepOrange, Colors.orangeAccent],
+                gradientColors: [
+                  AppColors.skillDeepOrange,
+                  AppColors.skillOrangeAccent
+                ],
               ),
             ),
-            SizedBox(width: AppSizes.p16.left),
+            SizedBox(width: AppSizes.p16),
             Expanded(
               child: SkillLevelCard(
                 skillName: 'Kotlin',
                 skillLevel: 'Başlangıç',
                 percentage: 30,
-                color: Colors.purple,
+                color: AppColors.skillPurple,
                 iconPath: 'assets/icons/kotlin_icon.png',
               ),
             ),
@@ -127,11 +130,11 @@ class _SkillsScreenState extends State<SkillsScreen>
                 skillName: 'Kotlin',
                 skillLevel: 'Başlangıç',
                 percentage: 30,
-                color: Colors.purple,
+                color: AppColors.skillPurple,
                 iconPath: 'assets/icons/kotlin_icon.png',
               ),
             ),
-            SizedBox(width: AppSizes.p16.left),
+            SizedBox(width: AppSizes.p16),
             Expanded(child: Container()),
           ],
         ),
@@ -150,7 +153,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                 gradientColors: [AppColors.blueText, AppColors.purpleText],
               ),
             ),
-            SizedBox(width: AppSizes.p16.left),
+            SizedBox(width: AppSizes.p16),
             Expanded(
               child: SkillLevelCard(
                 skillName: 'Dart',
@@ -163,7 +166,7 @@ class _SkillsScreenState extends State<SkillsScreen>
             ),
           ],
         ),
-        SizedBox(height: AppSizes.p16.top),
+        SizedBox(height: AppSizes.p16),
         Row(
           children: [
             Expanded(
@@ -171,12 +174,15 @@ class _SkillsScreenState extends State<SkillsScreen>
                 skillName: 'Firebase',
                 skillLevel: 'Orta',
                 percentage: 55,
-                color: Colors.orange,
+                color: AppColors.skillOrange,
                 iconPath: 'assets/icons/firebase_icon.png',
-                gradientColors: [Colors.deepOrange, Colors.orangeAccent],
+                gradientColors: [
+                  AppColors.skillDeepOrange,
+                  AppColors.skillOrangeAccent
+                ],
               ),
             ),
-            SizedBox(width: AppSizes.p16.left),
+            SizedBox(width: AppSizes.p16),
             Expanded(child: Container()),
           ],
         ),
@@ -199,18 +205,18 @@ class _SkillsScreenState extends State<SkillsScreen>
 
   @override
   Widget build(BuildContext context) {
-    const double itemGap = 16.0;
+    const double itemGap = AppSizes.p16;
 
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: AppColors.scaffoldBackground,
       ),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1400),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSizes.p24, vertical: AppSizes.p80),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -223,12 +229,12 @@ class _SkillsScreenState extends State<SkillsScreen>
                       style: TextStyle(
                         fontSize: AppSizes.fontXXXXL,
                         fontWeight: AppSizes.fontWeightBold,
-                        color: const Color(0xFF111827),
+                        color: AppColors.textPrimary,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSizes.p8),
                 // Alt başlık
                 _animItem(
                   1,
@@ -238,12 +244,12 @@ class _SkillsScreenState extends State<SkillsScreen>
                       style: TextStyle(
                         fontSize: AppSizes.fontL,
                         fontWeight: AppSizes.fontWeightRegular,
-                        color: const Color(0xFF6B7280),
+                        color: AppColors.textSecondary,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
 
                 // Filtre butonları
                 _animItem(
@@ -306,7 +312,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
 
                 // Featured Projects başlığı
                 _animItem(
@@ -331,7 +337,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSizes.p24),
 
                 // Filtrelenmiş yetenek kartları (Animasyonlu)
                 _animItem(
@@ -359,7 +365,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                   ),
                 ),
 
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
 
                 // Diğer bölümler aynı şekilde devam eder...
                 _animItem(
@@ -384,7 +390,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSizes.p24),
                 _animItem(
                   6,
                   Row(
@@ -397,7 +403,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
                 _animItem(
                   7,
                   Row(
@@ -420,7 +426,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSizes.p24),
                 _animItem(
                   8,
                   Row(
@@ -433,7 +439,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: AppSizes.p48),
                 _animItem(
                   9,
                   Container(

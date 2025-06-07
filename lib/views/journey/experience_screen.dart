@@ -159,13 +159,13 @@ class _ExperienceScreenState extends State<ExperienceScreen>
       ),
       _ExperienceEntry(
         icon: FontAwesomeIcons.codeBranch,
-        iconBg: Colors.green,
+        iconBg: AppColors.certGreen,
         title: 'React Native Intern',
         subtitle: 'Fazla',
         date: 'Ağustos 2023 – Kasım 2023',
         location: 'Uzaktan',
         statusBadge: 'Uzaktan',
-        bulletColor: Colors.green,
+        bulletColor: AppColors.certGreen,
         points: [
           'Stok takip uygulaması geliştirdim ve test süreçlerine katkı sağladım.',
           'React Native ile mobil arayüzler tasarlayıp veri yönetimini sağladım.',
@@ -177,18 +177,19 @@ class _ExperienceScreenState extends State<ExperienceScreen>
 
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white, // Tek renk arka plan
+        color: AppColors.scaffoldBackground, // Tek renk arka plan
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.p24, vertical: AppSizes.p80),
         child: Column(
           children: [
             // Header section
             _buildHeader(),
-            const SizedBox(height: 32),
+            const SizedBox(height: AppSizes.p32),
             // Timeline with animations
             _buildTimeline(entries),
-            const SizedBox(height: 32),
+            const SizedBox(height: AppSizes.p32),
             // Achievement banner at bottom
             _buildAchievementBanner(),
           ],
@@ -206,16 +207,16 @@ class _ExperienceScreenState extends State<ExperienceScreen>
           style: TextStyle(
             fontSize: AppSizes.fontXXXXL,
             fontWeight: AppSizes.fontWeightBold,
-            color: Colors.grey[900],
+            color: AppColors.textPrimary,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSizes.p8),
         Text(
           "Çalıştığım yerler ve bu yolda öğrendiklerim",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppSizes.fontL,
-            color: Colors.grey[600],
+            color: AppColors.textSecondary,
           ),
         ),
       ],
@@ -231,10 +232,10 @@ class _ExperienceScreenState extends State<ExperienceScreen>
           children: [
             // Central vertical line
             Positioned(
-              left: centerX - 1,
+              left: centerX - AppSizes.p1,
               top: 0,
               bottom: 0,
-              child: Container(width: 2, color: AppColors.primary),
+              child: Container(width: AppSizes.p2, color: AppColors.primary),
             ),
             Column(
               children: List.generate(entries.length, (i) {
@@ -242,7 +243,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
                 return _buildAnimatedEntry(
                   i,
                   Container(
-                    margin: EdgeInsets.only(bottom: AppSizes.p32.top),
+                    margin: EdgeInsets.only(bottom: AppSizes.p32),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -255,17 +256,18 @@ class _ExperienceScreenState extends State<ExperienceScreen>
                         ),
                         // Bullet dot at center
                         SizedBox(
-                          width: 24,
+                          width: AppSizes.p24,
                           child: Column(
                             children: [
                               Container(
-                                width: 12,
-                                height: 12,
+                                width: AppSizes.p12,
+                                height: AppSizes.p12,
                                 decoration: BoxDecoration(
                                   color: entries[i].bulletColor,
                                   shape: BoxShape.circle,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
+                                  border: Border.all(
+                                      color: AppColors.scaffoldBackground,
+                                      width: AppSizes.p2),
                                 ),
                               ),
                             ],
@@ -296,7 +298,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
     return Align(
       alignment: alignRight ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: centerX - 32),
+        constraints: BoxConstraints(maxWidth: centerX - AppSizes.p32),
         child: entry, // actual entry widget
       ),
     );
@@ -305,14 +307,14 @@ class _ExperienceScreenState extends State<ExperienceScreen>
   /// Banner showing achievements with icons and values
   Widget _buildAchievementBanner() {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(AppSizes.p24),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
             colors: [AppColors.primary, AppColors.primaryPurple]),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: AppSizes.r24,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: const [
           _AchievementItem(
               icon: FontAwesomeIcons.trophy,
@@ -372,34 +374,33 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        transform: Matrix4.translationValues(0, _isHovered ? -8 : 0, 0),
+        transform:
+            Matrix4.translationValues(0, _isHovered ? -AppSizes.p8 : 0, 0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
+            color: AppColors.scaffoldBackground,
+            borderRadius: AppSizes.r16,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
-                spreadRadius: 2,
+                color: AppColors.shadow.withOpacity(0.1),
+                blurRadius: AppSizes.p20,
+                offset: const Offset(0, AppSizes.p8),
+                spreadRadius: AppSizes.p2,
               ),
             ],
           ),
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(AppSizes.p16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top row: icon + title/subtitle + status badge
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      // Icon box with gradient
                       Container(
-                        width: 48,
-                        height: 48,
+                        width: AppSizes.p48,
+                        height: AppSizes.p48,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
@@ -409,89 +410,120 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: AppSizes.r12,
                         ),
                         child: Center(
-                            child: FaIcon(widget.icon, color: Colors.white)),
+                          child: FaIcon(
+                            widget.icon,
+                            color: AppColors.scaffoldBackground,
+                            size: AppSizes.iconM,
+                          ),
+                        ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: AppSizes.p12),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Entry title
-                          Text(widget.title,
-                              style: TextStyle(
-                                  fontSize: AppSizes.fontXL,
-                                  fontWeight: AppSizes.fontWeightSemiBold)),
-                          // Entry subtitle/company
-                          Text(widget.subtitle,
-                              style: TextStyle(
-                                  color: widget.iconBg,
-                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            widget.title,
+                            style: TextStyle(
+                              fontSize: AppSizes.fontXL,
+                              fontWeight: AppSizes.fontWeightSemiBold,
+                            ),
+                          ),
+                          Text(
+                            widget.subtitle,
+                            style: TextStyle(
+                              color: widget.iconBg,
+                              fontWeight: AppSizes.fontWeightMedium,
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
-                  // Status badge
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSizes.p12,
+                      vertical: AppSizes.p4,
+                    ),
                     decoration: BoxDecoration(
-                        color: widget.bulletColor.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Text(widget.statusBadge,
-                        style: TextStyle(
-                            color: widget.bulletColor,
-                            fontSize: AppSizes.fontXs)),
+                      color: widget.bulletColor.withOpacity(0.2),
+                      borderRadius: AppSizes.r8,
+                    ),
+                    child: Text(
+                      widget.statusBadge,
+                      style: TextStyle(
+                        color: widget.bulletColor,
+                        fontSize: AppSizes.fontXs,
+                      ),
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              // Date text
-              Text(widget.date, style: TextStyle(color: Colors.grey[600])),
-              const SizedBox(height: 4),
-              // Location row with icon
+              SizedBox(height: AppSizes.p8),
+              Text(
+                widget.date,
+                style: TextStyle(color: AppColors.textSecondary),
+              ),
+              SizedBox(height: AppSizes.p4),
               Row(
                 children: [
-                  const Icon(FontAwesomeIcons.mapMarkerAlt,
-                      size: 14, color: Colors.grey),
-                  const SizedBox(width: 6),
+                  FaIcon(
+                    FontAwesomeIcons.locationDot,
+                    size: AppSizes.fontS,
+                    color: AppColors.icon,
+                  ),
+                  SizedBox(width: AppSizes.p6),
                   Expanded(
-                      child: Text(widget.location,
-                          style: TextStyle(color: Colors.grey[600]))),
+                    child: Text(
+                      widget.location,
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 12),
-              // Bullet points
+              SizedBox(height: AppSizes.p12),
               ...widget.points.map((p) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    padding: EdgeInsets.symmetric(vertical: AppSizes.p2),
                     child: Row(
                       children: [
-                        Icon(FontAwesomeIcons.checkCircle,
-                            size: 14, color: widget.bulletColor),
-                        const SizedBox(width: 6),
+                        FaIcon(
+                          FontAwesomeIcons.circleCheck,
+                          size: AppSizes.fontS,
+                          color: widget.bulletColor,
+                        ),
+                        SizedBox(width: AppSizes.p6),
                         Expanded(
-                            child: Text(p,
-                                style: TextStyle(color: Colors.grey[800]))),
+                          child: Text(
+                            p,
+                            style: TextStyle(color: AppColors.textPrimary),
+                          ),
+                        ),
                       ],
                     ),
                   )),
-              const SizedBox(height: 12),
-              // Tags wrap
+              SizedBox(height: AppSizes.p12),
               Wrap(
-                  spacing: 8,
-                  runSpacing: 6,
-                  children: widget.tags
-                      .map((t) => Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(6)),
-                            child: Text(t,
-                                style: TextStyle(fontSize: AppSizes.fontXs)),
-                          ))
-                      .toList()),
+                spacing: AppSizes.p8,
+                runSpacing: AppSizes.p6,
+                children: widget.tags
+                    .map((t) => Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.p8,
+                            vertical: AppSizes.p4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.grey,
+                            borderRadius: AppSizes.r6,
+                          ),
+                          child: Text(
+                            t,
+                            style: TextStyle(fontSize: AppSizes.fontXs),
+                          ),
+                        ))
+                    .toList(),
+              ),
             ],
           ),
         ),
@@ -516,22 +548,30 @@ class _AchievementItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        FaIcon(icon, color: Colors.white, size: 28),
-        const SizedBox(width: 8),
+        FaIcon(
+          icon,
+          color: AppColors.scaffoldBackground,
+          size: AppSizes.iconXXL,
+        ),
+        SizedBox(width: AppSizes.p8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Numeric value
-            Text(value,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: AppSizes.fontXXL,
-                    fontWeight: AppSizes.fontWeightBold)),
-            // Label below value
-            Text(label,
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: AppSizes.fontS)),
+            Text(
+              value,
+              style: TextStyle(
+                color: AppColors.scaffoldBackground,
+                fontSize: AppSizes.fontXXL,
+                fontWeight: AppSizes.fontWeightBold,
+              ),
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                color: AppColors.scaffoldBackground.withOpacity(0.9),
+                fontSize: AppSizes.fontS,
+              ),
+            ),
           ],
         ),
       ],

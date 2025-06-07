@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Expanded(
                       flex: 2,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 128.0),
+                        padding: const EdgeInsets.only(left: AppSizes.p128),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,12 +96,12 @@ class _HomeScreenState extends State<HomeScreen>
                               child: CustomBadge(
                                 text:
                                     'Şu anda Flutter ile bir yapay zeka uygulaması geliştiriyorum',
-                                backgroundColor: const Color(0xFFD1FAE5),
-                                dotColor: const Color(0xFF10B981),
-                                textColor: const Color(0xFF065F46),
+                                backgroundColor: AppColors.successLight,
+                                dotColor: AppColors.success,
+                                textColor: AppColors.successDark,
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: AppSizes.p16),
                             _buildAnimated(
                               index: 1,
                               child: SectionTitle(
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen>
                               index: 2,
                               child: const AnimatedTitle(),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: AppSizes.p16),
                             _buildAnimated(
                               index: 3,
                               child: RichSubtitleText(
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 },
                               ),
                             ),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: AppSizes.p32),
                             _buildAnimated(
                               index: 4,
                               child: Row(
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       widget.onProjectsTap?.call();
                                     },
                                   ),
-                                  const SizedBox(width: 16),
+                                  const SizedBox(width: AppSizes.p16),
                                   RoundedButton(
                                     firstText: "CV'mi İndir",
                                     icon: 'assets/icons/download.png',
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     onPressed: () {
                                       final anchor = html.AnchorElement(
                                         href:
-                                            'mcankirkgoz-mobiledeveloper-resume.pdf',
+                                            'assets/files/mcankirkgoz-mobiledeveloper-resume.pdf',
                                       )
                                         ..setAttribute('download',
                                             'mcankirkgoz-mobiledeveloper-resume.pdf')
@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 32),
+                            const SizedBox(height: AppSizes.p32),
                             _buildAnimated(
                               index: 5,
                               child: RoundedButton(
@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Expanded(
                       flex: 1,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 128.0),
+                        padding: const EdgeInsets.only(right: AppSizes.p128),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: _buildAnimated(
@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen>
             },
           ),
           Positioned(
-            bottom: 16,
+            bottom: AppSizes.p16,
             left: 0,
             right: 0,
             child: Center(

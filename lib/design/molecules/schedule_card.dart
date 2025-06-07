@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
@@ -57,7 +58,8 @@ class ScheduleCard extends StatelessWidget {
           const SizedBox(height: 16),
           RoundedButton(
             firstText: "Görüşme Ayarla",
-            onPressed: () {},
+            onPressed: () =>
+                html.window.open('https://calendly.com/mcankirkgoz', '_blank'),
             type: ButtonType.outline,
             textColor: Color(0xFF6366F1),
             borderColor: Color(0xFF6366F1),
