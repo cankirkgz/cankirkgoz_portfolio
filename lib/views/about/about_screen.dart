@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/profile_avatar.dart';
@@ -68,12 +69,6 @@ class _AboutScreenState extends State<AboutScreen>
 
   @override
   Widget build(BuildContext context) {
-    const sampleText = '''
-Ben Can, Ankara, Türkiye'de yaşayan bir mobil uygulama geliştiricisiyim. Flutter, Kotlin ve Firebase kullanarak yüksek kaliteli mobil uygulamalar geliştirme konusunda uzmanlaştım. Fikirleri çalışan ürünlere dönüştürmeyi ve yazılım geliştirme sürecindeki tasarım, kodlama ve problem çözme aşamalarını çok seviyorum.
-
-Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit geçirmeyi seviyorum. Sürekli öğrenmeye ve iş birliği içinde çalışmaya inanıyorum.
-''';
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
@@ -105,16 +100,18 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                               image: const AssetImage(
                                   'assets/images/my_photo_second.jpg'),
                               showBadge: true,
-                              badgeTags: const [
-                                'Mobile Developer',
-                                'Flutter',
-                                'Firebase'
+                              badgeTags: [
+                                AppLocalizations.of(context)!.mobileDeveloper,
+                                AppLocalizations.of(context)!.flutter,
+                                AppLocalizations.of(context)!.firebase
                               ],
                               showBorder: false,
                               size: avatarSize,
                             ),
                             const SizedBox(height: AppSizes.p24),
-                            TextCard(text: sampleText),
+                            TextCard(
+                                text:
+                                    AppLocalizations.of(context)!.aboutMeText),
                           ],
                         )
                       : Row(
@@ -123,16 +120,19 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                               image: const AssetImage(
                                   'assets/images/my_photo_second.jpg'),
                               showBadge: true,
-                              badgeTags: const [
-                                'Mobile Developer',
-                                'Flutter',
-                                'Firebase'
+                              badgeTags: [
+                                AppLocalizations.of(context)!.mobileDeveloper,
+                                AppLocalizations.of(context)!.flutter,
+                                AppLocalizations.of(context)!.firebase
                               ],
                               showBorder: false,
                               size: avatarSize,
                             ),
                             const SizedBox(width: AppSizes.p32),
-                            Expanded(child: TextCard(text: sampleText)),
+                            Expanded(
+                                child: TextCard(
+                                    text: AppLocalizations.of(context)!
+                                        .aboutMeText)),
                           ],
                         ),
                 ),
@@ -143,9 +143,9 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                 _animItem(
                   2,
                   Text(
-                    'Kullandığım Teknolojiler',
+                    AppLocalizations.of(context)!.technologiesIUse,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: AppSizes.fontXL,
                       fontWeight: AppSizes.fontWeightSemiBold,
                       color: AppColors.textPrimary,
@@ -162,30 +162,31 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                     alignment: WrapAlignment.center,
                     spacing: AppSizes.p20,
                     runSpacing: AppSizes.p16,
-                    children: const [
+                    children: [
                       TechIconCard(
                           iconPath: 'assets/icons/flutter_icon.png',
-                          label: 'Flutter'),
+                          label: AppLocalizations.of(context)!.flutter),
                       TechIconCard(
                           iconPath: 'assets/icons/dart_icon.png',
-                          label: 'Dart'),
+                          label: AppLocalizations.of(context)!.dart),
                       TechIconCard(
                           iconPath: 'assets/icons/kotlin_icon.png',
-                          label: 'Kotlin'),
+                          label: AppLocalizations.of(context)!.kotlin),
                       TechIconCard(
                           iconPath: 'assets/icons/firebase_icon.png',
-                          label: 'Firebase'),
+                          label: AppLocalizations.of(context)!.firebase),
                       TechIconCard(
-                          iconPath: 'assets/icons/git_icon.png', label: 'Git'),
+                          iconPath: 'assets/icons/git_icon.png',
+                          label: AppLocalizations.of(context)!.git),
                       TechIconCard(
                           iconPath: 'assets/icons/figma_icon.png',
-                          label: 'Figma'),
+                          label: AppLocalizations.of(context)!.figma),
                       TechIconCard(
                           iconPath: 'assets/icons/hive_icon.png',
-                          label: 'Hive'),
+                          label: AppLocalizations.of(context)!.hive),
                       TechIconCard(
                           iconPath: 'assets/icons/riverpod_icon.png',
-                          label: 'Riverpod'),
+                          label: AppLocalizations.of(context)!.riverpod),
                     ],
                   ),
                 ),
@@ -196,9 +197,9 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                 _animItem(
                   4,
                   Text(
-                    'Şu Ana Kadarki Yolculuğum',
+                    AppLocalizations.of(context)!.myJourney,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: AppSizes.fontXL,
                       fontWeight: AppSizes.fontWeightSemiBold,
                       color: AppColors.textPrimary,
@@ -217,9 +218,9 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                 _animItem(
                   6,
                   Text(
-                    'Sertifikalarım & Başarılarım',
+                    AppLocalizations.of(context)!.certificatesAndAchievements,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: AppSizes.fontXL,
                       fontWeight: AppSizes.fontWeightSemiBold,
                       color: AppColors.textPrimary,
@@ -248,30 +249,33 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       CertificateCard(
                         icon: FontAwesomeIcons.lightbulb,
                         iconColor: AppColors.primaryblue,
-                        title: "Ideathon",
-                        subtitle: "Google Oyun ve Uygulama Akademisi",
+                        title: AppLocalizations.of(context)!.ideathon,
+                        subtitle: AppLocalizations.of(context)!
+                            .googleGameAndAppAcademy,
                         description:
-                            "Fikir üretme, takım çalışması ve sunum teknikleri alanında yoğun bir fikir maratonuna katıldım.",
+                            AppLocalizations.of(context)!.ideathonDescription,
                         year: "2024",
                         yearColor: AppColors.primaryblue,
                       ),
                       CertificateCard(
                         icon: FontAwesomeIcons.rocket,
                         iconColor: AppColors.certOrange,
-                        title: "App-Jam",
-                        subtitle: "Google Oyun ve Uygulama Akademisi",
+                        title: AppLocalizations.of(context)!.appJam,
+                        subtitle: AppLocalizations.of(context)!
+                            .googleGameAndAppAcademy,
                         description:
-                            "3 gün içinde takım çalışmasıyla prototip bir mobil uygulama geliştirip sunduğumuz hızlı geliştirme maratonu.",
+                            AppLocalizations.of(context)!.appJamDescription,
                         year: "2024",
                         yearColor: AppColors.certOrange,
                       ),
                       CertificateCard(
                         icon: FontAwesomeIcons.robot,
                         iconColor: AppColors.certGreen,
-                        title: "AI Destekli App-Jam",
-                        subtitle: "Google Oyun ve Uygulama Akademisi",
+                        title: AppLocalizations.of(context)!.aiAppJam,
+                        subtitle: AppLocalizations.of(context)!
+                            .googleGameAndAppAcademy,
                         description:
-                            "Yapay zekayı entegre ettiğimiz, 4 günlük bir uygulama geliştirme sürecinde ekip olarak yenilikçi bir prototip oluşturduk.",
+                            AppLocalizations.of(context)!.aiAppJamDescription,
                         year: "2024",
                         yearColor: AppColors.certGreen,
                       ),
@@ -293,7 +297,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
 
                 SizedBox(height: AppSizes.p24),
 
-// 8) Sertifika Kartları—ikinci grup
+                // 8) Sertifika Kartları—ikinci grup
                 _animItem(
                   8,
                   LayoutBuilder(builder: (context, constraints) {
@@ -311,30 +315,31 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                       CertificateCard(
                         icon: FontAwesomeIcons.clipboardCheck,
                         iconColor: AppColors.certLightBlue,
-                        title: "Proje Yöneticisi",
-                        subtitle: "Google",
-                        description:
-                            "Google Proje Yönetimi eğitimi kapsamında; planlama, zaman yönetimi, ekip koordinasyonu ve Agile metodolojileri üzerine kapsamlı bilgi edindim.",
+                        title: AppLocalizations.of(context)!.projectManager,
+                        subtitle: AppLocalizations.of(context)!.google,
+                        description: AppLocalizations.of(context)!
+                            .projectManagerDescription,
                         year: "2024",
                         yearColor: AppColors.certLightBlue,
                       ),
                       CertificateCard(
                         icon: FontAwesomeIcons.code,
                         iconColor: AppColors.certDarkBlue,
-                        title: "Dart Programlama Dili",
-                        subtitle: "BTK Akademi",
+                        title: AppLocalizations.of(context)!.dartProgramming,
+                        subtitle: AppLocalizations.of(context)!.btkAcademy,
                         description:
-                            "Dart programlama dilinin temellerini öğrendim. Flutter geliştirme sürecinde ihtiyaç duyduğum tüm temel konulara hakimiyet kazandım.",
+                            AppLocalizations.of(context)!.dartDescription,
                         year: "2024",
                         yearColor: AppColors.certDarkBlue,
                       ),
                       CertificateCard(
                         icon: FontAwesomeIcons.graduationCap,
                         iconColor: AppColors.certYellow,
-                        title: "Bootcamp",
-                        subtitle: "Google Oyun ve Uygulama Akademisi",
+                        title: AppLocalizations.of(context)!.bootcamp,
+                        subtitle: AppLocalizations.of(context)!
+                            .googleGameAndAppAcademy,
                         description:
-                            "Flutter, girişimcilik ve proje yönetimi alanlarında kapsamlı eğitim aldığım, uygulamalı proje geliştirme temelli yoğun eğitim programı.",
+                            AppLocalizations.of(context)!.bootcampDescription,
                         year: "2024",
                         yearColor: AppColors.certYellow,
                       ),
@@ -359,9 +364,8 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                 // 9) Quote
                 _animItem(
                   9,
-                  const QuoteCard(
-                    quote:
-                        '"Code is like poetry – when written with care, it flows beautifully."',
+                  QuoteCard(
+                    quote: AppLocalizations.of(context)!.codeQuote,
                   ),
                 ),
 

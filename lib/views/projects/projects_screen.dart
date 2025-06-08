@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
@@ -15,19 +16,28 @@ class ProjectsScreen extends StatefulWidget {
 class _ProjectsScreenState extends State<ProjectsScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _cardController;
-  String _selectedFilter = "Tüm Projeler";
+  late String _selectedFilter;
   bool _isFiltering = false;
   late List<ProjectShowcaseCard> _displayedProjects;
+  bool _initialized = false;
 
   @override
   void initState() {
     super.initState();
-    _displayedProjects = _allProjects;
-
     _cardController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
     )..forward();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_initialized) {
+      _selectedFilter = AppLocalizations.of(context)!.allProjects;
+      _displayedProjects = _allProjects;
+      _initialized = true;
+    }
   }
 
   @override
@@ -47,13 +57,14 @@ class _ProjectsScreenState extends State<ProjectsScreen>
     await _cardController.reverse();
 
     List<ProjectShowcaseCard> newProjects;
-    if (filter == "Tüm Projeler") {
+    if (filter == AppLocalizations.of(context)!.allProjects) {
       newProjects = _allProjects;
-    } else if (filter == "Diğer") {
+    } else if (filter == AppLocalizations.of(context)!.other) {
       newProjects = _allProjects
           .where((project) =>
-              project.projectLanguage != "Flutter" &&
-              project.projectLanguage != "Kotlin")
+              project.projectLanguage !=
+                  AppLocalizations.of(context)!.flutter &&
+              project.projectLanguage != AppLocalizations.of(context)!.kotlin)
           .toList();
     } else {
       newProjects = _allProjects
@@ -87,8 +98,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
               children: [
                 // Başlık
                 Text(
-                  "Neler Geliştirdim",
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.projects,
+                  style: const TextStyle(
                     fontSize: AppSizes.fontXXXXL,
                     fontWeight: AppSizes.fontWeightBold,
                     color: AppColors.textPrimary,
@@ -97,8 +108,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 const SizedBox(height: AppSizes.p8),
                 // Alt Başlık
                 Text(
-                  'Flutter, Firebase ve ileri düzey mobil teknolojilerle geliştirdiğim son projelerimden bazıları.',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.projectsSubtitle,
+                  style: const TextStyle(
                     fontSize: AppSizes.fontL,
                     fontWeight: AppSizes.fontWeightRegular,
                     color: AppColors.textSecondary,
@@ -111,10 +122,11 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                   runSpacing: AppSizes.p16,
                   alignment: WrapAlignment.center,
                   children: [
-                    _buildFilterButton("Tüm Projeler"),
-                    _buildFilterButton("Flutter"),
-                    _buildFilterButton("Kotlin"),
-                    _buildFilterButton("Diğer"),
+                    _buildFilterButton(
+                        AppLocalizations.of(context)!.allProjects),
+                    _buildFilterButton(AppLocalizations.of(context)!.flutter),
+                    _buildFilterButton(AppLocalizations.of(context)!.kotlin),
+                    _buildFilterButton(AppLocalizations.of(context)!.other),
                   ],
                 ),
                 const SizedBox(height: AppSizes.p48),
@@ -124,7 +136,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                         padding:
                             const EdgeInsets.symmetric(vertical: AppSizes.p50),
                         child: Text(
-                          "Çok yakında...",
+                          AppLocalizations.of(context)!.comingSoon,
                           style: TextStyle(
                             fontSize: AppSizes.fontL,
                             fontWeight: AppSizes.fontWeightMedium,
@@ -156,7 +168,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 const SizedBox(height: AppSizes.p48),
                 // GitHub Butonu
                 RoundedButton(
-                  firstText: "Tüm Projelerime Göz At",
+                  firstText: AppLocalizations.of(context)!.viewAllProjects,
                   icon: "assets/icons/github_icon.png",
                   onPressed: () {
                     html.window.open(
@@ -185,23 +197,22 @@ class _ProjectsScreenState extends State<ProjectsScreen>
   List<ProjectShowcaseCard> get _allProjects => [
         ProjectShowcaseCard(
           key: const ValueKey<String>("ternai"),
-          projectLanguage: "Flutter",
-          title: "Ternai",
-          description:
-              "Ternai, yurt dışı seyahat planlayan kullanıcılar için geliştirilen, maliyetleri karşılaştırarak tatil bütçesi oluşturmalarını sağlayan bir mobil uygulamadır.",
-          badgeText: "Geliştiriliyor",
+          projectLanguage: AppLocalizations.of(context)!.flutter,
+          title: AppLocalizations.of(context)!.ternai,
+          description: AppLocalizations.of(context)!.ternaiDescription,
+          badgeText: AppLocalizations.of(context)!.inDevelopment,
           badgeColor: AppColors.success,
           imagePath: "assets/images/ternai_mockup.png",
           techTags: [
-            'Flutter',
-            'Firebase',
-            'Hive',
-            'Riverpod',
-            'MVVM',
-            'Bootcamp Finalisti',
-            'EmpowerMe Finalisti'
+            AppLocalizations.of(context)!.flutter,
+            AppLocalizations.of(context)!.firebase,
+            AppLocalizations.of(context)!.hive,
+            AppLocalizations.of(context)!.riverpod,
+            AppLocalizations.of(context)!.mvvm,
+            AppLocalizations.of(context)!.bootcampFinalist,
+            AppLocalizations.of(context)!.empowerMeFinalist
           ],
-          techTagColors: [
+          techTagColors: const [
             AppColors.primary,
             AppColors.skillOrange,
             AppColors.skillPurple,
@@ -210,10 +221,10 @@ class _ProjectsScreenState extends State<ProjectsScreen>
             AppColors.skillOrange,
             AppColors.primary,
           ],
-          button1Text: 'Ziyaret',
+          button1Text: AppLocalizations.of(context)!.visit,
           button1SecondText: 'Et',
           onButton1Pressed: () {},
-          button2Text: 'Github',
+          button2Text: AppLocalizations.of(context)!.github,
           onButton2Pressed: () {
             html.window
                 .open('https://github.com/cankirkgz/ternai-app', '_blank');
@@ -222,28 +233,33 @@ class _ProjectsScreenState extends State<ProjectsScreen>
         ),
         ProjectShowcaseCard(
           key: const ValueKey<String>("wedly"),
-          projectLanguage: "Flutter",
-          title: "Wedly",
-          description:
-              "Evlenmeye hazırlanan çiftler için oda bazlı eşya planlama ve listeleme uygulamasıdır. Offline desteklidir.",
-          badgeText: "Yayında",
+          projectLanguage: AppLocalizations.of(context)!.flutter,
+          title: AppLocalizations.of(context)!.wedly,
+          description: AppLocalizations.of(context)!.wedlyDescription,
+          badgeText: AppLocalizations.of(context)!.published,
           badgeColor: AppColors.skillOrange,
           imagePath: "assets/images/wedly_mockup.png",
-          techTags: ['Dart', 'Firebase', 'Hive', 'Riverpod', 'MVVM'],
-          techTagColors: [
+          techTags: [
+            AppLocalizations.of(context)!.dart,
+            AppLocalizations.of(context)!.firebase,
+            AppLocalizations.of(context)!.hive,
+            AppLocalizations.of(context)!.riverpod,
+            AppLocalizations.of(context)!.mvvm
+          ],
+          techTagColors: const [
             AppColors.primaryblue,
             AppColors.error,
             AppColors.skillOrangeAccent,
             AppColors.primaryPurple,
             AppColors.textSecondary,
           ],
-          button1Text: 'Yükle',
+          button1Text: AppLocalizations.of(context)!.download,
           onButton1Pressed: () {
             html.window.open(
                 'https://play.google.com/store/apps/details?id=com.wedly.app&hl=tr',
                 '_blank');
           },
-          button2Text: 'GitHub',
+          button2Text: AppLocalizations.of(context)!.github,
           onButton2Pressed: () {
             html.window.open('https://github.com/cankirkgz/wedlist', '_blank');
           },

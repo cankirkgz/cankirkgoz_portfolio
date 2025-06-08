@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/views/main_page/main_page.dart';
 
 /// Uygulamanın temasını global olarak yönetir.
@@ -48,6 +50,16 @@ class MyApp extends StatelessWidget {
               ],
             );
           },
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'), // English
+            Locale('tr'), // Turkish
+          ],
           home: const MainPage(),
         );
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 
@@ -203,7 +204,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
     return Column(
       children: [
         Text(
-          'Yolculuğum',
+          AppLocalizations.of(context)!.journey,
           style: TextStyle(
             fontSize: AppSizes.fontXXXXL,
             fontWeight: AppSizes.fontWeightBold,
@@ -212,7 +213,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         ),
         const SizedBox(height: AppSizes.p8),
         Text(
-          "Çalıştığım yerler ve bu yolda öğrendiklerim",
+          AppLocalizations.of(context)!.journeySubtitle,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: AppSizes.fontL,
@@ -327,19 +328,19 @@ class _ExperienceScreenState extends State<ExperienceScreen>
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
+        children: [
           _AchievementItem(
               icon: FontAwesomeIcons.trophy,
               value: '1+',
-              label: 'Yıllık Deneyim'),
+              label: AppLocalizations.of(context)!.yearsExperience),
           _AchievementItem(
               icon: FontAwesomeIcons.projectDiagram,
               value: '3+',
-              label: 'Geliştirilen Proje'),
+              label: AppLocalizations.of(context)!.developedProjects),
           _AchievementItem(
               icon: FontAwesomeIcons.codeBranch,
               value: '300+',
-              label: 'Commit'),
+              label: AppLocalizations.of(context)!.commits),
         ],
       ),
     );

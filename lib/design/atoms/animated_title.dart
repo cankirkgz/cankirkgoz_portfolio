@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 
@@ -29,9 +30,9 @@ class AnimatedTitle extends StatelessWidget {
             repeatForever: true,
             pause: const Duration(seconds: 2),
             animatedTexts: [
-              TyperAnimatedText('Problem Çözücü'),
-              TyperAnimatedText('Teknoloji Tutkunu'),
-              TyperAnimatedText('Flutter Geliştiricisi'),
+              TyperAnimatedText(AppLocalizations.of(context)!.problemSolver),
+              TyperAnimatedText(AppLocalizations.of(context)!.techEnthusiast),
+              TyperAnimatedText(AppLocalizations.of(context)!.flutterDeveloper),
             ],
             onTap: () {
               // isteğe bağlı tıklama efekti

@@ -10,6 +10,7 @@ import 'package:my_portfolio/design/atoms/scroll_indicator.dart';
 import 'package:my_portfolio/design/atoms/section_title.dart';
 import 'package:my_portfolio/design/atoms/subtitle_text.dart';
 import 'package:my_portfolio/design/molecules/floating_bubbles.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback? onProjectsTap;
@@ -178,8 +179,7 @@ class _HomeScreenState extends State<HomeScreen>
         _buildAnimated(
           index: 0,
           child: CustomBadge(
-            text:
-                'Şu anda Flutter ile bir yapay zeka uygulaması geliştiriyorum',
+            text: AppLocalizations.of(context)!.currentlyDeveloping,
             backgroundColor: AppColors.successLight,
             dotColor: AppColors.success,
             textColor: AppColors.successDark,
@@ -189,8 +189,8 @@ class _HomeScreenState extends State<HomeScreen>
         _buildAnimated(
           index: 1,
           child: SectionTitle(
-            title: 'Merhaba, Ben Can 👋',
-            style: TextStyle(
+            title: AppLocalizations.of(context)!.hello,
+            style: const TextStyle(
               fontSize: AppSizes.fontHuge,
               fontWeight: AppSizes.fontWeightBold,
             ),
@@ -205,9 +205,8 @@ class _HomeScreenState extends State<HomeScreen>
         _buildAnimated(
           index: 3,
           child: RichSubtitleText(
-            text:
-                'Flutter, Kotlin ve Firebase \nkullanarak sade ve kullanıcı odaklı uygulamalar geliştirmeye tutkulu biriyim.',
-            highlights: {
+            text: AppLocalizations.of(context)!.aboutMe,
+            highlights: const {
               'Flutter': AppColors.blueText,
               'Kotlin': AppColors.purpleText,
               'Firebase': AppColors.pinkText,
@@ -224,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen>
             alignment: WrapAlignment.center,
             children: [
               RoundedButton(
-                firstText: 'Projelerime Göz At',
+                firstText: AppLocalizations.of(context)!.viewAllProjects,
                 icon: 'assets/icons/rocket.png',
                 type: ButtonType.gradient,
                 onPressed: () {
@@ -232,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen>
                 },
               ),
               RoundedButton(
-                firstText: "CV'mi İndir",
+                firstText: AppLocalizations.of(context)!.downloadCV,
                 icon: 'assets/icons/download.png',
                 type: ButtonType.outline,
                 onPressed: () {
@@ -252,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen>
           index: 5,
           child: Center(
             child: RoundedButton(
-              firstText: 'Kodlama Listem',
+              firstText: AppLocalizations.of(context)!.codingPlaylist,
               icon: 'assets/icons/spotify.png',
               type: ButtonType.card,
               onPressed: () {},

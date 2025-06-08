@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
@@ -65,54 +66,63 @@ class _SkillsScreenState extends State<SkillsScreen>
   }
 
   List<Widget> _getFilteredSkillCards() {
-    if (_currentFilter == 'all') {
+    if (_currentFilter == "all") {
       return [
         Row(
           children: [
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Flutter',
-                skillLevel: 'Orta+',
+                skillName: AppLocalizations.of(context)!.flutter,
+                skillLevel:
+                    AppLocalizations.of(context)!.skillLevelIntermediatePlus,
                 percentage: 65,
                 color: AppColors.primaryblue,
                 iconPath: 'assets/icons/flutter_icon.png',
-                gradientColors: [AppColors.blueText, AppColors.purpleText],
+                gradientColors: const [
+                  AppColors.blueText,
+                  AppColors.purpleText
+                ],
               ),
             ),
-            SizedBox(width: AppSizes.p16),
+            const SizedBox(width: AppSizes.p16),
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Dart',
-                skillLevel: 'Orta+',
+                skillName: AppLocalizations.of(context)!.dart,
+                skillLevel:
+                    AppLocalizations.of(context)!.skillLevelIntermediatePlus,
                 percentage: 65,
                 color: AppColors.primaryblue,
                 iconPath: 'assets/icons/dart_icon.png',
-                gradientColors: [AppColors.blueText, AppColors.purpleText],
+                gradientColors: const [
+                  AppColors.blueText,
+                  AppColors.purpleText
+                ],
               ),
             ),
           ],
         ),
-        SizedBox(height: AppSizes.p16),
+        const SizedBox(height: AppSizes.p16),
         Row(
           children: [
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Firebase',
-                skillLevel: 'Orta',
+                skillName: AppLocalizations.of(context)!.firebase,
+                skillLevel:
+                    AppLocalizations.of(context)!.skillLevelIntermediate,
                 percentage: 55,
                 color: AppColors.skillOrange,
                 iconPath: 'assets/icons/firebase_icon.png',
-                gradientColors: [
+                gradientColors: const [
                   AppColors.skillDeepOrange,
                   AppColors.skillOrangeAccent
                 ],
               ),
             ),
-            SizedBox(width: AppSizes.p16),
+            const SizedBox(width: AppSizes.p16),
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Kotlin',
-                skillLevel: 'Başlangıç',
+                skillName: AppLocalizations.of(context)!.kotlin,
+                skillLevel: AppLocalizations.of(context)!.skillLevelBeginner,
                 percentage: 30,
                 color: AppColors.skillPurple,
                 iconPath: 'assets/icons/kotlin_icon.png',
@@ -121,78 +131,87 @@ class _SkillsScreenState extends State<SkillsScreen>
           ],
         ),
       ];
-    } else if (_currentFilter == 'beginner') {
+    } else if (_currentFilter == "beginner") {
       return [
         Row(
           children: [
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Kotlin',
-                skillLevel: 'Başlangıç',
+                skillName: AppLocalizations.of(context)!.kotlin,
+                skillLevel: AppLocalizations.of(context)!.skillLevelBeginner,
                 percentage: 30,
                 color: AppColors.skillPurple,
                 iconPath: 'assets/icons/kotlin_icon.png',
               ),
             ),
-            SizedBox(width: AppSizes.p16),
+            const SizedBox(width: AppSizes.p16),
             Expanded(child: Container()),
           ],
         ),
       ];
-    } else if (_currentFilter == 'intermediate') {
+    } else if (_currentFilter == "intermediate") {
       return [
         Row(
           children: [
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Flutter',
-                skillLevel: 'Orta+',
+                skillName: AppLocalizations.of(context)!.flutter,
+                skillLevel:
+                    AppLocalizations.of(context)!.skillLevelIntermediatePlus,
                 percentage: 65,
                 color: AppColors.primaryblue,
                 iconPath: 'assets/icons/flutter_icon.png',
-                gradientColors: [AppColors.blueText, AppColors.purpleText],
+                gradientColors: const [
+                  AppColors.blueText,
+                  AppColors.purpleText
+                ],
               ),
             ),
-            SizedBox(width: AppSizes.p16),
+            const SizedBox(width: AppSizes.p16),
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Dart',
-                skillLevel: 'Orta+',
+                skillName: AppLocalizations.of(context)!.dart,
+                skillLevel:
+                    AppLocalizations.of(context)!.skillLevelIntermediatePlus,
                 percentage: 65,
                 color: AppColors.primaryblue,
                 iconPath: 'assets/icons/dart_icon.png',
-                gradientColors: [AppColors.blueText, AppColors.purpleText],
+                gradientColors: const [
+                  AppColors.blueText,
+                  AppColors.purpleText
+                ],
               ),
             ),
           ],
         ),
-        SizedBox(height: AppSizes.p16),
+        const SizedBox(height: AppSizes.p16),
         Row(
           children: [
             Expanded(
               child: SkillLevelCard(
-                skillName: 'Firebase',
-                skillLevel: 'Orta',
+                skillName: AppLocalizations.of(context)!.firebase,
+                skillLevel:
+                    AppLocalizations.of(context)!.skillLevelIntermediate,
                 percentage: 55,
                 color: AppColors.skillOrange,
                 iconPath: 'assets/icons/firebase_icon.png',
-                gradientColors: [
+                gradientColors: const [
                   AppColors.skillDeepOrange,
                   AppColors.skillOrangeAccent
                 ],
               ),
             ),
-            SizedBox(width: AppSizes.p16),
+            const SizedBox(width: AppSizes.p16),
             Expanded(child: Container()),
           ],
         ),
       ];
-    } else if (_currentFilter == 'expert') {
+    } else if (_currentFilter == "expert") {
       return [
         Center(
           child: Text(
-            'Uzman seviye yetenekler henüz eklenmedi',
-            style: TextStyle(
+            AppLocalizations.of(context)!.expertSkillsNotAdded,
+            style: const TextStyle(
               fontSize: AppSizes.fontL,
               color: AppColors.darkText,
             ),
@@ -225,8 +244,8 @@ class _SkillsScreenState extends State<SkillsScreen>
                   0,
                   Center(
                     child: Text(
-                      "Kullandığım Teknolojiler",
-                      style: TextStyle(
+                      AppLocalizations.of(context)!.technologies,
+                      style: const TextStyle(
                         fontSize: AppSizes.fontXXXXL,
                         fontWeight: AppSizes.fontWeightBold,
                         color: AppColors.textPrimary,
@@ -240,8 +259,8 @@ class _SkillsScreenState extends State<SkillsScreen>
                   1,
                   Center(
                     child: Text(
-                      "Mobil uygulamalar geliştirmek için kullandığım teknolojiler, araçlar ve framework'ler.",
-                      style: TextStyle(
+                      AppLocalizations.of(context)!.technologiesSubtitle,
+                      style: const TextStyle(
                         fontSize: AppSizes.fontL,
                         fontWeight: AppSizes.fontWeightRegular,
                         color: AppColors.textSecondary,
@@ -261,49 +280,49 @@ class _SkillsScreenState extends State<SkillsScreen>
                       alignment: WrapAlignment.center,
                       children: [
                         RoundedButton(
-                          firstText: "Tüm Yetenekler",
+                          firstText: AppLocalizations.of(context)!.allSkills,
                           onPressed: () {
                             setState(() {
-                              _currentFilter = 'all';
+                              _currentFilter = "all";
                             });
                           },
-                          type: _currentFilter == 'all'
+                          type: _currentFilter == "all"
                               ? ButtonType.gradient
                               : ButtonType.outline,
                           borderRadius: 9999,
                         ),
                         RoundedButton(
-                          firstText: "Başlangıç",
+                          firstText: AppLocalizations.of(context)!.beginner,
                           onPressed: () {
                             setState(() {
-                              _currentFilter = 'beginner';
+                              _currentFilter = "beginner";
                             });
                           },
-                          type: _currentFilter == 'beginner'
+                          type: _currentFilter == "beginner"
                               ? ButtonType.gradient
                               : ButtonType.outline,
                           borderRadius: 9999,
                         ),
                         RoundedButton(
-                          firstText: "Orta Seviye",
+                          firstText: AppLocalizations.of(context)!.intermediate,
                           onPressed: () {
                             setState(() {
-                              _currentFilter = 'intermediate';
+                              _currentFilter = "intermediate";
                             });
                           },
-                          type: _currentFilter == 'intermediate'
+                          type: _currentFilter == "intermediate"
                               ? ButtonType.gradient
                               : ButtonType.outline,
                           borderRadius: 9999,
                         ),
                         RoundedButton(
-                          firstText: "Uzman",
+                          firstText: AppLocalizations.of(context)!.expert,
                           onPressed: () {
                             setState(() {
-                              _currentFilter = 'expert';
+                              _currentFilter = "expert";
                             });
                           },
-                          type: _currentFilter == 'expert'
+                          type: _currentFilter == "expert"
                               ? ButtonType.gradient
                               : ButtonType.outline,
                           borderRadius: 9999,
@@ -327,11 +346,11 @@ class _SkillsScreenState extends State<SkillsScreen>
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Öne Çıkan Yetenekler',
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.featuredSkills,
+                        style: const TextStyle(
                           fontSize: AppSizes.fontXL,
                           fontWeight: AppSizes.fontWeightSemiBold,
-                          color: const Color(0xFF111827),
+                          color: Color(0xFF111827),
                         ),
                       ),
                     ],
@@ -380,7 +399,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        "Framework'ler ve Kütüphaneler",
+                        AppLocalizations.of(context)!.frameworksAndLibraries,
                         style: const TextStyle(
                           fontSize: AppSizes.fontXL,
                           fontWeight: AppSizes.fontWeightSemiBold,
@@ -428,11 +447,11 @@ class _SkillsScreenState extends State<SkillsScreen>
                       ),
                       const SizedBox(width: 12),
                       Text(
-                        'Araçlar ve Platformlar',
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.toolsAndPlatforms,
+                        style: const TextStyle(
                           fontSize: AppSizes.fontXL,
                           fontWeight: AppSizes.fontWeightSemiBold,
-                          color: const Color(0xFF111827),
+                          color: Color(0xFF111827),
                         ),
                       ),
                     ],
@@ -491,11 +510,11 @@ class _SkillsScreenState extends State<SkillsScreen>
                             ),
                             const SizedBox(width: 12),
                             Text(
-                              'Şu Anda Öğreniyorum',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.currentlyLearning,
+                              style: const TextStyle(
                                 fontSize: AppSizes.fontL,
                                 fontWeight: AppSizes.fontWeightSemiBold,
-                                color: const Color(0xFF111827),
+                                color: Color(0xFF111827),
                               ),
                             ),
                           ],
@@ -505,7 +524,7 @@ class _SkillsScreenState extends State<SkillsScreen>
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             RoundedButton(
-                              firstText: "Kotlin",
+                              firstText: AppLocalizations.of(context)!.kotlin,
                               onPressed: () {},
                               type: ButtonType.outline,
                               icon: "assets/icons/kotlin_icon.png",
@@ -528,29 +547,29 @@ class _SkillsScreenState extends State<SkillsScreen>
 
   List<FrameworkCard> get frameworkCards => [
         FrameworkCard(
-          title: "Flutter",
-          level: "Temel Teknoloji",
+          title: AppLocalizations.of(context)!.flutter,
+          level: AppLocalizations.of(context)!.coreTechnology,
           iconPath: "assets/icons/phone_icon.png",
           iconBackgroundColor: const Color(0xFF2563EB),
           badgeColor: const Color(0xFF6366F1),
         ),
         FrameworkCard(
-          title: "React Native",
-          level: "Orta Seviye",
+          title: AppLocalizations.of(context)!.reactNative,
+          level: AppLocalizations.of(context)!.intermediateLevel,
           iconPath: "assets/icons/reactnative_icon.png",
           iconBackgroundColor: const Color(0xFF9333EA),
           badgeColor: const Color(0xFF8B5CF6),
         ),
         FrameworkCard(
-          title: "Firebase",
-          level: "Orta Seviye",
+          title: AppLocalizations.of(context)!.firebase,
+          level: AppLocalizations.of(context)!.intermediateLevel,
           iconPath: "assets/icons/firebase_icon.png",
           iconBackgroundColor: const Color(0xFFEA580C),
           badgeColor: const Color(0xFF6366F1),
         ),
         FrameworkCard(
-          title: "Riverpod",
-          level: "Orta Seviye",
+          title: AppLocalizations.of(context)!.riverpod,
+          level: AppLocalizations.of(context)!.intermediateLevel,
           iconPath: "assets/icons/riverpod_icon.png",
           iconBackgroundColor: const Color(0xFF0D9488),
           badgeColor: const Color(0xFF8B5CF6),
@@ -559,27 +578,27 @@ class _SkillsScreenState extends State<SkillsScreen>
 
   List<FrameworkCard> get toolCards => [
         FrameworkCard(
-          title: "Git",
+          title: AppLocalizations.of(context)!.git,
           iconPath: "assets/icons/git_icon.png",
           iconBackgroundColor: const Color(0xFF334155),
         ),
         FrameworkCard(
-          title: "GitHub",
+          title: AppLocalizations.of(context)!.github,
           iconPath: "assets/icons/github_icon.png",
           iconBackgroundColor: const Color(0xFF334155),
         ),
         FrameworkCard(
-          title: "Figma",
+          title: AppLocalizations.of(context)!.figma,
           iconPath: "assets/icons/figma_icon.png",
           iconBackgroundColor: const Color(0xFF334155),
         ),
         FrameworkCard(
-          title: "VS Code",
+          title: AppLocalizations.of(context)!.vsCode,
           iconPath: "assets/icons/riverpod_icon.png",
           iconBackgroundColor: const Color(0xFF334155),
         ),
         FrameworkCard(
-          title: "Android Studio",
+          title: AppLocalizations.of(context)!.androidStudio,
           iconPath: "assets/icons/kotlin_icon.png",
           iconBackgroundColor: const Color(0xFF334155),
         ),

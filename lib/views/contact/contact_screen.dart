@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
@@ -40,7 +41,7 @@ class _ContactFormState extends State<ContactForm> {
       if (response.statusCode == 200 || response.statusCode == 302) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Mesaj başarıyla gönderildi ✅')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.messageSent)),
           );
         }
         nameController.clear();
@@ -49,14 +50,15 @@ class _ContactFormState extends State<ContactForm> {
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Bir hata oluştu ❌')),
+            SnackBar(
+                content: Text(AppLocalizations.of(context)!.errorOccurred)),
           );
         }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Bir hata oluştu ❌')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.errorOccurred)),
         );
       }
     } finally {
@@ -83,30 +85,34 @@ class _ContactFormState extends State<ContactForm> {
         children: [
           CustomTextField(
             controller: nameController,
-            label: 'İsim Soyisim',
-            validator: (v) => v!.isEmpty ? 'Gerekli' : null,
+            label: AppLocalizations.of(context)!.name,
+            validator: (v) =>
+                v!.isEmpty ? AppLocalizations.of(context)!.required : null,
           ),
           const SizedBox(height: 20),
           CustomTextField(
             controller: emailController,
-            label: 'Email',
+            label: AppLocalizations.of(context)!.email,
             keyboardType: TextInputType.emailAddress,
             validator: (v) {
-              if (v!.isEmpty) return 'Gerekli';
+              if (v!.isEmpty) return AppLocalizations.of(context)!.required;
               final regex = RegExp(r"^[^\s@]+@[^\s@]+\.[^\s@]+$");
-              return regex.hasMatch(v) ? null : 'Geçersiz email';
+              return regex.hasMatch(v)
+                  ? null
+                  : AppLocalizations.of(context)!.invalidEmail;
             },
           ),
           const SizedBox(height: 20),
           CustomTextField(
             controller: messageController,
-            label: 'Mesajın',
+            label: AppLocalizations.of(context)!.message,
             maxLines: 5,
-            validator: (v) => v!.isEmpty ? 'Gerekli' : null,
+            validator: (v) =>
+                v!.isEmpty ? AppLocalizations.of(context)!.required : null,
           ),
           const SizedBox(height: 24),
           RoundedButton(
-            firstText: 'Mesaj Gönder',
+            firstText: AppLocalizations.of(context)!.sendMessage,
             icon: 'assets/icons/postman_icon.png',
             type: ButtonType.gradient,
             onPressed: _isSubmitting ? () {} : submitForm,
@@ -209,21 +215,12 @@ class _ContactScreenState extends State<ContactScreen>
                     blendMode: BlendMode.srcIn,
                     child: Text.rich(
                       TextSpan(
-                        text: "Benimle ",
+                        text: AppLocalizations.of(context)!.getInTouch,
                         style: TextStyle(
                           fontSize: AppSizes.fontXXXXL,
                           fontWeight: AppSizes.fontWeightBold,
                           color: AppColors.textPrimary,
                         ),
-                        children: [
-                          TextSpan(
-                            text: "İletişime Geç",
-                            style: TextStyle(
-                              color: Colors
-                                  .white, // Bu renk ShaderMask'ten gelecek
-                            ),
-                          ),
-                        ],
                       ),
                       textAlign: TextAlign.center,
                       softWrap: true,
@@ -238,7 +235,7 @@ class _ContactScreenState extends State<ContactScreen>
                 1,
                 Center(
                   child: Text(
-                    "Bir sorunuz varsa, sadece selam vermek istiyorsanız ya da bir proje hakkında konuşmak istiyorsanız, bana ulaşmaktan çekinmeyin. Mesajınızı duymaktan mutluluk duyarım!",
+                    AppLocalizations.of(context)!.contactSubtitle,
                     style: TextStyle(
                       fontSize: AppSizes.fontL,
                       color: AppColors.textPrimary.withOpacity(0.8),
@@ -290,7 +287,7 @@ class _ContactScreenState extends State<ContactScreen>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Bana bir mesaj gönderin',
+                                  AppLocalizations.of(context)!.sendMeMessage,
                                   style: TextStyle(
                                     fontSize: titleFontSize,
                                     fontWeight: AppSizes.fontWeightSemiBold,
@@ -298,7 +295,7 @@ class _ContactScreenState extends State<ContactScreen>
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  'Genellikle 24–48 saat içinde yanıt veririm.',
+                                  AppLocalizations.of(context)!.responseTime,
                                   style: TextStyle(
                                     fontSize: AppSizes.fontM,
                                     color:
