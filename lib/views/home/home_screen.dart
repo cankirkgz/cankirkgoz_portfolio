@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildMobileLayout(double avatarSize) {
+  _buildMobileLayout(double avatarSize) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,19 +140,16 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
         const SizedBox(height: AppSizes.p32),
-        _buildContent(),
+        _buildContent(isWide: false),
       ],
     );
   }
 
-  Widget _buildDesktopLayout(double avatarSize) {
+  _buildDesktopLayout(double avatarSize) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          flex: 2,
-          child: _buildContent(),
-        ),
+        Expanded(flex: 2, child: _buildContent(isWide: true)),
         Expanded(
           flex: 1,
           child: Align(
@@ -171,18 +168,22 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent({required bool isWide}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment:
+          isWide ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         _buildAnimated(
           index: 0,
-          child: CustomBadge(
-            text: AppLocalizations.of(context)!.currentlyDeveloping,
-            backgroundColor: AppColors.successLight,
-            dotColor: AppColors.success,
-            textColor: AppColors.successDark,
+          child: Align(
+            alignment: isWide ? Alignment.centerLeft : Alignment.center,
+            child: CustomBadge(
+              text: AppLocalizations.of(context)!.currentlyDeveloping,
+              backgroundColor: AppColors.successLight,
+              dotColor: AppColors.success,
+              textColor: AppColors.successDark,
+            ),
           ),
         ),
         const SizedBox(height: AppSizes.p16),
@@ -194,13 +195,10 @@ class _HomeScreenState extends State<HomeScreen>
               fontSize: AppSizes.fontHuge,
               fontWeight: AppSizes.fontWeightBold,
             ),
-            textAlign: TextAlign.center,
+            textAlign: isWide ? TextAlign.left : TextAlign.center,
           ),
         ),
-        _buildAnimated(
-          index: 2,
-          child: const AnimatedTitle(),
-        ),
+        _buildAnimated(index: 2, child: const AnimatedTitle()),
         const SizedBox(height: AppSizes.p16),
         _buildAnimated(
           index: 3,
@@ -211,45 +209,50 @@ class _HomeScreenState extends State<HomeScreen>
               'Kotlin': AppColors.purpleText,
               'Firebase': AppColors.pinkText,
             },
-            textAlign: TextAlign.center,
+            textAlign: isWide ? TextAlign.left : TextAlign.center,
           ),
         ),
         const SizedBox(height: AppSizes.p32),
         _buildAnimated(
           index: 4,
-          child: Wrap(
-            spacing: AppSizes.p16,
-            runSpacing: AppSizes.p24,
-            alignment: WrapAlignment.center,
-            children: [
-              RoundedButton(
-                firstText: AppLocalizations.of(context)!.viewAllProjects,
-                icon: 'assets/icons/rocket.png',
-                type: ButtonType.gradient,
-                onPressed: () {
-                  widget.onProjectsTap?.call();
-                },
-              ),
-              RoundedButton(
-                firstText: AppLocalizations.of(context)!.downloadCV,
-                icon: 'assets/icons/download.png',
-                type: ButtonType.outline,
-                onPressed: () {
-                  final anchor = html.AnchorElement(
-                    href: 'assets/files/mcankirkgoz-mobiledeveloper-resume.pdf',
-                  )
-                    ..setAttribute(
-                        'download', 'mcankirkgoz-mobiledeveloper-resume.pdf')
-                    ..click();
-                },
-              ),
-            ],
+          child: Align(
+            alignment: isWide ? Alignment.centerLeft : Alignment.center,
+            child: Wrap(
+              spacing: AppSizes.p16,
+              runSpacing: AppSizes.p24,
+              alignment: isWide ? WrapAlignment.start : WrapAlignment.center,
+              children: [
+                RoundedButton(
+                  firstText: AppLocalizations.of(context)!.viewAllProjects,
+                  icon: 'assets/icons/rocket.png',
+                  type: ButtonType.gradient,
+                  onPressed: () {
+                    widget.onProjectsTap?.call();
+                  },
+                ),
+                RoundedButton(
+                  firstText: AppLocalizations.of(context)!.downloadCV,
+                  icon: 'assets/icons/download.png',
+                  type: ButtonType.outline,
+                  onPressed: () {
+                    final anchor = html.AnchorElement(
+                      href:
+                          'assets/files/mcankirkgoz-mobiledeveloper-resume.pdf',
+                    )
+                      ..setAttribute(
+                          'download', 'mcankirkgoz-mobiledeveloper-resume.pdf')
+                      ..click();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: AppSizes.p32),
         _buildAnimated(
           index: 5,
-          child: Center(
+          child: Align(
+            alignment: isWide ? Alignment.centerLeft : Alignment.center,
             child: RoundedButton(
               firstText: AppLocalizations.of(context)!.codingPlaylist,
               icon: 'assets/icons/spotify.png',
