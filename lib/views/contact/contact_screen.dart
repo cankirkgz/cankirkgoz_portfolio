@@ -200,34 +200,35 @@ class _ContactScreenState extends State<ContactScreen>
               _buildAnimated(
                 0,
                 Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Benimle ",
+                  child: ShaderMask(
+                    shaderCallback: (bounds) => LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [AppColors.blueText, AppColors.purpleText],
+                    ).createShader(bounds),
+                    blendMode: BlendMode.srcIn,
+                    child: Text.rich(
+                      TextSpan(
+                        text: "Benimle ",
                         style: TextStyle(
                           fontSize: AppSizes.fontXXXXL,
                           fontWeight: AppSizes.fontWeightBold,
-                          color: const Color(0xFF111827),
+                          color: AppColors.textPrimary,
                         ),
-                      ),
-                      ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [AppColors.blueText, AppColors.purpleText],
-                        ).createShader(bounds),
-                        blendMode: BlendMode.srcIn,
-                        child: Text(
-                          'İletişime Geç',
-                          style: TextStyle(
-                            fontSize: AppSizes.fontXXXXL,
-                            fontWeight: AppSizes.fontWeightBold,
-                            color: Colors.white,
+                        children: [
+                          TextSpan(
+                            text: "İletişime Geç",
+                            style: TextStyle(
+                              color: Colors
+                                  .white, // Bu renk ShaderMask'ten gelecek
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    ),
                   ),
                 ),
               ),
@@ -247,19 +248,31 @@ class _ContactScreenState extends State<ContactScreen>
                 ),
               ),
               const SizedBox(height: 40),
+              // Inside LayoutBuilder in ContactScreen.build:
               LayoutBuilder(
                 builder: (context, constraints) {
-                  final isWide = constraints.maxWidth > 800;
+                  final width = constraints.maxWidth;
+                  final isWide = width > 1000;
+                  final isTablet = width > 600 && width <= 1000;
+                  final isMobile = width <= 600;
+
+                  final double spacing = isWide ? 40 : 24;
+                  final double formPadding = isMobile ? 20 : 32;
+                  final double titleFontSize = isMobile
+                      ? AppSizes.fontXXL
+                      : (isTablet ? AppSizes.fontXXXL : AppSizes.fontXXXXL);
+
                   return Flex(
                     direction: isWide ? Axis.horizontal : Axis.vertical,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // 2: Contact form card
+                      // Contact form
                       Expanded(
                         flex: isWide ? 1 : 0,
                         child: _buildAnimated(
                           2,
                           Container(
+                            width: double.infinity,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(24),
@@ -272,14 +285,14 @@ class _ContactScreenState extends State<ContactScreen>
                               ],
                               border: Border.all(color: Colors.grey.shade200),
                             ),
-                            padding: const EdgeInsets.all(32),
+                            padding: EdgeInsets.all(formPadding),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Bana bir mesaj gönderin',
                                   style: TextStyle(
-                                    fontSize: AppSizes.fontXXL,
+                                    fontSize: titleFontSize,
                                     fontWeight: AppSizes.fontWeightSemiBold,
                                   ),
                                 ),
@@ -293,29 +306,27 @@ class _ContactScreenState extends State<ContactScreen>
                                   ),
                                 ),
                                 const SizedBox(height: 24),
-                                const ContactForm(), // Using the new ContactForm widget
+                                const ContactForm(),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      if (isWide)
-                        const SizedBox(width: 40)
-                      else
-                        const SizedBox(height: 40),
-                      // 3: Social card
+                      SizedBox(
+                          height: isWide ? 0 : spacing,
+                          width: isWide ? spacing : 0),
+                      // Social + Schedule
                       Expanded(
                         flex: isWide ? 1 : 0,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             _buildAnimated(3, const SocialCard()),
                             const SizedBox(height: 24),
-                            // 4: Schedule card
                             _buildAnimated(4, const ScheduleCard()),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 80),
                     ],
                   );
                 },
