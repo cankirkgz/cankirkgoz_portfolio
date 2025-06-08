@@ -227,67 +227,79 @@ class _ExperienceScreenState extends State<ExperienceScreen>
   Widget _buildTimeline(List<_ExperienceEntry> entries) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final centerX = constraints.maxWidth / 2; // center line x-coord
-        return Stack(
-          children: [
-            // Central vertical line
-            Positioned(
-              left: centerX - AppSizes.p1,
-              top: 0,
-              bottom: 0,
-              child: Container(width: AppSizes.p2, color: AppColors.primary),
-            ),
-            Column(
-              children: List.generate(entries.length, (i) {
-                // Build and animate each entry row
-                return _buildAnimatedEntry(
-                  i,
-                  Container(
-                    margin: EdgeInsets.only(bottom: AppSizes.p32),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Left side or placeholder
-                        Expanded(
-                          child: i.isEven
-                              ? _buildSide(entries[i], centerX,
-                                  alignRight: true)
-                              : const SizedBox.shrink(),
+        final isMobile = constraints.maxWidth < 600;
+
+        if (isMobile) {
+          // Single column, full width entries
+          return Column(
+            children: List.generate(entries.length, (i) {
+              return _buildAnimatedEntry(
+                i,
+                Padding(
+                  padding: EdgeInsets.only(bottom: AppSizes.p32),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // bullet dot
+                      Container(
+                        width: AppSizes.p12,
+                        height: AppSizes.p12,
+                        decoration: BoxDecoration(
+                          color: entries[i].bulletColor,
+                          shape: BoxShape.circle,
                         ),
-                        // Bullet dot at center
-                        SizedBox(
-                          width: AppSizes.p24,
-                          child: Column(
-                            children: [
-                              Container(
-                                width: AppSizes.p12,
-                                height: AppSizes.p12,
-                                decoration: BoxDecoration(
-                                  color: entries[i].bulletColor,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: AppColors.scaffoldBackground,
-                                      width: AppSizes.p2),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Right side or placeholder
-                        Expanded(
-                          child: i.isOdd
-                              ? _buildSide(entries[i], centerX,
-                                  alignRight: false)
-                              : const SizedBox.shrink(),
-                        ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(width: AppSizes.p16),
+                      // full‐width entry
+                      Expanded(child: entries[i]),
+                    ],
                   ),
-                );
-              }),
-            ),
-          ],
-        );
+                ),
+              );
+            }),
+          );
+        } else {
+          // Your existing two‐sided Stack + alternating left/right layout:
+          final centerX = constraints.maxWidth / 2;
+          return Stack(
+            children: [
+              // center line…
+              Positioned(
+                left: centerX - AppSizes.p1,
+                top: 0,
+                bottom: 0,
+                child: Container(width: AppSizes.p2, color: AppColors.primary),
+              ),
+              Column(
+                children: List.generate(entries.length, (i) {
+                  return _buildAnimatedEntry(
+                    i,
+                    Container(
+                      margin: EdgeInsets.only(bottom: AppSizes.p32),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: i.isEven
+                                ? _buildSide(entries[i], centerX,
+                                    alignRight: true)
+                                : const SizedBox.shrink(),
+                          ),
+                          SizedBox(width: AppSizes.p24), // spacer for dot
+                          Expanded(
+                            child: i.isOdd
+                                ? _buildSide(entries[i], centerX,
+                                    alignRight: false)
+                                : const SizedBox.shrink(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ],
+          );
+        }
       },
     );
   }
@@ -394,54 +406,62 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: AppSizes.p48,
-                        height: AppSizes.p48,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              widget.iconBg,
-                              widget.iconBg.withOpacity(0.7)
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: AppSizes.r12,
-                        ),
-                        child: Center(
-                          child: FaIcon(
-                            widget.icon,
-                            color: AppColors.scaffoldBackground,
-                            size: AppSizes.iconM,
-                          ),
-                        ),
+                  // 1. İkon kısmı
+                  Container(
+                    width: AppSizes.p48,
+                    height: AppSizes.p48,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [widget.iconBg, widget.iconBg.withOpacity(0.7)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      SizedBox(width: AppSizes.p12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.title,
-                            style: TextStyle(
-                              fontSize: AppSizes.fontXL,
-                              fontWeight: AppSizes.fontWeightSemiBold,
-                            ),
-                          ),
-                          Text(
-                            widget.subtitle,
-                            style: TextStyle(
-                              color: widget.iconBg,
-                              fontWeight: AppSizes.fontWeightMedium,
-                            ),
-                          ),
-                        ],
+                      borderRadius: AppSizes.r12,
+                    ),
+                    child: Center(
+                      child: FaIcon(
+                        widget.icon,
+                        color: AppColors.scaffoldBackground,
+                        size: AppSizes.iconM,
                       ),
-                    ],
+                    ),
                   ),
+
+                  SizedBox(width: AppSizes.p12),
+
+                  // 2. Başlık ve alt başlık
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontSize: AppSizes.fontXL,
+                            fontWeight: AppSizes.fontWeightSemiBold,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.visible,
+                        ),
+                        SizedBox(height: AppSizes.p4),
+                        Text(
+                          widget.subtitle,
+                          style: TextStyle(
+                            color: widget.iconBg,
+                            fontWeight: AppSizes.fontWeightMedium,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.visible,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(width: AppSizes.p12),
+
+                  // 3. Status badge (sağ üstte)
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: AppSizes.p12,
