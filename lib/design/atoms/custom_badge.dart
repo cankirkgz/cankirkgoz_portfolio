@@ -31,8 +31,9 @@ class CustomBadge extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(borderRadius ?? 32),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: Wrap(
+        spacing: 8,
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           if (leftIconPath != null) ...[
             SizedBox(
@@ -42,7 +43,6 @@ class CustomBadge extends StatelessWidget {
                 leftIconPath!,
               ),
             ),
-            const SizedBox(width: 4),
           ],
           if (showDot) ...[
             Container(
@@ -53,7 +53,6 @@ class CustomBadge extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
             ),
-            const SizedBox(width: 8),
           ],
           Text(
             text,
@@ -62,6 +61,8 @@ class CustomBadge extends StatelessWidget {
               fontSize: AppSizes.fontS,
               fontWeight: FontWeight.w500,
             ),
+            softWrap: true,
+            overflow: TextOverflow.visible,
           ),
         ],
       ),

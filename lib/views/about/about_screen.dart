@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
+import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/profile_avatar.dart';
 import 'package:my_portfolio/design/molecules/certificate_card.dart';
 import 'package:my_portfolio/design/molecules/quote_card.dart';
 import 'package:my_portfolio/design/molecules/tech_icon_card.dart';
 import 'package:my_portfolio/design/molecules/text_card.dart';
 import 'package:my_portfolio/design/organisms/journey_timeline.dart';
-import 'package:my_portfolio/core/constants/app_colors.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class AboutScreen extends StatefulWidget {
 
 class _AboutScreenState extends State<AboutScreen>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late final AnimationController _controller;
   final List<Animation<Offset>> _slideAnims = [];
   final List<Animation<double>> _fadeAnims = [];
   final int _itemCount = 11;
@@ -30,21 +30,24 @@ class _AboutScreenState extends State<AboutScreen>
       vsync: this,
       duration: const Duration(milliseconds: 1400),
     )..forward();
+
     for (int i = 0; i < _itemCount; i++) {
       final start = i / _itemCount;
       final end = (i + 1) / _itemCount;
       _slideAnims.add(
         Tween<Offset>(begin: const Offset(0, -0.2), end: Offset.zero).animate(
           CurvedAnimation(
-              parent: _controller,
-              curve: Interval(start, end, curve: Curves.easeOut)),
+            parent: _controller,
+            curve: Interval(start, end, curve: Curves.easeOut),
+          ),
         ),
       );
       _fadeAnims.add(
         Tween<double>(begin: 0, end: 1).animate(
           CurvedAnimation(
-              parent: _controller,
-              curve: Interval(start, end, curve: Curves.easeIn)),
+            parent: _controller,
+            curve: Interval(start, end, curve: Curves.easeIn),
+          ),
         ),
       );
     }
@@ -71,115 +74,178 @@ Ben Can, Ankara, Türkiye'de yaşayan bir mobil uygulama geliştiricisiyim. Flut
 Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit geçirmeyi seviyorum. Sürekli öğrenmeye ve iş birliği içinde çalışmaya inanıyorum.
 ''';
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSizes.p120, vertical: AppSizes.p80),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: AppSizes.p48),
-          _animItem(
-            1,
-            Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final isSmall = width < 800;
+        // Responsive horizontal padding & vertical spacing
+        final horizontalPadding = isSmall ? AppSizes.p16 : AppSizes.p120;
+        final verticalPadding = isSmall ? AppSizes.p32 : AppSizes.p80;
+        // Responsive avatar size for About screen
+        final avatarSize = isSmall ? (width * 0.6).clamp(120.0, 200.0) : 320.0;
+
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding,
+              vertical: verticalPadding,
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const ProfileAvatar(
-                  image: AssetImage('assets/images/my_photo_second.jpg'),
-                  showBadge: true,
-                  badgeTags: ['Mobile Developer', 'Flutter', 'Firebase'],
-                  showBorder: false,
-                ),
-                const Spacer(),
-                Expanded(child: TextCard(text: sampleText)),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSizes.p64),
-          _animItem(
-            2,
-            Text(
-              'Kullandığım Teknolojiler',
-              style: TextStyle(
-                fontSize: AppSizes.fontXL,
-                fontWeight: AppSizes.fontWeightSemiBold,
-                color: AppColors.textPrimary,
-              ),
-            ),
-          ),
-          const SizedBox(height: AppSizes.p24),
-          _animItem(
-            3,
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: AppSizes.p40,
-              runSpacing: AppSizes.p20,
-              children: const [
-                TechIconCard(
-                    iconPath: 'assets/icons/flutter_icon.png',
-                    label: 'Flutter'),
-                TechIconCard(
-                    iconPath: 'assets/icons/dart_icon.png', label: 'Dart'),
-                TechIconCard(
-                    iconPath: 'assets/icons/kotlin_icon.png', label: 'Kotlin'),
-                TechIconCard(
-                    iconPath: 'assets/icons/firebase_icon.png',
-                    label: 'Firebase'),
-                TechIconCard(
-                    iconPath: 'assets/icons/git_icon.png', label: 'Git'),
-                TechIconCard(
-                    iconPath: 'assets/icons/figma_icon.png', label: 'Figma'),
-                TechIconCard(
-                    iconPath: 'assets/icons/hive_icon.png', label: 'Hive'),
-                TechIconCard(
-                    iconPath: 'assets/icons/riverpod_icon.png',
-                    label: 'Riverpod'),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSizes.p64),
-          _animItem(
-            4,
-            Text(
-              'Şu Ana Kadarki Yolculuğum',
-              style: TextStyle(
-                fontSize: AppSizes.fontXL,
-                fontWeight: AppSizes.fontWeightSemiBold,
-                color: AppColors.textPrimary,
-              ),
-            ),
-          ),
-          const SizedBox(height: AppSizes.p40),
-          _animItem(5, JourneyTimeline()),
-          const SizedBox(height: AppSizes.p64),
-          _animItem(
-            6,
-            Text(
-              'Sertifikalarım & Başarılarım',
-              style: TextStyle(
-                fontSize: AppSizes.fontXL,
-                fontWeight: AppSizes.fontWeightSemiBold,
-                color: AppColors.textPrimary,
-              ),
-            ),
-          ),
-          const SizedBox(height: AppSizes.p40),
-          _animItem(
-            7,
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final screenWidth = constraints.maxWidth;
-                final cardCount = 3; // Kart sayısı
-                final spacing = AppSizes.p24; // Kartlar arası boşluk
-                final totalSpacing = spacing * (cardCount - 1);
-                final availableWidth = screenWidth - totalSpacing;
-                final cardWidth = availableWidth / cardCount;
+                SizedBox(height: isSmall ? AppSizes.p24 : AppSizes.p48),
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: cardWidth,
-                      child: CertificateCard(
+                // 1) Profile + Text
+                _animItem(
+                  1,
+                  isSmall
+                      ? Column(
+                          children: [
+                            ProfileAvatar(
+                              image: const AssetImage(
+                                  'assets/images/my_photo_second.jpg'),
+                              showBadge: true,
+                              badgeTags: const [
+                                'Mobile Developer',
+                                'Flutter',
+                                'Firebase'
+                              ],
+                              showBorder: false,
+                              size: avatarSize,
+                            ),
+                            const SizedBox(height: AppSizes.p24),
+                            TextCard(text: sampleText),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            ProfileAvatar(
+                              image: const AssetImage(
+                                  'assets/images/my_photo_second.jpg'),
+                              showBadge: true,
+                              badgeTags: const [
+                                'Mobile Developer',
+                                'Flutter',
+                                'Firebase'
+                              ],
+                              showBorder: false,
+                              size: avatarSize,
+                            ),
+                            const SizedBox(width: AppSizes.p32),
+                            Expanded(child: TextCard(text: sampleText)),
+                          ],
+                        ),
+                ),
+
+                SizedBox(height: isSmall ? AppSizes.p32 : AppSizes.p64),
+
+                // 2) Technologies Title
+                _animItem(
+                  2,
+                  Text(
+                    'Kullandığım Teknolojiler',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppSizes.fontXL,
+                      fontWeight: AppSizes.fontWeightSemiBold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: AppSizes.p24),
+
+                // 3) Tech Icons
+                _animItem(
+                  3,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: AppSizes.p20,
+                    runSpacing: AppSizes.p16,
+                    children: const [
+                      TechIconCard(
+                          iconPath: 'assets/icons/flutter_icon.png',
+                          label: 'Flutter'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/dart_icon.png',
+                          label: 'Dart'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/kotlin_icon.png',
+                          label: 'Kotlin'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/firebase_icon.png',
+                          label: 'Firebase'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/git_icon.png', label: 'Git'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/figma_icon.png',
+                          label: 'Figma'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/hive_icon.png',
+                          label: 'Hive'),
+                      TechIconCard(
+                          iconPath: 'assets/icons/riverpod_icon.png',
+                          label: 'Riverpod'),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: isSmall ? AppSizes.p32 : AppSizes.p64),
+
+                // 4) Journey Title
+                _animItem(
+                  4,
+                  Text(
+                    'Şu Ana Kadarki Yolculuğum',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppSizes.fontXL,
+                      fontWeight: AppSizes.fontWeightSemiBold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: AppSizes.p24),
+
+                // 5) Journey Timeline
+                _animItem(5, JourneyTimeline()),
+
+                SizedBox(height: isSmall ? AppSizes.p32 : AppSizes.p64),
+
+                // 6) Certificates Title
+                _animItem(
+                  6,
+                  Text(
+                    'Sertifikalarım & Başarılarım',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: AppSizes.fontXL,
+                      fontWeight: AppSizes.fontWeightSemiBold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: AppSizes.p24),
+
+                // 7) Certificate Cards (first row)
+                _animItem(
+                  7,
+                  LayoutBuilder(builder: (context, constraints) {
+                    final screenWidth = constraints.maxWidth;
+                    // Kaç sütun?
+                    final columns = screenWidth >= 1200
+                        ? 3
+                        : screenWidth >= 800
+                            ? 2
+                            : 1;
+                    final spacing = AppSizes.p24;
+                    final totalSpacing = spacing * (columns - 1);
+                    final cardWidth = (screenWidth - totalSpacing) / columns;
+
+                    final firstRow = [
+                      CertificateCard(
                         icon: FontAwesomeIcons.lightbulb,
                         iconColor: AppColors.primaryblue,
                         title: "Ideathon",
@@ -189,11 +255,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                         year: "2024",
                         yearColor: AppColors.primaryblue,
                       ),
-                    ),
-                    SizedBox(width: spacing),
-                    SizedBox(
-                      width: cardWidth,
-                      child: CertificateCard(
+                      CertificateCard(
                         icon: FontAwesomeIcons.rocket,
                         iconColor: AppColors.certOrange,
                         title: "App-Jam",
@@ -203,11 +265,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                         year: "2024",
                         yearColor: AppColors.certOrange,
                       ),
-                    ),
-                    SizedBox(width: spacing),
-                    SizedBox(
-                      width: cardWidth,
-                      child: CertificateCard(
+                      CertificateCard(
                         icon: FontAwesomeIcons.robot,
                         iconColor: AppColors.certGreen,
                         title: "AI Destekli App-Jam",
@@ -217,30 +275,40 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                         year: "2024",
                         yearColor: AppColors.certGreen,
                       ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: AppSizes.p24),
-          _animItem(
-            8,
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final screenWidth = constraints.maxWidth;
-                final cardCount = 3; // Bu satırdaki kart sayısı
-                final spacing = AppSizes.p24; // Kartlar arası boşluk
-                final totalSpacing = spacing * (cardCount - 1);
-                final availableWidth = screenWidth - totalSpacing;
-                final cardWidth = availableWidth / cardCount;
+                    ];
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: cardWidth,
-                      child: CertificateCard(
+                    return Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: spacing,
+                      runSpacing: spacing,
+                      children: firstRow.map((card) {
+                        return SizedBox(
+                          width: cardWidth,
+                          child: card,
+                        );
+                      }).toList(),
+                    );
+                  }),
+                ),
+
+                SizedBox(height: AppSizes.p24),
+
+// 8) Sertifika Kartları—ikinci grup
+                _animItem(
+                  8,
+                  LayoutBuilder(builder: (context, constraints) {
+                    final screenWidth = constraints.maxWidth;
+                    final columns = screenWidth >= 1200
+                        ? 3
+                        : screenWidth >= 800
+                            ? 2
+                            : 1;
+                    final spacing = AppSizes.p24;
+                    final totalSpacing = spacing * (columns - 1);
+                    final cardWidth = (screenWidth - totalSpacing) / columns;
+
+                    final secondRow = [
+                      CertificateCard(
                         icon: FontAwesomeIcons.clipboardCheck,
                         iconColor: AppColors.certLightBlue,
                         title: "Proje Yöneticisi",
@@ -250,11 +318,7 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                         year: "2024",
                         yearColor: AppColors.certLightBlue,
                       ),
-                    ),
-                    SizedBox(width: spacing),
-                    SizedBox(
-                      width: cardWidth,
-                      child: CertificateCard(
+                      CertificateCard(
                         icon: FontAwesomeIcons.code,
                         iconColor: AppColors.certDarkBlue,
                         title: "Dart Programlama Dili",
@@ -264,36 +328,49 @@ Kodlamanın dışında, gitar çalmayı, yazı yazmayı ve kedim Misha ile vakit
                         year: "2024",
                         yearColor: AppColors.certDarkBlue,
                       ),
-                    ),
-                    SizedBox(width: spacing),
-                    SizedBox(
-                      width: cardWidth,
-                      child: CertificateCard(
+                      CertificateCard(
                         icon: FontAwesomeIcons.graduationCap,
                         iconColor: AppColors.certYellow,
                         title: "Bootcamp",
                         subtitle: "Google Oyun ve Uygulama Akademisi",
                         description:
                             "Flutter, girişimcilik ve proje yönetimi alanlarında kapsamlı eğitim aldığım, uygulamalı proje geliştirme temelli yoğun eğitim programı.",
-                        year: "2021",
+                        year: "2024",
                         yearColor: AppColors.certYellow,
                       ),
-                    ),
-                  ],
-                );
-              },
+                    ];
+
+                    return Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: spacing,
+                      runSpacing: spacing,
+                      children: secondRow.map((card) {
+                        return SizedBox(
+                          width: cardWidth,
+                          child: card,
+                        );
+                      }).toList(),
+                    );
+                  }),
+                ),
+
+                SizedBox(height: isSmall ? AppSizes.p32 : AppSizes.p40),
+
+                // 9) Quote
+                _animItem(
+                  9,
+                  const QuoteCard(
+                    quote:
+                        '"Code is like poetry – when written with care, it flows beautifully."',
+                  ),
+                ),
+
+                SizedBox(height: isSmall ? AppSizes.p32 : AppSizes.p48),
+              ],
             ),
           ),
-          const SizedBox(height: AppSizes.p40),
-          _animItem(
-            9,
-            QuoteCard(
-              quote:
-                  '"Code is like poetry – when written with care, it flows beautifully."',
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -86,17 +86,22 @@ class _RoundedButtonState extends State<RoundedButton> {
                         ? AppSizes.p10
                         : AppSizes.p8),
               ],
-              Text(
-                widget.firstText,
-                style: TextStyle(
-                  color: widget.type == ButtonType.gradient
-                      ? AppColors.scaffoldBackground
-                      : widget.textColor ??
-                          (widget.type == ButtonType.card
-                              ? AppColors.textPrimary
-                              : AppColors.blackText),
-                  fontSize: AppSizes.fontM,
-                  fontWeight: AppSizes.fontWeightSemiBold,
+              Flexible(
+                child: Text(
+                  widget.firstText,
+                  style: TextStyle(
+                    color: widget.type == ButtonType.gradient
+                        ? AppColors.scaffoldBackground
+                        : widget.textColor ??
+                            (widget.type == ButtonType.card
+                                ? AppColors.textPrimary
+                                : AppColors.blackText),
+                    fontSize: AppSizes.fontM,
+                    fontWeight: AppSizes.fontWeightSemiBold,
+                  ),
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.center,
                 ),
               ),
               if (widget.rightIcon != null) ...[
@@ -124,17 +129,22 @@ class _RoundedButtonState extends State<RoundedButton> {
           ),
           if (widget.secondText != null) ...[
             const SizedBox(height: AppSizes.p2),
-            Text(
-              widget.secondText!,
-              style: TextStyle(
-                color: widget.type == ButtonType.gradient
-                    ? AppColors.scaffoldBackground
-                    : (widget.textColor ??
-                        (widget.type == ButtonType.card
-                            ? AppColors.textSecondary
-                            : AppColors.blackText.withOpacity(0.7))),
-                fontSize: AppSizes.fontM,
-                fontWeight: AppSizes.fontWeightSemiBold,
+            Flexible(
+              child: Text(
+                widget.secondText!,
+                style: TextStyle(
+                  color: widget.type == ButtonType.gradient
+                      ? AppColors.scaffoldBackground
+                      : (widget.textColor ??
+                          (widget.type == ButtonType.card
+                              ? AppColors.textSecondary
+                              : AppColors.blackText.withOpacity(0.7))),
+                  fontSize: AppSizes.fontM,
+                  fontWeight: AppSizes.fontWeightSemiBold,
+                ),
+                softWrap: true,
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.center,
               ),
             ),
           ],

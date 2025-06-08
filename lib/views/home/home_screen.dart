@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen>
   late AnimationController _controller;
   final List<Animation<Offset>> _slideAnims = [];
   final List<Animation<double>> _fadeAnims = [];
-  final int _itemCount = 8; // number of animated widgets
+  final int _itemCount = 8;
 
   @override
   void initState() {
@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen>
       duration: const Duration(milliseconds: 1200),
     )..forward();
 
-    // build staggered animations
     for (int i = 0; i < _itemCount; i++) {
       final start = i / _itemCount;
       final end = (i + 1) / _itemCount;
@@ -79,122 +78,30 @@ class _HomeScreenState extends State<HomeScreen>
           const FloatingBubbles(),
           LayoutBuilder(
             builder: (context, constraints) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: AppSizes.p128),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildAnimated(
-                              index: 0,
-                              child: CustomBadge(
-                                text:
-                                    'Şu anda Flutter ile bir yapay zeka uygulaması geliştiriyorum',
-                                backgroundColor: AppColors.successLight,
-                                dotColor: AppColors.success,
-                                textColor: AppColors.successDark,
-                              ),
-                            ),
-                            const SizedBox(height: AppSizes.p16),
-                            _buildAnimated(
-                              index: 1,
-                              child: SectionTitle(
-                                title: 'Merhaba, Ben Can 👋',
-                                style: TextStyle(
-                                  fontSize: AppSizes.fontHuge,
-                                  fontWeight: AppSizes.fontWeightBold,
-                                ),
-                              ),
-                            ),
-                            _buildAnimated(
-                              index: 2,
-                              child: const AnimatedTitle(),
-                            ),
-                            const SizedBox(height: AppSizes.p16),
-                            _buildAnimated(
-                              index: 3,
-                              child: RichSubtitleText(
-                                text:
-                                    'Flutter, Kotlin ve Firebase \nkullanarak sade ve kullanıcı odaklı uygulamalar geliştirmeye tutkulu biriyim.',
-                                highlights: {
-                                  'Flutter': AppColors.blueText,
-                                  'Kotlin': AppColors.purpleText,
-                                  'Firebase': AppColors.pinkText,
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: AppSizes.p32),
-                            _buildAnimated(
-                              index: 4,
-                              child: Row(
-                                children: [
-                                  RoundedButton(
-                                    firstText: 'Projelerime Göz At',
-                                    icon: 'assets/icons/rocket.png',
-                                    type: ButtonType.gradient,
-                                    onPressed: () {
-                                      widget.onProjectsTap?.call();
-                                    },
-                                  ),
-                                  const SizedBox(width: AppSizes.p16),
-                                  RoundedButton(
-                                    firstText: "CV'mi İndir",
-                                    icon: 'assets/icons/download.png',
-                                    type: ButtonType.outline,
-                                    onPressed: () {
-                                      final anchor = html.AnchorElement(
-                                        href:
-                                            'assets/files/mcankirkgoz-mobiledeveloper-resume.pdf',
-                                      )
-                                        ..setAttribute('download',
-                                            'mcankirkgoz-mobiledeveloper-resume.pdf')
-                                        ..click();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: AppSizes.p32),
-                            _buildAnimated(
-                              index: 5,
-                              child: RoundedButton(
-                                firstText: 'Kodlama Listem',
-                                icon: 'assets/icons/spotify.png',
-                                type: ButtonType.card,
-                                onPressed: () {},
-                                textColor: Colors.black,
-                                rightIcon: 'assets/icons/music.png',
-                                hasShadow: true,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: AppSizes.p128),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: _buildAnimated(
-                            index: 6,
-                            child: const ProfileAvatar(
-                              image: AssetImage(
-                                  'assets/images/my_photo_first.JPG'),
-                              showBorder: true,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+              final width = constraints.maxWidth;
+              final isTiny = width < 600;
+              final isLarge = width >= 1024;
+              final avatarSize = (isTiny
+                      ? width * 0.6
+                      : width < 1024
+                          ? width * 0.4
+                          : width * 0.3)
+                  .clamp(150.0, 400.0);
+
+              final horizontalPadding = isLarge ? AppSizes.p128 : AppSizes.p32;
+
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: horizontalPadding),
+                    child: isLarge
+                        ? _buildDesktopLayout(avatarSize)
+                        : _buildMobileLayout(avatarSize),
+                  ),
                 ),
               );
             },
@@ -212,6 +119,151 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildMobileLayout(double avatarSize) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: AppSizes.p32),
+        Center(
+          child: _buildAnimated(
+            index: 6,
+            child: ProfileAvatar(
+              image: const AssetImage('assets/images/my_photo_first.JPG'),
+              showBorder: true,
+              size: avatarSize,
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSizes.p32),
+        _buildContent(),
+      ],
+    );
+  }
+
+  Widget _buildDesktopLayout(double avatarSize) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 2,
+          child: _buildContent(),
+        ),
+        Expanded(
+          flex: 1,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: _buildAnimated(
+              index: 6,
+              child: ProfileAvatar(
+                image: const AssetImage('assets/images/my_photo_first.JPG'),
+                showBorder: true,
+                size: avatarSize,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContent() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _buildAnimated(
+          index: 0,
+          child: CustomBadge(
+            text:
+                'Şu anda Flutter ile bir yapay zeka uygulaması geliştiriyorum',
+            backgroundColor: AppColors.successLight,
+            dotColor: AppColors.success,
+            textColor: AppColors.successDark,
+          ),
+        ),
+        const SizedBox(height: AppSizes.p16),
+        _buildAnimated(
+          index: 1,
+          child: SectionTitle(
+            title: 'Merhaba, Ben Can 👋',
+            style: TextStyle(
+              fontSize: AppSizes.fontHuge,
+              fontWeight: AppSizes.fontWeightBold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        _buildAnimated(
+          index: 2,
+          child: const AnimatedTitle(),
+        ),
+        const SizedBox(height: AppSizes.p16),
+        _buildAnimated(
+          index: 3,
+          child: RichSubtitleText(
+            text:
+                'Flutter, Kotlin ve Firebase \nkullanarak sade ve kullanıcı odaklı uygulamalar geliştirmeye tutkulu biriyim.',
+            highlights: {
+              'Flutter': AppColors.blueText,
+              'Kotlin': AppColors.purpleText,
+              'Firebase': AppColors.pinkText,
+            },
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: AppSizes.p32),
+        _buildAnimated(
+          index: 4,
+          child: Wrap(
+            spacing: AppSizes.p16,
+            runSpacing: AppSizes.p24,
+            alignment: WrapAlignment.center,
+            children: [
+              RoundedButton(
+                firstText: 'Projelerime Göz At',
+                icon: 'assets/icons/rocket.png',
+                type: ButtonType.gradient,
+                onPressed: () {
+                  widget.onProjectsTap?.call();
+                },
+              ),
+              RoundedButton(
+                firstText: "CV'mi İndir",
+                icon: 'assets/icons/download.png',
+                type: ButtonType.outline,
+                onPressed: () {
+                  final anchor = html.AnchorElement(
+                    href: 'assets/files/mcankirkgoz-mobiledeveloper-resume.pdf',
+                  )
+                    ..setAttribute(
+                        'download', 'mcankirkgoz-mobiledeveloper-resume.pdf')
+                    ..click();
+                },
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSizes.p32),
+        _buildAnimated(
+          index: 5,
+          child: Center(
+            child: RoundedButton(
+              firstText: 'Kodlama Listem',
+              icon: 'assets/icons/spotify.png',
+              type: ButtonType.card,
+              onPressed: () {},
+              textColor: Colors.black,
+              rightIcon: 'assets/icons/music.png',
+              hasShadow: true,
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSizes.p32),
+      ],
     );
   }
 }

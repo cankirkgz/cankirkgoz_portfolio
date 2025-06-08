@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 
-class CertificateCard extends StatelessWidget {
+class CertificateCard extends StatefulWidget {
   final IconData icon;
   final Color iconColor;
   final String title;
@@ -23,88 +23,118 @@ class CertificateCard extends StatelessWidget {
   });
 
   @override
+  State<CertificateCard> createState() => _CertificateCardState();
+}
+
+class _CertificateCardState extends State<CertificateCard> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          )
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        transform: Matrix4.translationValues(0, _isHovered ? -8 : 0, 0),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: _isHovered
+                    ? widget.iconColor.withOpacity(0.2)
+                    : Colors.black.withOpacity(0.05),
+                blurRadius: _isHovered ? 12 : 8,
+                offset: const Offset(0, 4),
+              )
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Icon(icon, color: iconColor),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  Text(title,
-                      style: TextStyle(
-                        fontSize: AppSizes.fontM,
-                        fontWeight: AppSizes.fontWeightSemiBold,
-                        color: AppColors.darkText,
-                      )),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: AppSizes.fontS,
-                      fontWeight: AppSizes.fontWeightRegular,
-                      color: AppColors.blackText,
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: widget.iconColor.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    child: Icon(widget.icon, color: widget.iconColor),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontM,
+                          fontWeight: AppSizes.fontWeightSemiBold,
+                          color: AppColors.darkText,
+                        ),
+                      ),
+                      Text(
+                        widget.subtitle,
+                        style: TextStyle(
+                          fontSize: AppSizes.fontS,
+                          fontWeight: AppSizes.fontWeightRegular,
+                          color: AppColors.blackText,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
+              const SizedBox(height: 12),
+              Tooltip(
+                message: widget.description,
+                waitDuration: const Duration(milliseconds: 500),
+                showDuration: const Duration(seconds: 3),
+                padding: EdgeInsets.all(AppSizes.p8),
+                decoration: BoxDecoration(
+                  color: AppColors.darkText.withOpacity(0.9),
+                  borderRadius: AppSizes.r8,
+                ),
+                textStyle: TextStyle(
+                  color: AppColors.scaffoldBackground,
+                  fontSize: AppSizes.fontS,
+                ),
+                child: Text(
+                  widget.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: AppSizes.fontS,
+                    fontWeight: AppSizes.fontWeightRegular,
+                    color: AppColors.blackText,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.year,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: widget.yearColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(Icons.verified, size: 16, color: widget.yearColor),
+                  ],
+                ),
+              )
             ],
           ),
-          const SizedBox(height: 12),
-          Tooltip(
-            message: description,
-            child: Text(
-              description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: AppSizes.fontS,
-                fontWeight: AppSizes.fontWeightRegular,
-                color: AppColors.blackText,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  year,
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: yearColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(width: 4),
-                Icon(Icons.verified, size: 16, color: yearColor),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

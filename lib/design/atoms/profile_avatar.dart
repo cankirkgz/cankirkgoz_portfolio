@@ -4,9 +4,10 @@ import 'package:my_portfolio/core/constants/app_sizes.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final ImageProvider image;
-  final bool showBadge; // Alttaki mavi baloncuk
+  final bool showBadge;
   final List<String>? badgeTags;
-  final bool showBorder; // Dıştaki beyaz/gradient kenar
+  final bool showBorder;
+  final double size;
 
   const ProfileAvatar({
     super.key,
@@ -14,28 +15,40 @@ class ProfileAvatar extends StatelessWidget {
     this.showBadge = false,
     this.badgeTags,
     this.showBorder = true,
+    this.size = 320,
   });
 
   @override
   Widget build(BuildContext context) {
-    const double outerSize = 320;
-    const double imageSize = 300; // outerSize - 2*border
-    // const double badgeHeight = 60; // Artık taşma olmayacak
-    // double totalHeight = outerSize + (showBadge ? badgeHeight : 0);
+    final double outerSize = size;
+    final double imageSize = outerSize - (showBorder ? 20 : 0);
+
+    // Ekran genişliği bazlı küçük mod kontrolü
+    final isCompact = MediaQuery.of(context).size.width < 600;
+
+    // Badge ölçüleri: normal ve compact
+    final double badgeWidth = isCompact
+        ? outerSize * 0.5 // compact iken daha dar
+        : outerSize * 0.7; // normalde %70
+
+    final double padH = isCompact ? 8 : 16;
+    final double padV = isCompact ? 6 : 12;
+
+    // Yazı boyutu: compact modda küçük, normalde orijinal 14
+    final double fontSize = isCompact ? 12 : 14;
 
     return SizedBox(
-      height: outerSize,
       width: outerSize,
+      height: outerSize,
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          // ── 1) Beyaz border ve dış gölge (showBorder true ise)
           if (showBorder)
             Positioned(
               top: 0,
               child: Container(
-                height: outerSize,
                 width: outerSize,
+                height: outerSize,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
@@ -50,12 +63,12 @@ class ProfileAvatar extends StatelessWidget {
               ),
             ),
 
-          // ── 2) Ana avatar (yuvarlak fotoğraf, border yoksa kendi gölgesi)
+          // Avatar fotoğraf
           Positioned(
-            top: (showBorder ? (outerSize - imageSize) / 2 : 0),
+            top: showBorder ? (outerSize - imageSize) / 2 : 0,
             child: Container(
-              height: imageSize,
               width: imageSize,
+              height: imageSize,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(image: image, fit: BoxFit.cover),
@@ -72,14 +85,13 @@ class ProfileAvatar extends StatelessWidget {
             ),
           ),
 
-          // ── 3) Alttaki etiket balonu (opsiyonel, avatar'ın tam altında ortalanmış)
+          // Badge
           if (showBadge && badgeTags != null && badgeTags!.isNotEmpty)
             Positioned(
               bottom: 0,
               child: Container(
-                width: outerSize * 0.7, // Orta hizalı, genişliği ayarlanabilir
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                width: badgeWidth,
+                padding: EdgeInsets.symmetric(horizontal: padH, vertical: padV),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.centerLeft,
@@ -96,23 +108,21 @@ class ProfileAvatar extends StatelessWidget {
                   ],
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: badgeTags!
-                      .map(
-                        (tag) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 2),
-                          child: Text(
-                            tag,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                  mainAxisSize: MainAxisSize.min,
+                  children: badgeTags!.map((tag) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: padV / 2),
+                      child: Text(
+                        tag,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.w500,
                         ),
-                      )
-                      .toList(),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
             ),
