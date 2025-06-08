@@ -82,13 +82,16 @@ class _RoundedButtonState extends State<RoundedButton> {
                               : AppColors.blackText),
                 ),
                 SizedBox(
-                    width: widget.type == ButtonType.card
-                        ? AppSizes.p10
-                        : AppSizes.p8),
+                  width: widget.type == ButtonType.card
+                      ? AppSizes.p10
+                      : AppSizes.p8,
+                ),
               ],
               Flexible(
                 child: Text(
                   widget.firstText,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: widget.type == ButtonType.gradient
                         ? AppColors.scaffoldBackground
@@ -99,16 +102,15 @@ class _RoundedButtonState extends State<RoundedButton> {
                     fontSize: AppSizes.fontM,
                     fontWeight: AppSizes.fontWeightSemiBold,
                   ),
-                  softWrap: true,
-                  overflow: TextOverflow.visible,
                   textAlign: TextAlign.center,
                 ),
               ),
               if (widget.rightIcon != null) ...[
                 SizedBox(
-                    width: widget.type == ButtonType.card
-                        ? AppSizes.p12
-                        : AppSizes.p8),
+                  width: widget.type == ButtonType.card
+                      ? AppSizes.p12
+                      : AppSizes.p8,
+                ),
                 Image.asset(
                   widget.rightIcon!,
                   height: widget.type == ButtonType.card
@@ -132,6 +134,8 @@ class _RoundedButtonState extends State<RoundedButton> {
             Flexible(
               child: Text(
                 widget.secondText!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: widget.type == ButtonType.gradient
                       ? AppColors.scaffoldBackground
@@ -142,8 +146,6 @@ class _RoundedButtonState extends State<RoundedButton> {
                   fontSize: AppSizes.fontM,
                   fontWeight: AppSizes.fontWeightSemiBold,
                 ),
-                softWrap: true,
-                overflow: TextOverflow.visible,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -254,10 +256,23 @@ class _RoundedButtonState extends State<RoundedButton> {
                 (widget.type == ButtonType.gradient
                     ? AppSizes.buttonHeightS
                     : AppSizes.p32),
-            minWidth: widget.width ?? 0,
+            minWidth: 0,
+            maxWidth: widget.width ?? double.infinity,
           ),
           decoration: getDecoration(),
-          child: buildContent(),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return FittedBox(
+                fit: BoxFit.scaleDown,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth,
+                  ),
+                  child: buildContent(),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

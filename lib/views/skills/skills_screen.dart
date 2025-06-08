@@ -393,14 +393,26 @@ class _SkillsScreenState extends State<SkillsScreen>
                 const SizedBox(height: AppSizes.p24),
                 _animItem(
                   6,
-                  Row(
-                    children: List.generate(
-                      frameworkCards.length * 2 - 1,
-                      (i) {
-                        if (i.isOdd) return SizedBox(width: itemGap);
-                        return Expanded(child: frameworkCards[i ~/ 2]);
-                      },
-                    ),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      // calculate how many cards fit in one row (min width of 280)
+                      int count = (constraints.maxWidth / 280).floor();
+                      if (count < 1) count = 1;
+                      double cardWidth =
+                          (constraints.maxWidth - (count - 1) * itemGap) /
+                              count;
+
+                      return Wrap(
+                        spacing: itemGap,
+                        runSpacing: itemGap,
+                        children: frameworkCards
+                            .map((card) => SizedBox(
+                                  width: cardWidth,
+                                  child: card,
+                                ))
+                            .toList(),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: AppSizes.p48),
@@ -429,14 +441,32 @@ class _SkillsScreenState extends State<SkillsScreen>
                 const SizedBox(height: AppSizes.p24),
                 _animItem(
                   8,
-                  Row(
-                    children: List.generate(
-                      toolCards.length * 2 - 1,
-                      (i) {
-                        if (i.isOdd) return SizedBox(width: itemGap);
-                        return Expanded(child: toolCards[i ~/ 2]);
-                      },
-                    ),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      const double minCardWidth = 200;
+                      const double gap = 16; // your itemGap
+
+                      // figure out how many cards fit side by side
+                      int itemsPerRow =
+                          ((constraints.maxWidth + gap) ~/ (minCardWidth + gap))
+                              .clamp(1, toolCards.length);
+
+                      // now slice the available width equally among that many cards
+                      final totalSpacing = gap * (itemsPerRow - 1);
+                      final cardWidth =
+                          (constraints.maxWidth - totalSpacing) / itemsPerRow;
+
+                      return Wrap(
+                        spacing: gap,
+                        runSpacing: gap,
+                        children: toolCards.map((card) {
+                          return SizedBox(
+                            width: cardWidth,
+                            child: card,
+                          );
+                        }).toList(),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: AppSizes.p48),
