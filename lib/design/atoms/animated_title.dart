@@ -12,9 +12,9 @@ class AnimatedTitle extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          'Bir ',
-          style: TextStyle(
+        Text(
+          '${AppLocalizations.of(context)!.one} ',
+          style: const TextStyle(
             fontSize: AppSizes.fontXL,
             fontWeight: AppSizes.fontWeightBold,
             color: AppColors.blackText,

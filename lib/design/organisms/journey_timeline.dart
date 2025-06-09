@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/molecules/timeline_item.dart';
 
@@ -36,37 +37,35 @@ class JourneyTimeline extends StatelessWidget {
           children: [
             TimelineItem(
               year: '2025',
-              title: 'Wedly (Yayında)',
+              title: AppLocalizations.of(context)!.wedlyTitle,
               description:
-                  "Flutter ile geliştirdiğim düğün planlayıcı mobil uygulamam Google Play’de yayınlandı.",
+                  AppLocalizations.of(context)!.wedlyJourneyDescription,
               color: AppColors.blueText,
             ),
             TimelineItem(
               year: '2024',
-              title: 'Flutter Bootcamp (Ternai)',
+              title: AppLocalizations.of(context)!.ternaiTitle,
               description:
-                  "Ternai adlı seyahat bütçeleme uygulamasını 5 kişilik ekiple geliştirerek 100 takım arasında ilk 7'ye girdik. MVVM, Riverpod, AutoRoute gibi yapılarla çalıştık.",
+                  AppLocalizations.of(context)!.ternaiJourneyDescription,
               color: AppColors.blueText,
             ),
             TimelineItem(
               year: '2024',
-              title: 'Google Oyun ve Uygulama Akademisi',
+              title: AppLocalizations.of(context)!.googleAcademyTitle,
               description:
-                  'Flutter, girişimcilik ve proje yönetimi alanlarında eğitim aldığım, uygulamalı proje geliştirme odaklı program.',
+                  AppLocalizations.of(context)!.googleAcademyDescription,
               color: AppColors.blueText,
             ),
             TimelineItem(
               year: '2022',
-              title: '42 Okulu',
-              description:
-                  'Sınavsız, öğretmensiz ama %100 pratikle yazılım geliştirme becerisi kazandığım eşsiz bir deneyim.',
+              title: AppLocalizations.of(context)!.school42Title,
+              description: AppLocalizations.of(context)!.school42Description,
               color: AppColors.purpleText,
             ),
             TimelineItem(
               year: '2018 – 2024',
-              title: 'Matematik Lisans Derecesi (%30 İngilizce)',
-              description:
-                  'Analitik düşünme, problem çözme ve soyutlama yeteneklerimi geliştirdiğim dört yıllık eğitim süreci.',
+              title: AppLocalizations.of(context)!.mathDegreeTitle,
+              description: AppLocalizations.of(context)!.mathDegreeDescription,
               color: AppColors.blueText,
             ),
           ],

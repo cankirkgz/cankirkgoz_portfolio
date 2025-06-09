@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 
@@ -39,9 +40,9 @@ class _ScrollIndicatorState extends State<ScrollIndicator>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          'Aşağı Kaydır',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.scrollDown,
+          style: const TextStyle(
             color: AppColors.textLight,
             fontSize: AppSizes.fontS,
             fontWeight: AppSizes.fontWeightMedium,

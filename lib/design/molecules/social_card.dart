@@ -3,12 +3,14 @@ import 'dart:html' as html;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SocialCard extends StatelessWidget {
   const SocialCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -27,7 +29,7 @@ class SocialCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Bana ulaş',
+            appLocalizations.contactSocialCardTitle,
             style: TextStyle(
               fontSize: AppSizes.fontXXL,
               fontWeight: AppSizes.fontWeightSemiBold,
@@ -37,35 +39,35 @@ class SocialCard extends StatelessWidget {
           Wrap(
             spacing: 16,
             runSpacing: 16,
-            children: const [
+            children: [
               _SocialItem(
                 icon: FontAwesomeIcons.github,
                 background: Colors.black,
-                label: 'GitHub',
+                label: appLocalizations.github,
                 sublabel: '@cankirkgz',
                 color: Colors.white,
                 url: 'https://github.com/cankirkgz',
               ),
               _SocialItem(
                 icon: FontAwesomeIcons.linkedinIn,
-                background: Color(0xFF0A66C2),
-                label: 'LinkedIn',
+                background: const Color(0xFF0A66C2),
+                label: appLocalizations.linkedin,
                 sublabel: '@cankirkgoz99',
                 color: Colors.white,
                 url: 'https://www.linkedin.com/in/cankirkgoz99/',
               ),
               _SocialItem(
                 icon: FontAwesomeIcons.envelope,
-                background: Color(0xFFE53E3E),
-                label: 'Email',
-                sublabel: 'Doğrudan',
+                background: const Color(0xFFE53E3E),
+                label: appLocalizations.email,
+                sublabel: appLocalizations.directEmail,
                 color: Colors.white,
                 url: 'mailto:mcankirkgoz@gmail.com',
               ),
               _SocialItem(
                 icon: FontAwesomeIcons.medium,
-                background: Color(0xFF1DA1F2),
-                label: 'Medium',
+                background: const Color(0xFF1DA1F2),
+                label: appLocalizations.medium,
                 sublabel: '@mcankirkgoz',
                 color: Colors.white,
                 url: 'https://medium.com/@mcankirkgoz',
@@ -104,6 +106,7 @@ class _SocialItemState extends State<_SocialItem> {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),

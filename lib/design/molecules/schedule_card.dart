@@ -4,12 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScheduleCard extends StatelessWidget {
   const ScheduleCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -40,7 +42,7 @@ class ScheduleCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Görüşme Planla',
+            appLocalizations.scheduleCallTitle,
             style: TextStyle(
               fontSize: AppSizes.fontXL,
               fontWeight: AppSizes.fontWeightSemiBold,
@@ -48,7 +50,7 @@ class ScheduleCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Yazışmak yerine konuşmayı mı tercih ediyorsunuz? Projenizi konuşmak için hızlı bir 15 dakikalık görüşme planlayalım.",
+            appLocalizations.scheduleCallSubtitle,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppSizes.fontM,
@@ -57,12 +59,12 @@ class ScheduleCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           RoundedButton(
-            firstText: "Görüşme Ayarla",
+            firstText: appLocalizations.scheduleCallButton,
             onPressed: () =>
                 html.window.open('https://calendly.com/mcankirkgoz', '_blank'),
             type: ButtonType.outline,
-            textColor: Color(0xFF6366F1),
-            borderColor: Color(0xFF6366F1),
+            textColor: const Color(0xFF6366F1),
+            borderColor: const Color(0xFF6366F1),
             borderWidth: 2,
           ),
         ],

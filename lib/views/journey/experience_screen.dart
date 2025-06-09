@@ -72,107 +72,124 @@ class _ExperienceScreenState extends State<ExperienceScreen>
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     // Define experience entries data
     final entries = [
       _ExperienceEntry(
         icon: FontAwesomeIcons.code,
         iconBg: AppColors.primary,
-        title: 'Takım Lideri - Flutter Developer',
+        title: appLocalizations.ternaiLeaderTitle,
         subtitle: 'Ternai',
-        date: 'Temmuz 2024 – Devam ediyor',
-        location: ' Ankara, Türkiye',
-        statusBadge: 'Aktif',
+        date: appLocalizations.ternaiLeaderDate,
+        location: appLocalizations.ankaraTurkeyLocation,
+        statusBadge: appLocalizations.activeStatus,
         bulletColor: AppColors.primary,
         points: [
-          '5 kişilik bir ekibi yöneterek yapay zeka destekli tatil bütçeleme uygulaması geliştirdim.',
-          'Flutter ile MVVM mimarisi, AutoRoute, Firebase, Hive ve Provider kullanarak gelişmiş bir mobil yapı kurdum.',
-          'API tüketimi, offline destek, favori sistemi ve çoklu filtreleme mekanizmaları gibi modülleri geliştirdim.',
-          "EmpowerMe Bootcamp'te 50+ takım arasında finalist olarak seçildik ve hızlandırma programına kabul edildik.",
-          'Kullanıcı araştırmaları, sunumlar ve demo videolarla yatırımcı görüşmelerine katkı sağladım.',
+          appLocalizations.ternaiPoint1,
+          appLocalizations.ternaiPoint2,
+          appLocalizations.ternaiPoint3,
+          appLocalizations.ternaiPoint4,
+          appLocalizations.ternaiPoint5,
         ],
         tags: [
-          'Flutter',
-          'Firebase',
-          'Riverpod',
-          'Hive',
-          'MVVM',
-          'AutoRoute',
-          'Team Leadership',
-          'UX/UI'
+          appLocalizations.flutter,
+          appLocalizations.firebase,
+          appLocalizations.riverpod,
+          appLocalizations.hive,
+          appLocalizations.mvvm,
+          appLocalizations.autoRouteTag,
+          appLocalizations.teamLeadershipTag,
+          appLocalizations.uxUiTag
         ],
       ),
       _ExperienceEntry(
         icon: FontAwesomeIcons.mobileScreen,
         iconBg: AppColors.primary,
-        title: 'Flutter Developer',
+        title: appLocalizations.moneypayTitle,
         subtitle: 'Moneypay',
-        date: 'Ağustos 2024 – Aralık 2024',
-        location: 'Uzaktan / Ankara, Türkiye',
-        statusBadge: 'Uzaktan',
+        date: appLocalizations.moneypayDate,
+        location: appLocalizations.remoteAnkaraLocation,
+        statusBadge: appLocalizations.remoteStatus,
         bulletColor: AppColors.primary,
         points: [
-          'Flutter ile sürdürülebilir ve ölçeklenebilir mobil uygulama geliştirme süreçlerinde aktif rol aldım.',
-          'Firebase Authentication, Firestore, Hive ve Provider gibi teknolojilerle kullanıcı yönetimi ve veri işleme işlemlerini yönettim.',
-          'MVVM mimarisi, AutoRoute ve Lottie animasyonları ile profesyonel uygulama deneyimi sağladım.',
-          'Kod inceleme, test ve hata ayıklama süreçlerine katkı sağladım.',
+          appLocalizations.moneypayPoint1,
+          appLocalizations.moneypayPoint2,
+          appLocalizations.moneypayPoint3,
+          appLocalizations.moneypayPoint4,
         ],
         tags: [
-          'Flutter',
-          'Firebase',
-          'MVC',
-          'AutoRoute',
-          'Agile',
-          'Scrum',
-          'Takım Çalışması',
+          appLocalizations.flutter,
+          appLocalizations.firebase,
+          appLocalizations.mvcTag,
+          appLocalizations.autoRouteTag,
+          appLocalizations.agileTag,
+          appLocalizations.scrumTag,
+          appLocalizations.teamworkTag,
         ],
       ),
       _ExperienceEntry(
         icon: FontAwesomeIcons.computer,
         iconBg: AppColors.primaryPurple,
-        title: 'BT Takım Asistani',
+        title: appLocalizations.vitraTitle,
         subtitle: 'VitrA Karo (Eczacıbaşı)',
-        date: 'Şubat 2024 – Mayıs 2024',
-        location: 'Uzaktan',
-        statusBadge: 'Uzaktan',
+        date: appLocalizations.vitraDate,
+        location: appLocalizations.remoteStatus,
+        statusBadge: appLocalizations.remoteStatus,
         bulletColor: AppColors.primaryPurple,
         points: [
-          'BT süreçlerinin işleyişini gözlemleyerek kurumsal teknoloji altyapısı hakkında bilgi edindim.',
-          'Toplantı notları, görev takibi ve iç iletişim süreçlerinde aktif rol aldım.',
-          'Proje yönetim süreçlerinde kullanılan araçlar ve sistemler konusunda destek sağladım.',
+          appLocalizations.vitraPoint1,
+          appLocalizations.vitraPoint2,
+          appLocalizations.vitraPoint3,
         ],
-        tags: ['SAP', 'Proje Takibi', 'Kurumsal Deneyim', 'Takım İletişimi'],
+        tags: [
+          appLocalizations.sapTag,
+          appLocalizations.projectTrackingTag,
+          appLocalizations.corporateExperienceTag,
+          appLocalizations.teamCommunicationTag
+        ],
       ),
       _ExperienceEntry(
         icon: FontAwesomeIcons.building,
         iconBg: AppColors.primary,
-        title: 'BT. Takım Asistanı',
+        title: appLocalizations.akbankTitle,
         subtitle: 'Akbank',
-        date: 'Kasım 2023 – Şubat 2024',
-        location: 'Uzaktan',
-        statusBadge: 'Uzaktan',
+        date: appLocalizations.akbankDate,
+        location: appLocalizations.remoteStatus,
+        statusBadge: appLocalizations.remoteStatus,
         bulletColor: AppColors.primary,
         points: [
-          'BT departmanında yürütülen yazılım ve proje geliştirme süreçlerini gözlemledim.',
-          'Scrum toplantılarına katılarak kurumsal çevik metodolojileri deneyimledim.',
-          'Takım içi dokümantasyon, raporlama ve görev takibi gibi destek süreçlerinde sorumluluk aldım.',
+          appLocalizations.akbankPoint1,
+          appLocalizations.akbankPoint2,
+          appLocalizations.akbankPoint3,
         ],
-        tags: ['Agile', 'Scrum', 'Takım Çalışması', 'Kurumsal Deneyim'],
+        tags: [
+          appLocalizations.agileTag,
+          appLocalizations.scrumTag,
+          appLocalizations.teamworkTag,
+          appLocalizations.corporateExperienceTag
+        ],
       ),
       _ExperienceEntry(
         icon: FontAwesomeIcons.codeBranch,
         iconBg: AppColors.certGreen,
-        title: 'React Native Intern',
+        title: appLocalizations.fazlaTitle,
         subtitle: 'Fazla',
-        date: 'Ağustos 2023 – Kasım 2023',
-        location: 'Uzaktan',
-        statusBadge: 'Uzaktan',
+        date: appLocalizations.fazlaDate,
+        location: appLocalizations.remoteStatus,
+        statusBadge: appLocalizations.remoteStatus,
         bulletColor: AppColors.certGreen,
         points: [
-          'Stok takip uygulaması geliştirdim ve test süreçlerine katkı sağladım.',
-          'React Native ile mobil arayüzler tasarlayıp veri yönetimini sağladım.',
-          'Ekip içi kod incelemelerine katılarak yazılım geliştirme süreçlerini öğrendim.',
+          appLocalizations.fazlaPoint1,
+          appLocalizations.fazlaPoint2,
+          appLocalizations.fazlaPoint3,
         ],
-        tags: ['React Native', 'TypeScript', 'REST API', 'Figma', 'Git'],
+        tags: [
+          appLocalizations.reactNative,
+          appLocalizations.typeScriptTag,
+          appLocalizations.restApiTag,
+          appLocalizations.figma,
+          appLocalizations.git
+        ],
       ),
     ];
 
@@ -201,11 +218,12 @@ class _ExperienceScreenState extends State<ExperienceScreen>
 
   /// Header with title and subtitle
   Widget _buildHeader() {
+    final appLocalizations = AppLocalizations.of(context)!;
     return Column(
       children: [
         Text(
-          AppLocalizations.of(context)!.journey,
-          style: TextStyle(
+          appLocalizations.journey,
+          style: const TextStyle(
             fontSize: AppSizes.fontXXXXL,
             fontWeight: AppSizes.fontWeightBold,
             color: AppColors.textPrimary,
@@ -213,9 +231,9 @@ class _ExperienceScreenState extends State<ExperienceScreen>
         ),
         const SizedBox(height: AppSizes.p8),
         Text(
-          AppLocalizations.of(context)!.journeySubtitle,
+          appLocalizations.journeySubtitle,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: AppSizes.fontL,
             color: AppColors.textSecondary,
           ),
@@ -237,7 +255,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
               return _buildAnimatedEntry(
                 i,
                 Padding(
-                  padding: EdgeInsets.only(bottom: AppSizes.p32),
+                  padding: const EdgeInsets.only(bottom: AppSizes.p32),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -250,7 +268,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
                           shape: BoxShape.circle,
                         ),
                       ),
-                      SizedBox(width: AppSizes.p16),
+                      const SizedBox(width: AppSizes.p16),
                       // full‐width entry
                       Expanded(child: entries[i]),
                     ],
@@ -276,7 +294,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
                   return _buildAnimatedEntry(
                     i,
                     Container(
-                      margin: EdgeInsets.only(bottom: AppSizes.p32),
+                      margin: const EdgeInsets.only(bottom: AppSizes.p32),
                       child: Row(
                         children: [
                           Expanded(
@@ -285,7 +303,7 @@ class _ExperienceScreenState extends State<ExperienceScreen>
                                     alignRight: true)
                                 : const SizedBox.shrink(),
                           ),
-                          SizedBox(width: AppSizes.p24), // spacer for dot
+                          const SizedBox(width: AppSizes.p24), // spacer for dot
                           Expanded(
                             child: i.isOdd
                                 ? _buildSide(entries[i], centerX,
@@ -319,10 +337,11 @@ class _ExperienceScreenState extends State<ExperienceScreen>
 
   /// Banner showing achievements with icons and values
   Widget _buildAchievementBanner() {
+    final appLocalizations = AppLocalizations.of(context)!;
     return Container(
-      padding: EdgeInsets.all(AppSizes.p24),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+      padding: const EdgeInsets.all(AppSizes.p24),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
             colors: [AppColors.primary, AppColors.primaryPurple]),
         borderRadius: AppSizes.r24,
       ),
@@ -332,15 +351,15 @@ class _ExperienceScreenState extends State<ExperienceScreen>
           _AchievementItem(
               icon: FontAwesomeIcons.trophy,
               value: '1+',
-              label: AppLocalizations.of(context)!.yearsExperience),
+              label: appLocalizations.yearsExperience),
           _AchievementItem(
               icon: FontAwesomeIcons.projectDiagram,
               value: '3+',
-              label: AppLocalizations.of(context)!.developedProjects),
+              label: appLocalizations.developedProjects),
           _AchievementItem(
               icon: FontAwesomeIcons.codeBranch,
               value: '300+',
-              label: AppLocalizations.of(context)!.commits),
+              label: appLocalizations.commits),
         ],
       ),
     );
@@ -402,7 +421,7 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
               ),
             ],
           ),
-          padding: EdgeInsets.all(AppSizes.p16),
+          padding: const EdgeInsets.all(AppSizes.p16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -430,7 +449,7 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                     ),
                   ),
 
-                  SizedBox(width: AppSizes.p12),
+                  const SizedBox(width: AppSizes.p12),
 
                   // 2. Başlık ve alt başlık
                   Expanded(
@@ -439,14 +458,14 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                       children: [
                         Text(
                           widget.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: AppSizes.fontXL,
                             fontWeight: AppSizes.fontWeightSemiBold,
                           ),
                           softWrap: true,
                           overflow: TextOverflow.visible,
                         ),
-                        SizedBox(height: AppSizes.p4),
+                        const SizedBox(height: AppSizes.p4),
                         Text(
                           widget.subtitle,
                           style: TextStyle(
@@ -460,11 +479,11 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                     ),
                   ),
 
-                  SizedBox(width: AppSizes.p12),
+                  const SizedBox(width: AppSizes.p12),
 
                   // 3. Status badge (sağ üstte)
                   Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: AppSizes.p12,
                       vertical: AppSizes.p4,
                     ),
@@ -482,31 +501,31 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                   ),
                 ],
               ),
-              SizedBox(height: AppSizes.p8),
+              const SizedBox(height: AppSizes.p8),
               Text(
                 widget.date,
                 style: TextStyle(color: AppColors.textSecondary),
               ),
-              SizedBox(height: AppSizes.p4),
+              const SizedBox(height: AppSizes.p4),
               Row(
                 children: [
-                  FaIcon(
+                  const FaIcon(
                     FontAwesomeIcons.locationDot,
                     size: AppSizes.fontS,
                     color: AppColors.icon,
                   ),
-                  SizedBox(width: AppSizes.p6),
+                  const SizedBox(width: AppSizes.p6),
                   Expanded(
                     child: Text(
                       widget.location,
-                      style: TextStyle(color: AppColors.textSecondary),
+                      style: const TextStyle(color: AppColors.textSecondary),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: AppSizes.p12),
+              const SizedBox(height: AppSizes.p12),
               ...widget.points.map((p) => Padding(
-                    padding: EdgeInsets.symmetric(vertical: AppSizes.p2),
+                    padding: const EdgeInsets.symmetric(vertical: AppSizes.p2),
                     child: Row(
                       children: [
                         FaIcon(
@@ -514,33 +533,34 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                           size: AppSizes.fontS,
                           color: widget.bulletColor,
                         ),
-                        SizedBox(width: AppSizes.p6),
+                        const SizedBox(width: AppSizes.p6),
                         Expanded(
                           child: Text(
                             p,
-                            style: TextStyle(color: AppColors.textPrimary),
+                            style:
+                                const TextStyle(color: AppColors.textPrimary),
                           ),
                         ),
                       ],
                     ),
                   )),
-              SizedBox(height: AppSizes.p12),
+              const SizedBox(height: AppSizes.p12),
               Wrap(
                 spacing: AppSizes.p8,
                 runSpacing: AppSizes.p6,
                 children: widget.tags
                     .map((t) => Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: AppSizes.p8,
                             vertical: AppSizes.p4,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: AppColors.grey,
                             borderRadius: AppSizes.r6,
                           ),
                           child: Text(
                             t,
-                            style: TextStyle(fontSize: AppSizes.fontXs),
+                            style: const TextStyle(fontSize: AppSizes.fontXs),
                           ),
                         ))
                     .toList(),
@@ -574,13 +594,13 @@ class _AchievementItem extends StatelessWidget {
           color: AppColors.scaffoldBackground,
           size: AppSizes.iconXXL,
         ),
-        SizedBox(width: AppSizes.p8),
+        const SizedBox(width: AppSizes.p8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColors.scaffoldBackground,
                 fontSize: AppSizes.fontXXL,
                 fontWeight: AppSizes.fontWeightBold,
