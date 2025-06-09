@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
+import 'package:my_portfolio/core/constants/app_colors.dart';
 
 class TechIconCard extends StatefulWidget {
   /// Kartta gösterilecek ikonun asset yolu
@@ -11,9 +12,6 @@ class TechIconCard extends StatefulWidget {
 
   /// İkonun boyutu (hem width hem height)
   final double iconSize;
-
-  /// Kartın arkaplan rengi (varsayılan beyaz)
-  final Color backgroundColor;
 
   /// Kartın kenarlarının yuvarlaklık yarıçapı
   final double borderRadius;
@@ -27,7 +25,6 @@ class TechIconCard extends StatefulWidget {
     required this.iconPath,
     required this.label,
     this.iconSize = AppSizes.buttonHeightS,
-    this.backgroundColor = Colors.white,
     this.borderRadius = 12,
     this.borderColor,
     this.borderWidth = 1,
@@ -52,14 +49,14 @@ class _TechIconCardState extends State<TechIconCard> {
       width: 120,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-        color: widget.backgroundColor,
+        color: AppColors.card(context),
         borderRadius: BorderRadius.circular(widget.borderRadius),
         border: widget.borderColor != null
             ? Border.all(color: widget.borderColor!, width: widget.borderWidth)
             : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.shadow(context).withOpacity(0.05),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -76,10 +73,10 @@ class _TechIconCardState extends State<TechIconCard> {
           const SizedBox(height: 4),
           Text(
             widget.label,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: AppSizes.fontS,
               fontWeight: FontWeight.w500,
-              color: Color(0xFF374151),
+              color: AppColors.textPrimary(context),
             ),
           ),
         ],

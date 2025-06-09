@@ -110,8 +110,8 @@ class _AboutScreenState extends State<AboutScreen>
                             ),
                             const SizedBox(height: AppSizes.p24),
                             TextCard(
-                                text:
-                                    AppLocalizations.of(context)!.aboutMeText),
+                              text: AppLocalizations.of(context)!.aboutMeText,
+                            ),
                           ],
                         )
                       : Row(
@@ -130,9 +130,10 @@ class _AboutScreenState extends State<AboutScreen>
                             ),
                             const SizedBox(width: AppSizes.p32),
                             Expanded(
-                                child: TextCard(
-                                    text: AppLocalizations.of(context)!
-                                        .aboutMeText)),
+                              child: TextCard(
+                                text: AppLocalizations.of(context)!.aboutMeText,
+                              ),
+                            ),
                           ],
                         ),
                 ),
@@ -145,10 +146,10 @@ class _AboutScreenState extends State<AboutScreen>
                   Text(
                     AppLocalizations.of(context)!.technologiesIUse,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: AppSizes.fontXL,
                       fontWeight: AppSizes.fontWeightSemiBold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimary(context),
                     ),
                   ),
                 ),
@@ -199,18 +200,18 @@ class _AboutScreenState extends State<AboutScreen>
                   Text(
                     AppLocalizations.of(context)!.myJourney,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: AppSizes.fontXL,
                       fontWeight: AppSizes.fontWeightSemiBold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimary(context),
                     ),
                   ),
                 ),
 
-                SizedBox(height: AppSizes.p24),
+                const SizedBox(height: AppSizes.p24),
 
                 // 5) Journey Timeline
-                _animItem(5, JourneyTimeline()),
+                _animItem(5, const JourneyTimeline()),
 
                 SizedBox(height: isSmall ? AppSizes.p32 : AppSizes.p64),
 
@@ -220,10 +221,10 @@ class _AboutScreenState extends State<AboutScreen>
                   Text(
                     AppLocalizations.of(context)!.certificatesAndAchievements,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: AppSizes.fontXL,
                       fontWeight: AppSizes.fontWeightSemiBold,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimary(context),
                     ),
                   ),
                 ),

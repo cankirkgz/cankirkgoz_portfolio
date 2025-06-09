@@ -37,7 +37,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Theme.of(context).canvasColor,
+      backgroundColor: AppColors.scaffoldBackground(context),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -59,6 +59,7 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                           fontWeight: widget.selectedIndex == i
                               ? AppSizes.fontWeightBold
                               : AppSizes.fontWeightMedium,
+                          color: AppColors.textPrimary(context),
                         ),
                       ),
                       onTap: () {
@@ -95,14 +96,14 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
       return Container(
         height: 64,
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-        color: Colors.white,
+        color: AppColors.scaffoldBackground(context),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [AppColors.blueText, AppColors.purpleText],
@@ -139,8 +140,8 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                               style: TextStyle(
                                 fontSize: AppSizes.fontS,
                                 color: widget.selectedIndex == index
-                                    ? Colors.black
-                                    : AppColors.blackText,
+                                    ? AppColors.textPrimary(context)
+                                    : AppColors.textSecondary(context),
                                 fontWeight: widget.selectedIndex == index
                                     ? AppSizes.fontWeightBold
                                     : AppSizes.fontWeightMedium,

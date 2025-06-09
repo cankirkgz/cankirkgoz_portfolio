@@ -25,12 +25,12 @@ class ThemeToggleIcon extends StatelessWidget {
             height: height,
             width: width,
             decoration: BoxDecoration(
-              color: AppColors.grey,
+              color: AppColors.grey(context),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               isDark ? Icons.wb_sunny_rounded : Icons.dark_mode_rounded,
-              color: AppColors.blackText,
+              color: AppColors.icon(context),
               size: 28,
             ),
           ),

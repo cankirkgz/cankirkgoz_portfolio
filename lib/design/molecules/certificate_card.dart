@@ -41,12 +41,12 @@ class _CertificateCardState extends State<CertificateCard> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: Colors.white,
+            color: AppColors.card(context),
             boxShadow: [
               BoxShadow(
                 color: _isHovered
                     ? widget.iconColor.withOpacity(0.2)
-                    : Colors.black.withOpacity(0.05),
+                    : AppColors.shadow(context).withOpacity(0.05),
                 blurRadius: _isHovered ? 12 : 8,
                 offset: const Offset(0, 4),
               )
@@ -74,7 +74,7 @@ class _CertificateCardState extends State<CertificateCard> {
                         style: TextStyle(
                           fontSize: AppSizes.fontM,
                           fontWeight: AppSizes.fontWeightSemiBold,
-                          color: AppColors.darkText,
+                          color: AppColors.textPrimary(context),
                         ),
                       ),
                       Text(
@@ -82,7 +82,7 @@ class _CertificateCardState extends State<CertificateCard> {
                         style: TextStyle(
                           fontSize: AppSizes.fontS,
                           fontWeight: AppSizes.fontWeightRegular,
-                          color: AppColors.blackText,
+                          color: AppColors.textSecondary(context),
                         ),
                       ),
                     ],
@@ -94,13 +94,13 @@ class _CertificateCardState extends State<CertificateCard> {
                 message: widget.description,
                 waitDuration: const Duration(milliseconds: 500),
                 showDuration: const Duration(seconds: 3),
-                padding: EdgeInsets.all(AppSizes.p8),
+                padding: const EdgeInsets.all(AppSizes.p8),
                 decoration: BoxDecoration(
-                  color: AppColors.darkText.withOpacity(0.9),
+                  color: AppColors.card(context).withOpacity(0.9),
                   borderRadius: AppSizes.r8,
                 ),
                 textStyle: TextStyle(
-                  color: AppColors.scaffoldBackground,
+                  color: AppColors.textPrimary(context),
                   fontSize: AppSizes.fontS,
                 ),
                 child: Text(
@@ -110,7 +110,7 @@ class _CertificateCardState extends State<CertificateCard> {
                   style: TextStyle(
                     fontSize: AppSizes.fontS,
                     fontWeight: AppSizes.fontWeightRegular,
-                    color: AppColors.blackText,
+                    color: AppColors.textSecondary(context),
                   ),
                 ),
               ),

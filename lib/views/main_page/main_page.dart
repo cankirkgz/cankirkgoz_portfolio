@@ -7,6 +7,7 @@ import 'package:my_portfolio/views/journey/experience_screen.dart';
 import 'package:my_portfolio/views/projects/projects_screen.dart';
 import 'package:my_portfolio/views/skills/skills_screen.dart';
 import 'package:my_portfolio/views/contact/contact_screen.dart';
+import 'package:my_portfolio/core/constants/app_colors.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -60,6 +61,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.scaffoldBackground(context),
       body: Stack(
         children: [
           SingleChildScrollView(

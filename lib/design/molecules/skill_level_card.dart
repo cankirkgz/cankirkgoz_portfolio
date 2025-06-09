@@ -43,11 +43,11 @@ class _SkillLevelCardState extends State<SkillLevelCard> {
         transform: Matrix4.translationValues(0, _isHovered ? -8 : 0, 0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.card(context),
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: AppColors.shadow(context).withOpacity(0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 6),
               ),
@@ -88,9 +88,10 @@ class _SkillLevelCardState extends State<SkillLevelCard> {
                         children: [
                           Text(
                             widget.skillName,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: AppSizes.fontWeightSemiBold,
                               fontSize: 16,
+                              color: AppColors.textPrimary(context),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -125,7 +126,7 @@ class _SkillLevelCardState extends State<SkillLevelCard> {
                   borderRadius: BorderRadius.circular(9999),
                   child: Container(
                     height: 8,
-                    color: Colors.grey.shade200,
+                    color: AppColors.grey(context),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: FractionallySizedBox(

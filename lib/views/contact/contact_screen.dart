@@ -192,8 +192,8 @@ class _ContactScreenState extends State<ContactScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white, // Tek renk arka plan
+      decoration: BoxDecoration(
+        color: AppColors.scaffoldBackground(context),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 80.0),
       child: Center(
@@ -207,7 +207,7 @@ class _ContactScreenState extends State<ContactScreen>
                 0,
                 Center(
                   child: ShaderMask(
-                    shaderCallback: (bounds) => LinearGradient(
+                    shaderCallback: (bounds) => const LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [AppColors.blueText, AppColors.purpleText],
@@ -219,7 +219,7 @@ class _ContactScreenState extends State<ContactScreen>
                         style: TextStyle(
                           fontSize: AppSizes.fontXXXXL,
                           fontWeight: AppSizes.fontWeightBold,
-                          color: AppColors.textPrimary,
+                          color: AppColors.textPrimary(context),
                         ),
                       ),
                       textAlign: TextAlign.center,
@@ -238,7 +238,7 @@ class _ContactScreenState extends State<ContactScreen>
                     AppLocalizations.of(context)!.contactSubtitle,
                     style: TextStyle(
                       fontSize: AppSizes.fontL,
-                      color: AppColors.textPrimary.withOpacity(0.8),
+                      color: AppColors.textPrimary(context).withOpacity(0.8),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -271,16 +271,18 @@ class _ContactScreenState extends State<ContactScreen>
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: AppColors.card(context),
                               borderRadius: BorderRadius.circular(24),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
+                                  color: AppColors.shadow(context)
+                                      .withOpacity(0.05),
                                   blurRadius: 10,
                                   offset: const Offset(0, 4),
                                 ),
                               ],
-                              border: Border.all(color: Colors.grey.shade200),
+                              border:
+                                  Border.all(color: AppColors.border(context)),
                             ),
                             padding: EdgeInsets.all(formPadding),
                             child: Column(
@@ -291,6 +293,7 @@ class _ContactScreenState extends State<ContactScreen>
                                   style: TextStyle(
                                     fontSize: titleFontSize,
                                     fontWeight: AppSizes.fontWeightSemiBold,
+                                    color: AppColors.textPrimary(context),
                                   ),
                                 ),
                                 const SizedBox(height: 8),
@@ -298,8 +301,8 @@ class _ContactScreenState extends State<ContactScreen>
                                   AppLocalizations.of(context)!.responseTime,
                                   style: TextStyle(
                                     fontSize: AppSizes.fontM,
-                                    color:
-                                        AppColors.textPrimary.withOpacity(0.6),
+                                    color: AppColors.textPrimary(context)
+                                        .withOpacity(0.6),
                                   ),
                                 ),
                                 const SizedBox(height: 24),

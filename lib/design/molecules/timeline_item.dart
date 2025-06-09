@@ -29,7 +29,7 @@ class TimelineItem extends StatelessWidget {
           padding: const EdgeInsets.only(left: markerSize + markerLeftPosition),
           child: Card(
             elevation: 1,
-            color: Colors.white,
+            color: AppColors.card(context),
             margin: const EdgeInsets.only(bottom: 24),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -53,7 +53,7 @@ class TimelineItem extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: AppSizes.fontWeightBold,
                       fontSize: AppSizes.fontM,
-                      color: AppColors.textPrimary,
+                      color: AppColors.textPrimary(context),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -62,7 +62,7 @@ class TimelineItem extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: AppSizes.fontWeightRegular,
                       fontSize: AppSizes.fontS,
-                      color: AppColors.textSecondary,
+                      color: AppColors.textSecondary(context),
                     ),
                   ),
                 ],
@@ -79,8 +79,8 @@ class TimelineItem extends StatelessWidget {
             child: Container(
               width: markerSize,
               height: markerSize,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: AppColors.card(context),
                 shape: BoxShape.circle,
               ),
               child: Center(

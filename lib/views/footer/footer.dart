@@ -28,7 +28,7 @@ class Footer extends StatelessWidget {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildIdentitySection(l10n),
+                        _buildIdentitySection(context, l10n),
                         const SizedBox(height: 24),
                         _buildMenuSection(isMobile, l10n),
                       ],
@@ -37,7 +37,7 @@ class Footer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Sol taraf
-                        Expanded(child: _buildIdentitySection(l10n)),
+                        Expanded(child: _buildIdentitySection(context, l10n)),
                         // Sağ taraf: Menü
                         _buildMenuSection(isMobile, l10n),
                       ],
@@ -71,7 +71,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildIdentitySection(AppLocalizations l10n) {
+  Widget _buildIdentitySection(BuildContext context, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -94,7 +94,7 @@ class Footer extends StatelessWidget {
           l10n.footerTitle,
           style: TextStyle(
             fontSize: AppSizes.fontS,
-            color: AppColors.textLight,
+            color: AppColors.textLight(context),
           ),
         ),
         const SizedBox(height: 8),
@@ -102,7 +102,7 @@ class Footer extends StatelessWidget {
           l10n.footerCopyright,
           style: TextStyle(
             fontSize: AppSizes.fontS,
-            color: AppColors.icon,
+            color: AppColors.icon(context),
           ),
         ),
       ],

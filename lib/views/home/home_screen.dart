@@ -258,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen>
               icon: 'assets/icons/spotify.png',
               type: ButtonType.card,
               onPressed: () {},
-              textColor: Colors.black,
+              textColor: AppColors.textPrimary(context),
               rightIcon: 'assets/icons/music.png',
               hasShadow: true,
             ),

@@ -32,7 +32,7 @@ class RichSubtitleText extends StatelessWidget {
               fontWeight: matchedColor != null
                   ? AppSizes.fontWeightBold
                   : AppSizes.fontWeightRegular,
-              color: matchedColor ?? AppColors.textSecondary,
+              color: matchedColor ?? AppColors.textSecondary(context),
             ),
           );
         }).toList(),

@@ -194,8 +194,8 @@ class _ExperienceScreenState extends State<ExperienceScreen>
     ];
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.scaffoldBackground, // Tek renk arka plan
+      decoration: BoxDecoration(
+        color: AppColors.scaffoldBackground(context), // Tek renk arka plan
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -223,19 +223,19 @@ class _ExperienceScreenState extends State<ExperienceScreen>
       children: [
         Text(
           appLocalizations.journey,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: AppSizes.fontXXXXL,
             fontWeight: AppSizes.fontWeightBold,
-            color: AppColors.textPrimary,
+            color: AppColors.textPrimary(context),
           ),
         ),
         const SizedBox(height: AppSizes.p8),
         Text(
           appLocalizations.journeySubtitle,
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: AppSizes.fontL,
-            color: AppColors.textSecondary,
+            color: AppColors.textSecondary(context),
           ),
         ),
       ],
@@ -410,11 +410,11 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
             Matrix4.translationValues(0, _isHovered ? -AppSizes.p8 : 0, 0),
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.scaffoldBackground,
+            color: AppColors.scaffoldBackground(context),
             borderRadius: AppSizes.r16,
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadow.withOpacity(0.1),
+                color: AppColors.shadow(context).withOpacity(0.1),
                 blurRadius: AppSizes.p20,
                 offset: const Offset(0, AppSizes.p8),
                 spreadRadius: AppSizes.p2,
@@ -443,7 +443,7 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                     child: Center(
                       child: FaIcon(
                         widget.icon,
-                        color: AppColors.scaffoldBackground,
+                        color: Colors.white,
                         size: AppSizes.iconM,
                       ),
                     ),
@@ -458,9 +458,10 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                       children: [
                         Text(
                           widget.title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: AppSizes.fontXL,
                             fontWeight: AppSizes.fontWeightSemiBold,
+                            color: AppColors.textPrimary(context),
                           ),
                           softWrap: true,
                           overflow: TextOverflow.visible,
@@ -504,21 +505,21 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
               const SizedBox(height: AppSizes.p8),
               Text(
                 widget.date,
-                style: TextStyle(color: AppColors.textSecondary),
+                style: TextStyle(color: AppColors.textSecondary(context)),
               ),
               const SizedBox(height: AppSizes.p4),
               Row(
                 children: [
-                  const FaIcon(
+                  FaIcon(
                     FontAwesomeIcons.locationDot,
                     size: AppSizes.fontS,
-                    color: AppColors.icon,
+                    color: AppColors.icon(context),
                   ),
                   const SizedBox(width: AppSizes.p6),
                   Expanded(
                     child: Text(
                       widget.location,
-                      style: const TextStyle(color: AppColors.textSecondary),
+                      style: TextStyle(color: AppColors.textSecondary(context)),
                     ),
                   ),
                 ],
@@ -537,8 +538,8 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                         Expanded(
                           child: Text(
                             p,
-                            style:
-                                const TextStyle(color: AppColors.textPrimary),
+                            style: TextStyle(
+                                color: AppColors.textPrimary(context)),
                           ),
                         ),
                       ],
@@ -554,13 +555,15 @@ class _ExperienceEntryState extends State<_ExperienceEntry> {
                             horizontal: AppSizes.p8,
                             vertical: AppSizes.p4,
                           ),
-                          decoration: const BoxDecoration(
-                            color: AppColors.grey,
+                          decoration: BoxDecoration(
+                            color: AppColors.grey(context),
                             borderRadius: AppSizes.r6,
                           ),
                           child: Text(
                             t,
-                            style: const TextStyle(fontSize: AppSizes.fontXs),
+                            style: TextStyle(
+                                fontSize: AppSizes.fontXs,
+                                color: AppColors.textPrimary(context)),
                           ),
                         ))
                     .toList(),
@@ -591,7 +594,7 @@ class _AchievementItem extends StatelessWidget {
       children: [
         FaIcon(
           icon,
-          color: AppColors.scaffoldBackground,
+          color: AppColors.scaffoldBackground(context),
           size: AppSizes.iconXXL,
         ),
         const SizedBox(width: AppSizes.p8),
@@ -600,8 +603,8 @@ class _AchievementItem extends StatelessWidget {
           children: [
             Text(
               value,
-              style: const TextStyle(
-                color: AppColors.scaffoldBackground,
+              style: TextStyle(
+                color: AppColors.scaffoldBackground(context),
                 fontSize: AppSizes.fontXXL,
                 fontWeight: AppSizes.fontWeightBold,
               ),
@@ -609,7 +612,7 @@ class _AchievementItem extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                color: AppColors.scaffoldBackground.withOpacity(0.9),
+                color: AppColors.scaffoldBackground(context).withOpacity(0.9),
                 fontSize: AppSizes.fontS,
               ),
             ),

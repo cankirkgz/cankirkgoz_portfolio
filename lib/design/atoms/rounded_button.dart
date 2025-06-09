@@ -75,7 +75,7 @@ class _RoundedButtonState extends State<RoundedButton> {
                       ? AppSizes.iconL
                       : AppSizes.iconS,
                   color: widget.type == ButtonType.gradient
-                      ? AppColors.scaffoldBackground
+                      ? AppColors.scaffoldBackground(context)
                       : widget.iconColor ??
                           (widget.type == ButtonType.card
                               ? null
@@ -94,10 +94,10 @@ class _RoundedButtonState extends State<RoundedButton> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: widget.type == ButtonType.gradient
-                        ? AppColors.scaffoldBackground
+                        ? AppColors.scaffoldBackground(context)
                         : widget.textColor ??
                             (widget.type == ButtonType.card
-                                ? AppColors.textPrimary
+                                ? AppColors.textPrimary(context)
                                 : AppColors.blackText),
                     fontSize: AppSizes.fontM,
                     fontWeight: AppSizes.fontWeightSemiBold,
@@ -120,7 +120,7 @@ class _RoundedButtonState extends State<RoundedButton> {
                       ? AppSizes.iconL
                       : AppSizes.iconS,
                   color: widget.type == ButtonType.gradient
-                      ? AppColors.scaffoldBackground
+                      ? AppColors.scaffoldBackground(context)
                       : widget.iconColor ??
                           (widget.type == ButtonType.card
                               ? null
@@ -138,10 +138,10 @@ class _RoundedButtonState extends State<RoundedButton> {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: widget.type == ButtonType.gradient
-                      ? AppColors.scaffoldBackground
+                      ? AppColors.scaffoldBackground(context)
                       : (widget.textColor ??
                           (widget.type == ButtonType.card
-                              ? AppColors.textSecondary
+                              ? AppColors.textSecondary(context)
                               : AppColors.blackText.withOpacity(0.7))),
                   fontSize: AppSizes.fontM,
                   fontWeight: AppSizes.fontWeightSemiBold,
@@ -177,7 +177,7 @@ class _RoundedButtonState extends State<RoundedButton> {
             boxShadow: widget.hasShadow
                 ? [
                     BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.1),
+                      color: AppColors.shadow(context).withOpacity(0.1),
                       blurRadius: AppSizes.shadowBlur,
                       offset: const Offset(0, 4),
                     ),
@@ -186,9 +186,9 @@ class _RoundedButtonState extends State<RoundedButton> {
           );
         case ButtonType.outline:
           return BoxDecoration(
-            color: AppColors.scaffoldBackground,
+            color: AppColors.scaffoldBackground(context),
             border: Border.all(
-              color: widget.borderColor ?? AppColors.border,
+              color: widget.borderColor ?? AppColors.border(context),
               width: widget.borderWidth ?? AppSizes.p1,
             ),
             borderRadius: widget.borderRadius != null
@@ -197,7 +197,7 @@ class _RoundedButtonState extends State<RoundedButton> {
             boxShadow: widget.hasShadow
                 ? [
                     BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.1),
+                      color: AppColors.shadow(context).withOpacity(0.1),
                       blurRadius: AppSizes.shadowBlur,
                       offset: const Offset(0, 4),
                     ),
@@ -206,7 +206,8 @@ class _RoundedButtonState extends State<RoundedButton> {
           );
         case ButtonType.card:
           return BoxDecoration(
-            color: widget.backgroundColor ?? AppColors.scaffoldBackground,
+            color:
+                widget.backgroundColor ?? AppColors.scaffoldBackground(context),
             borderRadius: widget.borderRadius != null
                 ? BorderRadius.circular(widget.borderRadius!)
                 : AppSizes.r12,
@@ -219,7 +220,7 @@ class _RoundedButtonState extends State<RoundedButton> {
             boxShadow: widget.hasShadow
                 ? [
                     BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.1),
+                      color: AppColors.shadow(context).withOpacity(0.1),
                       blurRadius: AppSizes.shadowBlur,
                       offset: const Offset(0, 4),
                     ),

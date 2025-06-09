@@ -120,7 +120,9 @@ class _ProjectsScreenState extends State<ProjectsScreen>
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
     return Container(
-      color: AppColors.scaffoldBackground,
+      decoration: BoxDecoration(
+        color: AppColors.scaffoldBackground(context),
+      ),
       child: Center(
         child: ConstrainedBox(
           constraints:
@@ -134,20 +136,20 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                 // Başlık
                 Text(
                   appLocalizations.projects,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: AppSizes.fontXXXXL,
                     fontWeight: AppSizes.fontWeightBold,
-                    color: AppColors.textPrimary,
+                    color: AppColors.textPrimary(context),
                   ),
                 ),
                 const SizedBox(height: AppSizes.p8),
                 // Alt Başlık
                 Text(
                   appLocalizations.projectsSubtitle,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: AppSizes.fontL,
                     fontWeight: AppSizes.fontWeightRegular,
-                    color: AppColors.textSecondary,
+                    color: AppColors.textSecondary(context),
                   ),
                 ),
                 const SizedBox(height: AppSizes.p48),
@@ -175,7 +177,8 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                           style: TextStyle(
                             fontSize: AppSizes.fontL,
                             fontWeight: AppSizes.fontWeightMedium,
-                            color: AppColors.textPrimary.withOpacity(0.6),
+                            color:
+                                AppColors.textPrimary(context).withOpacity(0.6),
                           ),
                         ),
                       )
@@ -251,12 +254,12 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           appLocalizations.bootcampFinalist,
           appLocalizations.empowerMeFinalist
         ],
-        techTagColors: const [
+        techTagColors: [
           AppColors.primary,
           AppColors.skillOrange,
           AppColors.skillPurple,
           AppColors.primaryPurple,
-          AppColors.textSecondary,
+          AppColors.textSecondary(context),
           AppColors.skillOrange,
           AppColors.primary,
         ],
@@ -284,12 +287,12 @@ class _ProjectsScreenState extends State<ProjectsScreen>
           appLocalizations.riverpod,
           appLocalizations.mvvm
         ],
-        techTagColors: const [
+        techTagColors: [
           AppColors.primaryblue,
           AppColors.error,
           AppColors.skillOrangeAccent,
           AppColors.primaryPurple,
-          AppColors.textSecondary,
+          AppColors.textSecondary(context),
         ],
         button1Text: appLocalizations.download,
         onButton1Pressed: () {

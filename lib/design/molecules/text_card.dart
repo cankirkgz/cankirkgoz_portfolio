@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 
 class TextCard extends StatelessWidget {
@@ -19,7 +20,7 @@ class TextCard extends StatelessWidget {
         width: screenWidth > maxWidth ? maxWidth : screenWidth * 0.9,
         // Beyaz zemin, yuvarlak köşeler ve gölge efektleri
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.card(context),
           borderRadius: AppSizes.r16,
           boxShadow: [
             BoxShadow(
@@ -33,10 +34,10 @@ class TextCard extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16,
             height: 1.5, // Satırlar arası boşluk
-            color: Color(0xFF374151), // Koyu gri ton
+            color: AppColors.textPrimary(context), // Koyu gri ton
           ),
         ),
       ),

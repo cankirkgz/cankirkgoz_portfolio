@@ -13,16 +13,16 @@ class SocialCard extends StatelessWidget {
     final appLocalizations = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.scaffoldBackground(context),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.shadow(context).withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.border(context)),
       ),
       padding: const EdgeInsets.all(32),
       child: Column(
@@ -33,6 +33,7 @@ class SocialCard extends StatelessWidget {
             style: TextStyle(
               fontSize: AppSizes.fontXXL,
               fontWeight: AppSizes.fontWeightSemiBold,
+              color: AppColors.textPrimary(context),
             ),
           ),
           const SizedBox(height: 16),
@@ -120,10 +121,10 @@ class _SocialItemState extends State<_SocialItem> {
             width: 160,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.grey,
+              color: AppColors.grey(context),
               borderRadius: BorderRadius.circular(24),
               border: Border.all(
-                color: _isHovered ? widget.background : AppColors.grey,
+                color: _isHovered ? widget.background : AppColors.grey(context),
                 width: _isHovered ? 2 : 1,
               ),
               boxShadow: _isHovered
@@ -156,7 +157,9 @@ class _SocialItemState extends State<_SocialItem> {
                     children: [
                       Text(
                         widget.label,
-                        style: const TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.textPrimary(context)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -165,7 +168,8 @@ class _SocialItemState extends State<_SocialItem> {
                         widget.sublabel,
                         style: TextStyle(
                           fontSize: AppSizes.fontXs,
-                          color: AppColors.textPrimary.withOpacity(0.6),
+                          color:
+                              AppColors.textPrimary(context).withOpacity(0.6),
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

@@ -227,8 +227,8 @@ class _SkillsScreenState extends State<SkillsScreen>
     const double itemGap = AppSizes.p16;
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.scaffoldBackground,
+      decoration: BoxDecoration(
+        color: AppColors.scaffoldBackground(context),
       ),
       child: Center(
         child: ConstrainedBox(
@@ -245,10 +245,10 @@ class _SkillsScreenState extends State<SkillsScreen>
                   Center(
                     child: Text(
                       AppLocalizations.of(context)!.technologies,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: AppSizes.fontXXXXL,
                         fontWeight: AppSizes.fontWeightBold,
-                        color: AppColors.textPrimary,
+                        color: AppColors.textPrimary(context),
                       ),
                     ),
                   ),
@@ -260,10 +260,10 @@ class _SkillsScreenState extends State<SkillsScreen>
                   Center(
                     child: Text(
                       AppLocalizations.of(context)!.technologiesSubtitle,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: AppSizes.fontL,
                         fontWeight: AppSizes.fontWeightRegular,
-                        color: AppColors.textSecondary,
+                        color: AppColors.textSecondary(context),
                       ),
                     ),
                   ),
@@ -347,10 +347,10 @@ class _SkillsScreenState extends State<SkillsScreen>
                       const SizedBox(width: 12),
                       Text(
                         AppLocalizations.of(context)!.featuredSkills,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: AppSizes.fontXL,
                           fontWeight: AppSizes.fontWeightSemiBold,
-                          color: Color(0xFF111827),
+                          color: AppColors.textPrimary(context),
                         ),
                       ),
                     ],
@@ -400,10 +400,10 @@ class _SkillsScreenState extends State<SkillsScreen>
                       const SizedBox(width: 12),
                       Text(
                         AppLocalizations.of(context)!.frameworksAndLibraries,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: AppSizes.fontXL,
                           fontWeight: AppSizes.fontWeightSemiBold,
-                          color: AppColors.darkText,
+                          color: AppColors.textPrimary(context),
                         ),
                       ),
                     ],
@@ -448,10 +448,10 @@ class _SkillsScreenState extends State<SkillsScreen>
                       const SizedBox(width: 12),
                       Text(
                         AppLocalizations.of(context)!.toolsAndPlatforms,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: AppSizes.fontXL,
                           fontWeight: AppSizes.fontWeightSemiBold,
-                          color: Color(0xFF111827),
+                          color: AppColors.textPrimary(context),
                         ),
                       ),
                     ],
@@ -511,10 +511,10 @@ class _SkillsScreenState extends State<SkillsScreen>
                             const SizedBox(width: 12),
                             Text(
                               AppLocalizations.of(context)!.currentlyLearning,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: AppSizes.fontL,
                                 fontWeight: AppSizes.fontWeightSemiBold,
-                                color: Color(0xFF111827),
+                                color: AppColors.textPrimary(context),
                               ),
                             ),
                           ],

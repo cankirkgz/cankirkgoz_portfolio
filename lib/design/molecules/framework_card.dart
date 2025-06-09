@@ -39,11 +39,11 @@ class _FrameworkCardState extends State<FrameworkCard> {
         child: Container(
           padding: const EdgeInsets.all(AppSizes.p16),
           decoration: BoxDecoration(
-            color: AppColors.scaffoldBackground,
+            color: AppColors.scaffoldBackground(context),
             borderRadius: AppSizes.r12,
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadowLight,
+                color: AppColors.shadowLight(context),
                 blurRadius: AppSizes.shadowBlur,
                 offset: const Offset(0, 4),
               ),
@@ -70,9 +70,10 @@ class _FrameworkCardState extends State<FrameworkCard> {
               const SizedBox(height: AppSizes.p12),
               Text(
                 widget.title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: AppSizes.fontWeightSemiBold,
                   fontSize: AppSizes.fontM,
+                  color: AppColors.textPrimary(context),
                 ),
               ),
               if (widget.level != null) ...[

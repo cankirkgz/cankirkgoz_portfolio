@@ -42,8 +42,8 @@ class _ScrollIndicatorState extends State<ScrollIndicator>
       children: [
         Text(
           AppLocalizations.of(context)!.scrollDown,
-          style: const TextStyle(
-            color: AppColors.textLight,
+          style: TextStyle(
+            color: AppColors.textLight(context),
             fontSize: AppSizes.fontS,
             fontWeight: AppSizes.fontWeightMedium,
           ),

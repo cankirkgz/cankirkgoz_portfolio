@@ -112,13 +112,13 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
             constraints: BoxConstraints(minHeight: 450),
             margin: EdgeInsets.all(AppSizes.p12),
             decoration: BoxDecoration(
-              color: AppColors.scaffoldBackground,
+              color: AppColors.scaffoldBackground(context),
               borderRadius: AppSizes.r16,
               boxShadow: [
                 BoxShadow(
                   color: _isHovered
                       ? AppColors.blueText.withOpacity(0.2)
-                      : AppColors.shadow.withOpacity(0.05),
+                      : AppColors.shadow(context).withOpacity(0.05),
                   blurRadius: _isHovered ? AppSizes.p20 : AppSizes.shadowBlur,
                   offset: Offset(0, AppSizes.p6),
                 ),
@@ -160,6 +160,7 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                 style: TextStyle(
                   fontSize: AppSizes.fontXL * fontScale,
                   fontWeight: AppSizes.fontWeightBold,
+                  color: AppColors.textPrimary(context),
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -179,7 +180,7 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
         Tooltip(
           preferBelow: true,
           decoration: BoxDecoration(
-            color: AppColors.darkText.withOpacity(0.9),
+            color: AppColors.card(context).withOpacity(0.9),
             borderRadius: AppSizes.r8,
           ),
           richMessage: TextSpan(
@@ -191,7 +192,7 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                   child: Text(widget.description,
                       style: TextStyle(
                         fontSize: AppSizes.fontS * fontScale,
-                        color: AppColors.scaffoldBackground,
+                        color: AppColors.textPrimary(context),
                       )),
                 ),
               ),
@@ -202,7 +203,7 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
             style: TextStyle(
               fontSize: AppSizes.fontM * fontScale,
               fontWeight: AppSizes.fontWeightRegular,
-              color: AppColors.blackText,
+              color: AppColors.textSecondary(context),
             ),
             maxLines: 6,
             overflow: TextOverflow.ellipsis,
@@ -260,6 +261,7 @@ class _ProjectShowcaseCardState extends State<ProjectShowcaseCard> {
                   AppColors.primaryPurple,
                 ],
                 height: widget.buttonHeight,
+                textColor: AppColors.textPrimary(context),
               ),
             ),
           ],

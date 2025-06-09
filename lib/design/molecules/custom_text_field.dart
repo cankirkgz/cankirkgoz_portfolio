@@ -26,28 +26,28 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       validator: validator,
       style: TextStyle(
-        color: AppColors.blackText,
+        color: AppColors.textPrimary(context),
         fontSize: AppSizes.fontM,
       ),
       decoration: InputDecoration(
         hintText: label,
         hintStyle: TextStyle(
-          color: const Color(0xFF64748B),
+          color: AppColors.textSecondary(context),
           fontSize: AppSizes.fontM,
         ),
         filled: true,
-        fillColor: const Color(0xFFF8FAFC),
+        fillColor: AppColors.card(context),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 20,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+          borderSide: BorderSide(color: AppColors.border(context)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+          borderSide: BorderSide(color: AppColors.border(context)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
