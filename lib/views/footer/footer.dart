@@ -3,6 +3,7 @@ import 'dart:html' as html;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Footer extends StatelessWidget {
   final Function(int)? onItemTap;
@@ -10,6 +11,7 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return LayoutBuilder(
       builder: (context, constraints) {
         final isMobile = constraints.maxWidth < 600;
@@ -26,18 +28,18 @@ class Footer extends StatelessWidget {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildIdentitySection(),
+                        _buildIdentitySection(l10n),
                         const SizedBox(height: 24),
-                        _buildMenuSection(isMobile),
+                        _buildMenuSection(isMobile, l10n),
                       ],
                     )
                   : Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Sol taraf
-                        Expanded(child: _buildIdentitySection()),
+                        Expanded(child: _buildIdentitySection(l10n)),
                         // Sağ taraf: Menü
-                        _buildMenuSection(isMobile),
+                        _buildMenuSection(isMobile, l10n),
                       ],
                     ),
               const SizedBox(height: 24),
@@ -69,12 +71,12 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildIdentitySection() {
+  Widget _buildIdentitySection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Can Kırkgöz',
+          l10n.footerName,
           style: TextStyle(
             fontSize: AppSizes.fontXL,
             fontWeight: AppSizes.fontWeightBold,
@@ -89,7 +91,7 @@ class Footer extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          'Mobil Geliştirici · Flutter Geliştirici · Problem Çözücü',
+          l10n.footerTitle,
           style: TextStyle(
             fontSize: AppSizes.fontS,
             color: AppColors.textLight,
@@ -97,7 +99,7 @@ class Footer extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '© 2025 Can Kırkgöz. Tüm hakları saklıdır.',
+          l10n.footerCopyright,
           style: TextStyle(
             fontSize: AppSizes.fontS,
             color: AppColors.icon,
@@ -107,7 +109,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuSection(bool isMobile) {
+  Widget _buildMenuSection(bool isMobile, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment:
           isMobile ? CrossAxisAlignment.start : CrossAxisAlignment.end,
@@ -117,12 +119,12 @@ class Footer extends StatelessWidget {
           spacing: 16,
           runSpacing: 8,
           children: [
-            _footerLink(0, 'Ana Sayfa', onItemTap),
-            _footerLink(1, 'Hakkımda', onItemTap),
-            _footerLink(2, 'Projeler', onItemTap),
-            _footerLink(3, 'Yetenekler', onItemTap),
-            _footerLink(4, 'Deneyimler', onItemTap),
-            _footerLink(5, 'İletişim', onItemTap),
+            _footerLink(0, l10n.footerHome, onItemTap),
+            _footerLink(1, l10n.footerAbout, onItemTap),
+            _footerLink(2, l10n.footerProjects, onItemTap),
+            _footerLink(3, l10n.footerSkills, onItemTap),
+            _footerLink(4, l10n.footerExperience, onItemTap),
+            _footerLink(5, l10n.footerContact, onItemTap),
           ],
         ),
         const SizedBox(height: 12),

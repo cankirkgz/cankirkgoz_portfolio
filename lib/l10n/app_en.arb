@@ -98,7 +98,7 @@
     "skills": "Skills",
     "experience": "Experience",
     "contact": "Contact",
-    "one": "One",
+    "one": "A",
     "scrollDown": "Scroll Down",
     "wedlyTitle": "Wedly (Published)",
     "wedlyJourneyDescription": "My wedding planner mobile app developed with Flutter was published on Google Play.",
@@ -161,6 +161,15 @@
     "medium": "Medium",
     "scheduleCallTitle": "Schedule a Call",
     "scheduleCallSubtitle": "Prefer to talk instead of type? Let's schedule a quick 15-minute call to discuss your project.",
-    "scheduleCallButton": "Schedule a Meeting"
+    "scheduleCallButton": "Schedule a Meeting",
+    "footerName": "Can Kırkgöz",
+    "footerTitle": "Mobile Developer · Flutter Developer · Problem Solver",
+    "footerCopyright": "© 2025 Can Kırkgöz. All rights reserved.",
+    "footerHome": "Home",
+    "footerAbout": "About",
+    "footerProjects": "Projects",
+    "footerSkills": "Skills",
+    "footerExperience": "Experience",
+    "footerContact": "Contact"
 }
   

@@ -161,6 +161,15 @@
     "medium": "Medium",
     "scheduleCallTitle": "Görüşme Planla",
     "scheduleCallSubtitle": "Yazışmak yerine konuşmayı mı tercih ediyorsunuz? Projenizi konuşmak için hızlı bir 15 dakikalık görüşme planlayalım.",
-    "scheduleCallButton": "Görüşme Ayarla"
+    "scheduleCallButton": "Görüşme Ayarla",
+    "footerName": "Can Kırkgöz",
+    "footerTitle": "Mobil Geliştirici · Flutter Geliştirici · Problem Çözücü",
+    "footerCopyright": "© 2025 Can Kırkgöz. Tüm hakları saklıdır.",
+    "footerHome": "Ana Sayfa",
+    "footerAbout": "Hakkımda",
+    "footerProjects": "Projeler",
+    "footerSkills": "Yetenekler",
+    "footerExperience": "Deneyimler",
+    "footerContact": "İletişim"
 }
   
