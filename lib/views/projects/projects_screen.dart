@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
 import 'package:my_portfolio/design/molecules/project_showcase_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({Key? key}) : super(key: key);
@@ -116,6 +117,13 @@ class _ProjectsScreenState extends State<ProjectsScreen>
     });
   }
 
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context)!;
@@ -209,9 +217,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
                   firstText: appLocalizations.viewAllProjects,
                   icon: "assets/icons/github_icon.png",
                   onPressed: () {
-                    html.window.open(
-                        'https://github.com/cankirkgz?tab=repositories',
-                        '_blank');
+                    _launchURL('https://github.com/cankirkgz?tab=repositories');
                   },
                   type: ButtonType.gradient,
                 ),
@@ -268,7 +274,7 @@ class _ProjectsScreenState extends State<ProjectsScreen>
         onButton1Pressed: () {},
         button2Text: appLocalizations.github,
         onButton2Pressed: () {
-          html.window.open('https://github.com/cankirkgz/ternai-app', '_blank');
+          _launchURL('https://github.com/cankirkgz/ternai-app');
         },
         buttonHeight: AppSizes.buttonHeightXL,
       ),
@@ -296,13 +302,12 @@ class _ProjectsScreenState extends State<ProjectsScreen>
         ],
         button1Text: appLocalizations.download,
         onButton1Pressed: () {
-          html.window.open(
-              'https://play.google.com/store/apps/details?id=com.wedly.app&hl=tr',
-              '_blank');
+          _launchURL(
+              'https://play.google.com/store/apps/details?id=com.wedly.app&hl=tr');
         },
         button2Text: appLocalizations.github,
         onButton2Pressed: () {
-          html.window.open('https://github.com/cankirkgz/wedlist', '_blank');
+          _launchURL('https://github.com/cankirkgz/wedlist');
         },
         buttonHeight: AppSizes.buttonHeightXL,
       ),

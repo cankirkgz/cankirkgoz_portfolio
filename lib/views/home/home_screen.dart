@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/animated_title.dart';
 import 'package:my_portfolio/design/atoms/custom_badge.dart';
 import 'package:my_portfolio/design/atoms/profile_avatar.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
-import 'package:my_portfolio/design/atoms/scroll_indicator.dart';
 import 'package:my_portfolio/design/atoms/section_title.dart';
 import 'package:my_portfolio/design/atoms/subtitle_text.dart';
 import 'package:my_portfolio/design/molecules/floating_bubbles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback? onProjectsTap;
@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late final AnimationController _controller;
   final List<Animation<Offset>> _slideAnims = [];
   final List<Animation<double>> _fadeAnims = [];
   final int _itemCount = 7;
@@ -70,62 +70,66 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Stack(
-        children: [
-          const FloatingBubbles(),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.maxWidth;
-              final isTiny = width < 600;
-              final isLarge = width >= 1024;
-              final avatarSize = (isTiny
-                      ? width * 0.6
-                      : width < 1024
-                          ? width * 0.4
-                          : width * 0.3)
-                  .clamp(150.0, 400.0);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final isTiny = width < 600;
+        final isLarge = width >= 1024;
+        final avatarSize = (isTiny
+                ? width * 0.6
+                : width < 1024
+                    ? width * 0.4
+                    : width * 0.3)
+            .clamp(150.0, 400.0);
 
-              final horizontalPadding = isLarge ? AppSizes.p128 : AppSizes.p32;
+        final horizontalPadding = isLarge ? AppSizes.p128 : AppSizes.p32;
+        final screenHeight = MediaQuery.of(context).size.height;
 
-              return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: constraints.maxHeight,
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: screenHeight),
+            child: Stack(
+              children: [
+                Positioned.fill(child: const FloatingBubbles()),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: AppSizes.p128,
+                    left: horizontalPadding,
+                    right: horizontalPadding,
                   ),
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: horizontalPadding),
-                    child: isLarge
-                        ? _buildDesktopLayout(avatarSize)
-                        : _buildMobileLayout(avatarSize),
-                  ),
+                  child: isLarge
+                      ? _buildDesktopLayout(avatarSize)
+                      : _buildMobileLayout(avatarSize),
                 ),
-              );
-            },
+              ],
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  _buildMobileLayout(double avatarSize) {
+  Widget _buildMobileLayout(double avatarSize) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: AppSizes.p32),
-        Center(
-          child: _buildAnimated(
-            index: 6,
-            child: ProfileAvatar(
-              image: const AssetImage('assets/images/my_photo_first.JPG'),
-              showBorder: true,
-              size: avatarSize,
-            ),
+        _buildAnimated(
+          index: 6,
+          child: ProfileAvatar(
+            image: const AssetImage('assets/images/my_photo_first.JPG'),
+            showBorder: true,
+            size: avatarSize,
           ),
         ),
         const SizedBox(height: AppSizes.p32),
@@ -134,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  _buildDesktopLayout(double avatarSize) {
+  Widget _buildDesktopLayout(double avatarSize) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -215,23 +219,14 @@ class _HomeScreenState extends State<HomeScreen>
                   firstText: AppLocalizations.of(context)!.viewAllProjects,
                   icon: 'assets/icons/rocket.png',
                   type: ButtonType.gradient,
-                  onPressed: () {
-                    widget.onProjectsTap?.call();
-                  },
+                  onPressed: widget.onProjectsTap ?? () {},
                 ),
                 RoundedButton(
                   firstText: AppLocalizations.of(context)!.downloadCV,
                   icon: 'assets/icons/download.png',
                   type: ButtonType.outline,
-                  onPressed: () {
-                    final anchor = html.AnchorElement(
-                      href:
-                          'assets/files/cankirkgoz-mobiledeveloper-resume.pdf',
-                    )
-                      ..setAttribute(
-                          'download', 'cankirkgoz-mobiledeveloper-resume.pdf')
-                      ..click();
-                  },
+                  onPressed: () =>
+                      _launchURL('cankirkgoz-mobiledeveloper-resume.pdf'),
                 ),
               ],
             ),

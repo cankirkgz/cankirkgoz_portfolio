@@ -66,6 +66,7 @@ class _MainPageState extends State<MainPage> {
         children: [
           SingleChildScrollView(
             controller: _scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 HomeScreen(

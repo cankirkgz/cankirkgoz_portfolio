@@ -240,33 +240,47 @@ class _SkillsScreenState extends State<SkillsScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Başlık
-                _animItem(
-                  0,
-                  Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.technologies,
-                      style: TextStyle(
-                        fontSize: AppSizes.fontXXXXL,
-                        fontWeight: AppSizes.fontWeightBold,
-                        color: AppColors.textPrimary(context),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    return _animItem(
+                      0,
+                      Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.technologies,
+                          style: TextStyle(
+                            fontSize: AppSizes.fontXXXXL,
+                            fontWeight: AppSizes.fontWeightBold,
+                            color: AppColors.textPrimary(context),
+                          ),
+                          textAlign:
+                              isMobile ? TextAlign.center : TextAlign.left,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 const SizedBox(height: AppSizes.p8),
                 // Alt başlık
-                _animItem(
-                  1,
-                  Center(
-                    child: Text(
-                      AppLocalizations.of(context)!.technologiesSubtitle,
-                      style: TextStyle(
-                        fontSize: AppSizes.fontL,
-                        fontWeight: AppSizes.fontWeightRegular,
-                        color: AppColors.textSecondary(context),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    return _animItem(
+                      1,
+                      Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.technologiesSubtitle,
+                          style: TextStyle(
+                            fontSize: AppSizes.fontL,
+                            fontWeight: AppSizes.fontWeightRegular,
+                            color: AppColors.textSecondary(context),
+                          ),
+                          textAlign:
+                              isMobile ? TextAlign.center : TextAlign.left,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 const SizedBox(height: AppSizes.p48),
 

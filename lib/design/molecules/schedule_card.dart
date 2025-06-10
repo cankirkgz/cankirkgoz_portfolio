@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleCard extends StatelessWidget {
   const ScheduleCard({Key? key}) : super(key: key);
+
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +68,7 @@ class ScheduleCard extends StatelessWidget {
           const SizedBox(height: 16),
           RoundedButton(
             firstText: appLocalizations.scheduleCallButton,
-            onPressed: () =>
-                html.window.open('https://calendly.com/mcankirkgoz', '_blank'),
+            onPressed: () => _launchURL('https://calendly.com/mcankirkgoz'),
             type: ButtonType.outline,
             textColor: const Color(0xFF6366F1),
             borderColor: const Color(0xFF6366F1),

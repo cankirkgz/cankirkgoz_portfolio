@@ -25,20 +25,25 @@ class CustomBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = MediaQuery.of(context).size.width < 600;
+
     return Container(
-      padding: padding,
+      padding: isMobile
+          ? const EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+          : padding,
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(borderRadius ?? 32),
+        borderRadius:
+            BorderRadius.circular(borderRadius ?? (isMobile ? 24 : 32)),
       ),
       child: Wrap(
-        spacing: 8,
+        spacing: isMobile ? 6 : 8,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           if (leftIconPath != null) ...[
             SizedBox(
-              width: 12,
-              height: 12,
+              width: isMobile ? 10 : 12,
+              height: isMobile ? 10 : 12,
               child: Image.asset(
                 leftIconPath!,
               ),
@@ -46,8 +51,8 @@ class CustomBadge extends StatelessWidget {
           ],
           if (showDot) ...[
             Container(
-              width: 8,
-              height: 8,
+              width: isMobile ? 6 : 8,
+              height: isMobile ? 6 : 8,
               decoration: BoxDecoration(
                 color: dotColor,
                 shape: BoxShape.circle,
@@ -58,7 +63,7 @@ class CustomBadge extends StatelessWidget {
             text,
             style: TextStyle(
               color: textColor,
-              fontSize: AppSizes.fontS,
+              fontSize: isMobile ? AppSizes.fontXs : AppSizes.fontS,
               fontWeight: FontWeight.w500,
             ),
             softWrap: true,

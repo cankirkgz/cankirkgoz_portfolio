@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   final Function(int)? onItemTap;
@@ -178,6 +179,20 @@ class _SocialIcon extends StatefulWidget {
 class _SocialIconState extends State<_SocialIcon> {
   bool _isHovered = false;
 
+  Future<void> _launchURL(String url) async {
+    if (kIsWeb) {
+      // Web platformu için
+      final uri = Uri.parse(url);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      // Mobil platformlar için
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -185,7 +200,7 @@ class _SocialIconState extends State<_SocialIcon> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
-        onTap: () => html.window.open(widget.url, '_blank'),
+        onTap: () => _launchURL(widget.url),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           transform: Matrix4.translationValues(0, _isHovered ? -4 : 0, 0),

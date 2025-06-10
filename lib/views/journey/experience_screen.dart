@@ -338,30 +338,57 @@ class _ExperienceScreenState extends State<ExperienceScreen>
   /// Banner showing achievements with icons and values
   Widget _buildAchievementBanner() {
     final appLocalizations = AppLocalizations.of(context)!;
-    return Container(
-      padding: const EdgeInsets.all(AppSizes.p24),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.primaryPurple]),
-        borderRadius: AppSizes.r24,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _AchievementItem(
-              icon: FontAwesomeIcons.trophy,
-              value: '1+',
-              label: appLocalizations.yearsExperience),
-          _AchievementItem(
-              icon: FontAwesomeIcons.projectDiagram,
-              value: '3+',
-              label: appLocalizations.developedProjects),
-          _AchievementItem(
-              icon: FontAwesomeIcons.codeBranch,
-              value: '300+',
-              label: appLocalizations.commits),
-        ],
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+
+        return Container(
+          padding: const EdgeInsets.all(AppSizes.p24),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                colors: [AppColors.primary, AppColors.primaryPurple]),
+            borderRadius: AppSizes.r24,
+          ),
+          child: isMobile
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _AchievementItem(
+                        icon: FontAwesomeIcons.trophy,
+                        value: '1+',
+                        label: appLocalizations.yearsExperience),
+                    const SizedBox(height: AppSizes.p24),
+                    _AchievementItem(
+                        icon: FontAwesomeIcons.projectDiagram,
+                        value: '3+',
+                        label: appLocalizations.developedProjects),
+                    const SizedBox(height: AppSizes.p24),
+                    _AchievementItem(
+                        icon: FontAwesomeIcons.codeBranch,
+                        value: '300+',
+                        label: appLocalizations.commits),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _AchievementItem(
+                        icon: FontAwesomeIcons.trophy,
+                        value: '1+',
+                        label: appLocalizations.yearsExperience),
+                    _AchievementItem(
+                        icon: FontAwesomeIcons.projectDiagram,
+                        value: '3+',
+                        label: appLocalizations.developedProjects),
+                    _AchievementItem(
+                        icon: FontAwesomeIcons.codeBranch,
+                        value: '300+',
+                        label: appLocalizations.commits),
+                  ],
+                ),
+        );
+      },
     );
   }
 }
@@ -590,35 +617,66 @@ class _AchievementItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        FaIcon(
-          icon,
-          color: AppColors.scaffoldBackground(context),
-          size: AppSizes.iconXXL,
-        ),
-        const SizedBox(width: AppSizes.p8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              value,
-              style: TextStyle(
-                color: AppColors.scaffoldBackground(context),
-                fontSize: AppSizes.fontXXL,
-                fontWeight: AppSizes.fontWeightBold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+
+        return Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSizes.p12,
+            horizontal: AppSizes.p16,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.primary.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(AppSizes.p12),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withOpacity(0.2),
+                  shape: BoxShape.circle,
+                ),
+                child: FaIcon(
+                  icon,
+                  color: AppColors.scaffoldBackground(context),
+                  size: AppSizes.iconXL,
+                ),
               ),
-            ),
-            Text(
-              label,
-              style: TextStyle(
-                color: AppColors.scaffoldBackground(context).withOpacity(0.9),
-                fontSize: AppSizes.fontS,
+              const SizedBox(width: AppSizes.p16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    value,
+                    style: TextStyle(
+                      color: AppColors.scaffoldBackground(context),
+                      fontSize: AppSizes.fontXXL,
+                      fontWeight: FontWeight.w800,
+                      height: 1.1,
+                    ),
+                  ),
+                  const SizedBox(height: AppSizes.p4),
+                  Text(
+                    label.toUpperCase(),
+                    style: TextStyle(
+                      color: AppColors.scaffoldBackground(context)
+                          .withOpacity(0.85),
+                      fontSize: AppSizes.fontXs,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        );
+      },
     );
   }
 }
