@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen>
                   onPressed: () {
                     final anchor = html.AnchorElement(
                       href:
-                          'assets/files/mcankirkgoz-mobiledeveloper-resume.pdf',
+                          'assets/files/cankirkgoz-mobiledeveloper-resume.pdf',
                     )
                       ..setAttribute(
                           'download', 'mcankirkgoz-mobiledeveloper-resume.pdf')
