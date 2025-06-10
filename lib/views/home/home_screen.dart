@@ -229,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen>
                           'assets/files/cankirkgoz-mobiledeveloper-resume.pdf',
                     )
                       ..setAttribute(
-                          'download', 'mcankirkgoz-mobiledeveloper-resume.pdf')
+                          'download', 'cankirkgoz-mobiledeveloper-resume.pdf')
                       ..click();
                   },
                 ),
