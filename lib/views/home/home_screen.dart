@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen>
   late AnimationController _controller;
   final List<Animation<Offset>> _slideAnims = [];
   final List<Animation<double>> _fadeAnims = [];
-  final int _itemCount = 8;
+  final int _itemCount = 7;
 
   @override
   void initState() {
@@ -106,17 +106,6 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               );
             },
-          ),
-          Positioned(
-            bottom: AppSizes.p16,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: _buildAnimated(
-                index: 7,
-                child: const ScrollIndicator(),
-              ),
-            ),
           ),
         ],
       ),

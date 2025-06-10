@@ -49,14 +49,6 @@ class MyApp extends StatelessWidget {
                 ),
                 useMaterial3: true,
               ),
-              builder: (context, child) {
-                return Stack(
-                  children: [
-                    if (child != null) child,
-                    const _DimensionOverlay(),
-                  ],
-                );
-              },
               localizationsDelegates: const [
                 AppLocalizations.delegate,
                 GlobalMaterialLocalizations.delegate,
@@ -72,40 +64,6 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-/// Her rebuild'de MediaQuery boyutunu alıp
-/// 10'ar piksellik adımlarla yuvarlayarak gösterir.
-class _DimensionOverlay extends StatelessWidget {
-  const _DimensionOverlay();
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    // En yakın 10luk piksele yuvarla
-    final roundedWidth = (size.width ~/ 10) * 10;
-    final roundedHeight = (size.height ~/ 10) * 10;
-
-    return Positioned(
-      top: 8,
-      right: 8,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.6),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Text(
-          '${roundedWidth.toInt()} × ${roundedHeight.toInt()}',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
     );
   }
 }
