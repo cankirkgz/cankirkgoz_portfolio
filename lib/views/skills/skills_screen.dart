@@ -68,67 +68,127 @@ class _SkillsScreenState extends State<SkillsScreen>
   List<Widget> _getFilteredSkillCards() {
     if (_currentFilter == "all") {
       return [
-        Row(
-          children: [
-            Expanded(
-              child: SkillLevelCard(
-                skillName: AppLocalizations.of(context)!.flutter,
-                skillLevel:
-                    AppLocalizations.of(context)!.skillLevelIntermediatePlus,
-                percentage: 65,
-                color: AppColors.primaryblue,
-                iconPath: 'assets/icons/flutter_icon.png',
-                gradientColors: const [
-                  AppColors.blueText,
-                  AppColors.purpleText
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final isSmallScreen = constraints.maxWidth < 500;
+            return Column(
+              children: [
+                if (isSmallScreen) ...[
+                  SkillLevelCard(
+                    skillName: AppLocalizations.of(context)!.flutter,
+                    skillLevel: AppLocalizations.of(context)!
+                        .skillLevelIntermediatePlus,
+                    percentage: 65,
+                    color: AppColors.primaryblue,
+                    iconPath: 'assets/icons/flutter_icon.png',
+                    gradientColors: const [
+                      AppColors.blueText,
+                      AppColors.purpleText
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.p16),
+                  SkillLevelCard(
+                    skillName: AppLocalizations.of(context)!.dart,
+                    skillLevel: AppLocalizations.of(context)!
+                        .skillLevelIntermediatePlus,
+                    percentage: 65,
+                    color: AppColors.primaryblue,
+                    iconPath: 'assets/icons/dart_icon.png',
+                    gradientColors: const [
+                      AppColors.blueText,
+                      AppColors.purpleText
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.p16),
+                  SkillLevelCard(
+                    skillName: AppLocalizations.of(context)!.firebase,
+                    skillLevel:
+                        AppLocalizations.of(context)!.skillLevelIntermediate,
+                    percentage: 55,
+                    color: AppColors.skillOrange,
+                    iconPath: 'assets/icons/firebase_icon.png',
+                    gradientColors: const [
+                      AppColors.skillDeepOrange,
+                      AppColors.skillOrangeAccent
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.p16),
+                  SkillLevelCard(
+                    skillName: AppLocalizations.of(context)!.kotlin,
+                    skillLevel:
+                        AppLocalizations.of(context)!.skillLevelBeginner,
+                    percentage: 30,
+                    color: AppColors.skillPurple,
+                    iconPath: 'assets/icons/kotlin_icon.png',
+                  ),
+                ] else ...[
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SkillLevelCard(
+                          skillName: AppLocalizations.of(context)!.flutter,
+                          skillLevel: AppLocalizations.of(context)!
+                              .skillLevelIntermediatePlus,
+                          percentage: 65,
+                          color: AppColors.primaryblue,
+                          iconPath: 'assets/icons/flutter_icon.png',
+                          gradientColors: const [
+                            AppColors.blueText,
+                            AppColors.purpleText
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: AppSizes.p16),
+                      Expanded(
+                        child: SkillLevelCard(
+                          skillName: AppLocalizations.of(context)!.dart,
+                          skillLevel: AppLocalizations.of(context)!
+                              .skillLevelIntermediatePlus,
+                          percentage: 65,
+                          color: AppColors.primaryblue,
+                          iconPath: 'assets/icons/dart_icon.png',
+                          gradientColors: const [
+                            AppColors.blueText,
+                            AppColors.purpleText
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSizes.p16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SkillLevelCard(
+                          skillName: AppLocalizations.of(context)!.firebase,
+                          skillLevel: AppLocalizations.of(context)!
+                              .skillLevelIntermediate,
+                          percentage: 55,
+                          color: AppColors.skillOrange,
+                          iconPath: 'assets/icons/firebase_icon.png',
+                          gradientColors: const [
+                            AppColors.skillDeepOrange,
+                            AppColors.skillOrangeAccent
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: AppSizes.p16),
+                      Expanded(
+                        child: SkillLevelCard(
+                          skillName: AppLocalizations.of(context)!.kotlin,
+                          skillLevel:
+                              AppLocalizations.of(context)!.skillLevelBeginner,
+                          percentage: 30,
+                          color: AppColors.skillPurple,
+                          iconPath: 'assets/icons/kotlin_icon.png',
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
-              ),
-            ),
-            const SizedBox(width: AppSizes.p16),
-            Expanded(
-              child: SkillLevelCard(
-                skillName: AppLocalizations.of(context)!.dart,
-                skillLevel:
-                    AppLocalizations.of(context)!.skillLevelIntermediatePlus,
-                percentage: 65,
-                color: AppColors.primaryblue,
-                iconPath: 'assets/icons/dart_icon.png',
-                gradientColors: const [
-                  AppColors.blueText,
-                  AppColors.purpleText
-                ],
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: AppSizes.p16),
-        Row(
-          children: [
-            Expanded(
-              child: SkillLevelCard(
-                skillName: AppLocalizations.of(context)!.firebase,
-                skillLevel:
-                    AppLocalizations.of(context)!.skillLevelIntermediate,
-                percentage: 55,
-                color: AppColors.skillOrange,
-                iconPath: 'assets/icons/firebase_icon.png',
-                gradientColors: const [
-                  AppColors.skillDeepOrange,
-                  AppColors.skillOrangeAccent
-                ],
-              ),
-            ),
-            const SizedBox(width: AppSizes.p16),
-            Expanded(
-              child: SkillLevelCard(
-                skillName: AppLocalizations.of(context)!.kotlin,
-                skillLevel: AppLocalizations.of(context)!.skillLevelBeginner,
-                percentage: 30,
-                color: AppColors.skillPurple,
-                iconPath: 'assets/icons/kotlin_icon.png',
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ];
     } else if (_currentFilter == "beginner") {
