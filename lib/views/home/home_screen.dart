@@ -225,8 +225,8 @@ class _HomeScreenState extends State<HomeScreen>
                   firstText: AppLocalizations.of(context)!.downloadCV,
                   icon: 'assets/icons/download.png',
                   type: ButtonType.outline,
-                  onPressed: () =>
-                      _launchURL('cankirkgoz-mobiledeveloper-resume.pdf'),
+                  onPressed: () => _launchURL(
+                      'assets/cankirkgoz-mobiledeveloper-resume.pdf'),
                 ),
               ],
             ),
