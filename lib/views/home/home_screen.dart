@@ -11,6 +11,7 @@ import 'package:my_portfolio/design/atoms/subtitle_text.dart';
 import 'package:my_portfolio/design/molecules/floating_bubbles.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback? onProjectsTap;
@@ -70,10 +71,14 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Future<void> _launchURL(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+  void _launchURL(String url) {
+    if (kIsWeb) {
+      html.AnchorElement anchor = html.AnchorElement(href: url)
+        ..target = 'blank'
+        ..click();
+    } else {
+      final uri = Uri.parse(url);
+      launchUrl(uri);
     }
   }
 
