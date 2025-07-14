@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleCard extends StatelessWidget {
@@ -38,7 +38,7 @@ class ScheduleCard extends StatelessWidget {
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [AppColors.primary, AppColors.primaryPurple],
               ),
               borderRadius: BorderRadius.circular(16),
@@ -51,7 +51,7 @@ class ScheduleCard extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             appLocalizations.scheduleCallTitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: AppSizes.fontXL,
               fontWeight: AppSizes.fontWeightSemiBold,
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/molecules/timeline_item.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 
 class JourneyTimeline extends StatelessWidget {
   const JourneyTimeline({super.key});
@@ -10,14 +10,13 @@ class JourneyTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Dikey gradient çizgi (timeline)
         Positioned(
-          left: 24, // TimelineItem'daki yıl metni ile hizalı
+          left: 24,
           top: 0,
           bottom: 0,
           child: Container(
-            width: 4, // Çizgi kalınlığı
-            decoration: BoxDecoration(
+            width: 4,
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   AppColors.blueText,
@@ -25,13 +24,11 @@ class JourneyTimeline extends StatelessWidget {
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: const [0.0, 1.0], // Düz geçiş
+                stops: [0.0, 1.0],
               ),
             ),
           ),
         ),
-
-        // Timeline öğeleri
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

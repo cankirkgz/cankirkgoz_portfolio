@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/profile_avatar.dart';
@@ -9,6 +8,7 @@ import 'package:my_portfolio/design/molecules/quote_card.dart';
 import 'package:my_portfolio/design/molecules/tech_icon_card.dart';
 import 'package:my_portfolio/design/molecules/text_card.dart';
 import 'package:my_portfolio/design/organisms/journey_timeline.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);

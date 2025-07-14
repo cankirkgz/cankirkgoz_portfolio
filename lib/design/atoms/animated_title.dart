@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 
 class AnimatedTitle extends StatelessWidget {
   const AnimatedTitle({super.key});

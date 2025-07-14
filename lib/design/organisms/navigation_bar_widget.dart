@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/design/atoms/language_selector.dart';
 import 'package:my_portfolio/design/atoms/theme_toggle_icon.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 
 class NavigationBarWidget extends StatefulWidget {
   final Function(int)? onItemTap;
@@ -154,9 +154,9 @@ class _NavigationBarWidgetState extends State<NavigationBarWidget> {
                   ),
                 ),
               ),
-              Row(
+              const Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   LanguageSelector(),
                   SizedBox(width: AppSizes.p12),
                   ThemeToggleIcon(),

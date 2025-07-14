@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 
 class ScrollIndicator extends StatefulWidget {
   const ScrollIndicator({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:my_portfolio/core/providers/locale_provider.dart';
 import 'package:my_portfolio/views/main_page/main_page.dart';
@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: const [
                 Locale('en'), // English
                 Locale('tr'), // Turkish
+                Locale('de'), // Almanca
               ],
               home: const MainPage(),
             );

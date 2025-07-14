@@ -27,6 +27,11 @@ class LanguageSelector extends StatelessWidget {
           child: Text('English',
               style: TextStyle(color: AppColors.textPrimary(context))),
         ),
+        PopupMenuItem(
+          value: const Locale('de'),
+          child: Text('Deutsch',
+              style: TextStyle(color: AppColors.textPrimary(context))),
+        ),
       ],
     );
   }

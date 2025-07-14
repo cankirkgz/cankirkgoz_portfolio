@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_portfolio/core/constants/app_colors.dart';
 import 'package:my_portfolio/core/constants/app_sizes.dart';
 import 'package:my_portfolio/design/atoms/rounded_button.dart';
 import 'package:my_portfolio/design/molecules/custom_text_field.dart';
 import 'package:my_portfolio/design/molecules/social_card.dart';
 import 'package:my_portfolio/design/molecules/schedule_card.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 
 class ContactForm extends StatefulWidget {
   const ContactForm({super.key});

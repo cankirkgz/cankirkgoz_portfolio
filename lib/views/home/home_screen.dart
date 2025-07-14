@@ -9,7 +9,7 @@ import 'package:my_portfolio/design/atoms/rounded_button.dart';
 import 'package:my_portfolio/design/atoms/section_title.dart';
 import 'package:my_portfolio/design/atoms/subtitle_text.dart';
 import 'package:my_portfolio/design/molecules/floating_bubbles.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_portfolio/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:html' as html;
 
